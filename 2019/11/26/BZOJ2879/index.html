@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      BZOJ2879 - Welcome to sher-wu&#39;s home !
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/style/style.css">
+  </head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#「BZOJ2879」-NOI2012-美食节"><span class="toc-text">「BZOJ2879」[NOI2012] 美食节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样例说明"><span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据规模及约定"><span class="toc-text">数据规模及约定</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/logo.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <div class="author">sher-wu</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">sher-wu</div>
+          <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/sher-wu" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=425099035&amp;site=qq&amp;menu=yes" target="_block">
+              <span class="iconfont icon-QQ"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">BZOJ2879</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2019/11/26</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Code">Code</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/网络流">网络流</a>
+                  
+                
+                  
+                    <a href="/tags/费用流">费用流</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <h1 id="「BZOJ2879」-NOI2012-美食节">「BZOJ2879」[NOI2012] 美食节<a class="post-anchor" href="#「BZOJ2879」-NOI2012-美食节"></a></h1><hr>
+<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><p>CZ市为了欢迎全国各地的同学，特地举办了一场盛大的美食节。作为一个喜欢尝鲜的美食客，小M自然不愿意错过这场盛宴。他很快就尝遍了美食节所有的美食。然而，尝鲜的欲望是难以满足的。尽管所有的菜品都很可口，厨师做菜的速度也很快，小M仍然觉得自己桌上没有已经摆在别人餐桌上的美食是一件无法忍受的事情。于是小M开始研究起了做菜顺序的问题，即安排一个做菜的顺序使得同学们的等待时间最短。小M发现，美食节共有n种不同的菜品。每次点餐，每个同学可以选择其中的一个菜品。总共有m个厨师来制作这些菜品。当所有的同学点餐结束后，菜品的制作任务就会分配给每个厨师。然后每个厨师就会同时开始做菜。厨师们会按照要求的顺序进行制作，并且每次只能制作一人份。此外，小M还发现了另一件有意思的事情: 虽然这m个厨师都会制作全部的n种菜品，但对于同一菜品，不同厨师的制作时间未必相同。他将菜品用1, 2, …, n依次编号，厨师用1, 2, …, m依次编号，将第j个厨师制作第i种菜品的时间记为 ti,j 。小M认为：每个同学的等待时间为所有厨师开始做菜起，到自己那份菜品完成为止的时间总长度。换句话说，如果一个同学点的菜是某个厨师做的第k道菜，则他的等待时间就是这个厨师制作前k道菜的时间之和。而总等待时间为所有同学的等待时间之和。现在，小M找到了所有同学的点菜信息: 有 pi 个同学点了第i种菜品（i=1, 2, …, n）。他想知道的是最小的总等待时间是多少。</p>
+<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>输入文件的第1行包含两个正整数n和m，表示菜品的种数和厨师的数量。 第2行包含n个正整数，其中第i个数为pi，表示点第i种菜品的人数。 接下来有n行，每行包含m个非负整数，这n行中的第i行的第j个数为ti,j，表示第j个厨师制作第i种菜品所需的时间。 输入文件中每行相邻的两个数之间均由一个空格隔开，行末均没有多余空格。</p>
+<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>输出仅一行包含一个整数，为总等待时间的最小值。</p>
+<h2 id="Sample-Input">Sample Input<a class="post-anchor" href="#Sample-Input"></a></h2><p>3 2</p>
+<p>3 1 1</p>
+<p>5 7</p>
+<p>3 6</p>
+<p>8 9</p>
+<h2 id="Sample-Output">Sample Output<a class="post-anchor" href="#Sample-Output"></a></h2><p>47</p>
+<h2 id="样例说明">样例说明<a class="post-anchor" href="#样例说明"></a></h2><blockquote>
+<p>厨师1先制作1份菜品2，再制作2份菜品1。点这3道菜的3个同学的等待时间分别为3，3+5=8，3+5+5=13。<br>厨师2先制作1份菜品1，再制作1份菜品3。点这2道菜的2个同学的等待时间分别为7，7+9=16。<br>总等待时间为3+8+13+7+16=47。<br>虽然菜品1和菜品3由厨师1制作更快，如果这些菜品都由厨师1制作，总等待时间反而更长。如果按上述的做法，将1份菜品1和1份菜品3调整到厨师2制作，这样厨师2不会闲着，总等待时间更短。<br>可以证明，没有更优的点餐方案。</p>
+</blockquote>
+<h2 id="数据规模及约定">数据规模及约定<a class="post-anchor" href="#数据规模及约定"></a></h2><p>对于100%的数据，n &lt;= 40, m &lt;= 100, p &lt;= 800, ti,j &lt;= 1000（其中p = ∑pi，即点菜同学的总人数）。</p>
+<blockquote>
+<p>题意：<br>&emsp;&emsp;n种菜m个厨师，第j个厨师做第i个菜要t[i][j]秒，每个菜点了ai份，顾客等待时间为从开始到他这份菜做完的时间，问等待总时间是多少。</p>
+</blockquote>
+<blockquote>
+<p>思路：<br>&emsp;&emsp;与「BZOJ1070」[SCOI2007]修车类似，只是数据规模增大了。<br>&emsp;&emsp;因而，需要用到动态加点的思想。就是说，在我考虑下一个让谁做哪种的菜的时候，它只会是某一位厨师的倒数的第x道菜，因为如果让他把这道菜放在倒数第x+1道菜来做的话，肯定没有放在倒数第x道菜更优。因而，只有当一位厨师做了倒数第x道菜后（该厨师的倒数第x位置有了流量后），才允许他做倒数第x+1道菜（在菜与该厨师的倒数第x+1位置之间连边）。其他和BZOJ1070相似。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">20</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>+<span class="number">7</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//建边的时候建错了，以及要避免变量的重名，MCMF中的n，m不是题目给的n，m的意思 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//cai是菜数，cook是厨师数，people是顾客数，sp=spend</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cai,cook,sp[<span class="number">50</span>][<span class="number">110</span>],people;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MCMF</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> from,to,cap,cost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        Edge()&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        Edge(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap,<span class="keyword">int</span> cost):from(from),to(to),cap(cap),cost(cost)&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> n,m,s,t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;Edge&gt; edges;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> inq[maxn];<span class="comment">//inqueue</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> d[maxn];<span class="comment">//dis</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> p[maxn];<span class="comment">//pre</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> a[maxn];<span class="comment">//flow</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="function">    </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;++i) G[i].<span class="built_in">clear</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        edges.<span class="built_in">clear</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap,<span class="keyword">int</span> cost)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="function">    </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        edges.push_back(Edge(from,to,cap,cost));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        edges.push_back(Edge(to,from,<span class="number">0</span>,-cost));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        m=edges.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        G[from].push_back(m<span class="number">-2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">BF</span><span class="params">(<span class="keyword">int</span>&amp; flow,<span class="keyword">int</span>&amp; cost)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="function">    </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) d[i]=INF,inq[i]=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        d[s]=<span class="number">0</span>,inq[s]=<span class="number">1</span>,p[s]=<span class="number">0</span>,a[s]=INF;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        Q.push(s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(!Q.empty())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> u=Q.front();Q.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            inq[u]=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//cout&lt;&lt;u&lt;&lt;' '&lt;&lt;G[u].size()&lt;&lt;' '&lt;&lt;d[u]&lt;&lt;'\n';</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].<span class="built_in">size</span>();++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">                Edge&amp; e=edges[G[u][i]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(e.cap&amp;&amp;d[e.to]&gt;d[u]+e.cost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">                    d[e.to]=d[u]+e.cost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">                    p[e.to]=G[u][i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">                    a[e.to]=<span class="built_in">min</span>(a[u],e.cap);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span>(!inq[e.to])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">                    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">                        Q.push(e.to);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">                        inq[e.to]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(d[t]==INF) <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">        flow+=a[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        cost+=d[t]*a[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> u=t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(u!=s)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">            edges[p[u]].cap-=a[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">            edges[p[u]^<span class="number">1</span>].cap+=a[t];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">            u=edges[p[u]].from;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Mincost</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="function">    </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> flow=<span class="number">0</span>,cost=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//cout&lt;&lt;m&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(BF(flow,cost))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> x=edges[p[t]].from,y=(x-cai)/people+<span class="number">1</span>,z=(x-cai)%people;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">            AddEdge(x+<span class="number">1</span>,t,<span class="number">1</span>,<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cai;++i) AddEdge(i,x+<span class="number">1</span>,<span class="number">1</span>,((z+<span class="number">1</span>)*sp[i][y]));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//cout&lt;&lt;edges[p[t]].from&lt;&lt;' '&lt;&lt;flow&lt;&lt;' '&lt;&lt;cost&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//cout&lt;&lt;m&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//for(int i=1;i&lt;=10;++i) cout&lt;&lt;i&lt;&lt;' '&lt;&lt;p[i]&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> cost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">&#125;NF;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">char</span> ch=getchar();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//if(ch=='-') f=-1;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">        ch=getchar();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">        x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">        ch=getchar();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">readin</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">    cai=<span class="built_in">read</span>(),cook=<span class="built_in">read</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cai;++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">        temp=<span class="built_in">read</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line">        NF.AddEdge(<span class="number">0</span>,i,temp,<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">        people+=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">    NF.s=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">    NF.n=NF.t=cai+people*cook+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cai;++i) <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cook;++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line">        sp[i][j]=<span class="built_in">read</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">        NF.AddEdge(i,cai+(j<span class="number">-1</span>)*people+<span class="number">1</span>,<span class="number">1</span>,sp[i][j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cook;++i) NF.AddEdge(cai+(i<span class="number">-1</span>)*people+<span class="number">1</span>,NF.t,<span class="number">1</span>,<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">    NF.init();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">    readin();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">129</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;NF.Mincost();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">130</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">131</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="2019/11/27/BZOJ1070/">BZOJ1070</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="2019/11/25/HDU6464/">HDU6464</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="/http:/yoursite.com">sher-wu</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="/http:/yoursite.com/2019/11/26/BZOJ2879/">/http:/yoursite.com/2019/11/26/BZOJ2879/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="/http:/yoursite.com">sher-wu</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2019
+            <a href="http://yoursite.com">sher-wu</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

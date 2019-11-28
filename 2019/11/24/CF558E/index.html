@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      CF558E - Welcome to sher-wu&#39;s home !
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/style/style.css">
+  </head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CF558E-A-Simple-Task"><span class="toc-text">CF558E A Simple Task</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-1"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-1"><span class="toc-text">output</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/logo.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <div class="author">sher-wu</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">sher-wu</div>
+          <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/sher-wu" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=425099035&amp;site=qq&amp;menu=yes" target="_block">
+              <span class="iconfont icon-QQ"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">CF558E</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2019/11/24</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Code">Code</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/计数排序">计数排序</a>
+                  
+                
+                  
+                    <a href="/tags/线段树">线段树</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <h1 id="CF558E-A-Simple-Task">CF558E A Simple Task<a class="post-anchor" href="#CF558E-A-Simple-Task"></a></h1><hr>
+<p>5 seconds per test<br>This task is very simple. Given a string S of length n and q queries each query is on the format i j k which means sort the substring consisting of the characters from i to j in non-decreasing order if k = 1 or in non-increasing order if k = 0.<br>Output the final string after applying the queries.</p>
+<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>The first line will contain two integers n, q (1 ≤ n ≤ 105, 0 ≤ q ≤ 50 000), the length of the string and the number of queries respectively.</p>
+<p>Next line contains a string S itself. It contains only lowercase English letters.</p>
+<p>Next q lines will contain three integers each i, j, k (1 ≤ i ≤ j ≤ n, ).</p>
+<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>Output one line, the string S after applying the queries.</p>
+<h2 id="Examples">Examples<a class="post-anchor" href="#Examples"></a></h2><h3 id="input">input<a class="post-anchor" href="#input"></a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">abacdabcda</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">10</span> <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">8</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">6</span> <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">10</span> <span class="number">1</span></span></pre></td></tr></table></figure>
+
+<h3 id="output">output<a class="post-anchor" href="#output"></a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cbcaaaabdd</span></pre></td></tr></table></figure>
+
+<h3 id="input-1">input<a class="post-anchor" href="#input-1"></a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">agjucbvdfk</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">10</span> <span class="number">1</span></span></pre></td></tr></table></figure>
+
+<h3 id="output-1">output<a class="post-anchor" href="#output-1"></a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">abcdfgjkuv</span></pre></td></tr></table></figure>
+
+<p>Note<br>First sample test explanation:<br><a href="http://codeforces.com/predownloaded/4d/ba/4dba2cdd1938e078339a4ded2f82dc7192817ef3.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/4d/ba/4dba2cdd1938e078339a4ded2f82dc7192817ef3.png" alt="Example"></a><br><a href="http://codeforces.com/predownloaded/9d/a8/9da8cab5fbde6c79046676f417e837247d83300c.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/9d/a8/9da8cab5fbde6c79046676f417e837247d83300c.png" alt="Example"></a><br><a href="http://codeforces.com/predownloaded/0e/88/0e882d5dcdf4f0e70b482ef9a7b8c1dc6960c0d8.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/0e/88/0e882d5dcdf4f0e70b482ef9a7b8c1dc6960c0d8.png" alt="Example"></a><br><a href="http://codeforces.com/predownloaded/3c/fc/3cfc74a993556199d0566ade7c4c9d5e7ef5fb84.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/3c/fc/3cfc74a993556199d0566ade7c4c9d5e7ef5fb84.png" alt="Example"></a><br><a href="http://codeforces.com/predownloaded/3f/2a/3f2ad70d9edc5bc7089e53e770b319e9ec2afa66.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/3f/2a/3f2ad70d9edc5bc7089e53e770b319e9ec2afa66.png" alt="Example"></a>  </p>
+<blockquote>
+<p>题意：给你一串字符串，每次操作对一段区间内的字符串作升序或降序排序。输出所有操作后的字符串。</p>
+</blockquote>
+<p>　</p>
+<blockquote>
+<p>错误思路：把a<del>z依次赋以1</del>26的值，然后做区间的修改。。。写到一半就暴毙了</p>
+</blockquote>
+<blockquote>
+<p>思路：<br>&emsp;&emsp;这是直接听归神例会讲的方法。为a<del>z各建立一棵线段树，然后把字符放入它自己的线段树中。每次区间排序的时候，区间求该字符的个数，区间清空，然后接着之前的顺序赋值。<br>&emsp;&emsp;比如ababa，变为升序时，t=1，1</del>（1+3-1）变为a，然后t变为4，4~（4+2-1）变为b.<br>&emsp;&emsp;复杂度O（m*26logn）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1e5</span>+<span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> tree[<span class="number">30</span>][<span class="number">4</span>*maxn],lazy[<span class="number">30</span>][<span class="number">4</span>*maxn];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//lazy -1 未使用, 0或1 区间赋值为0或1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> trnum,<span class="keyword">int</span> now)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    tree[trnum][now]=tree[trnum][now&lt;&lt;<span class="number">1</span>]+tree[trnum][now&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> trnum,<span class="keyword">int</span> num,<span class="keyword">int</span> l,<span class="keyword">int</span> mid,<span class="keyword">int</span> r)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(lazy[trnum][num]==<span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num&lt;&lt;<span class="number">1</span>]=tree[trnum][num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=lazy[trnum][num&lt;&lt;<span class="number">1</span>]=lazy[trnum][num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        lazy[trnum][num]=<span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(lazy[trnum][num]==<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num&lt;&lt;<span class="number">1</span>]=mid-l+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=r-mid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        lazy[trnum][num&lt;&lt;<span class="number">1</span>]=lazy[trnum][num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        lazy[trnum][num]=<span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addline</span><span class="params">(<span class="keyword">int</span> trnum,<span class="keyword">int</span> num,<span class="keyword">int</span> le,<span class="keyword">int</span> ri,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num]=r-l+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        lazy[trnum][num]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    pushdown(trnum,num,l,mid,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(mid&gt;=le) addline(trnum,num&lt;&lt;<span class="number">1</span>,le,ri,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(mid&lt;ri) addline(trnum,num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,le,ri,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    pushup(trnum,num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> pos,<span class="keyword">int</span> trnum,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l==r)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(pos&lt;=mid) add(num&lt;&lt;<span class="number">1</span>,pos,trnum,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> add(num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,pos,trnum,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    pushup(trnum,num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">&#125;<span class="comment">//其实add可以和addline合并但是当时没想到这么多就先写了个单点的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">counts</span><span class="params">(<span class="keyword">int</span> trnum,<span class="keyword">int</span> num,<span class="keyword">int</span> le,<span class="keyword">int</span> ri,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">        lazy[trnum][num]=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> t=tree[trnum][num];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        tree[trnum][num]=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>,sum=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">    pushdown(trnum,num,l,mid,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(mid&gt;=le) sum+=counts(trnum,num&lt;&lt;<span class="number">1</span>,le,ri,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(mid&lt;ri) sum+=counts(trnum,num&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,le,ri,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">    pushup(trnum,num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">    c=getchar();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">        c=getchar();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">        add(<span class="number">1</span>,i,c-<span class="string">'a'</span>,<span class="number">1</span>,n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(m--)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> le,ri,t,xu,totnum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;le,&amp;ri,&amp;xu);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(xu)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">            t=le;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">                totnum=counts(i,<span class="number">1</span>,le,ri,<span class="number">1</span>,n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;totnum&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(totnum)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">                    addline(i,<span class="number">1</span>,t,t+totnum<span class="number">-1</span>,<span class="number">1</span>,n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">                    t+=totnum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">            t=ri;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">                totnum=counts(i,<span class="number">1</span>,le,ri,<span class="number">1</span>,n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;totnum&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(totnum)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line">                    addline(i,<span class="number">1</span>,t-totnum+<span class="number">1</span>,t,<span class="number">1</span>,n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">                    t-=totnum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(counts(j,<span class="number">1</span>,i,i,<span class="number">1</span>,n))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">printf</span>(<span class="string">"%c"</span>,<span class="string">'a'</span>+j);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;j&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">129</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">130</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">131</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">132</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">133</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">134</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">memset</span>(lazy,<span class="number">-1</span>,<span class="keyword">sizeof</span>(lazy));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">135</span></pre></td><td class="code"><pre><span class="line">&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">136</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">137</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">138</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">139</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(fopen(<span class="string">"test.txt"</span>,<span class="string">"r"</span>)!=<span class="literal">NULL</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">140</span></pre></td><td class="code"><pre><span class="line">        freopen(<span class="string">"test.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">141</span></pre></td><td class="code"><pre><span class="line">    init();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">142</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">143</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">144</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="2019/11/25/HDU6464/">HDU6464</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="2019/11/23/CF1174D/">CF1174D</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="/http:/yoursite.com">sher-wu</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="/http:/yoursite.com/2019/11/24/CF558E/">/http:/yoursite.com/2019/11/24/CF558E/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="/http:/yoursite.com">sher-wu</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2019
+            <a href="http://yoursite.com">sher-wu</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
