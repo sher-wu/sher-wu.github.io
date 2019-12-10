@@ -12,7 +12,7 @@
 </script> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="null" />
     <meta name="description" content="" />
     
     <title>
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GYM101915K-Chess-Positions"><span class="toc-text">GYM101915K Chess Positions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Note"><span class="toc-text">Note</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#gym101915k-chess-positions"><span class="toc-text">GYM101915K Chess Positions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#note"><span class="toc-text">Note</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -206,20 +206,30 @@
       <div>
       </div>
     </div>
-    <h1 id="GYM101915K-Chess-Positions">GYM101915K Chess Positions<a class="post-anchor" href="#GYM101915K-Chess-Positions"></a></h1><hr>
-<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><blockquote>
+    <h1 id="gym101915k-chess-positions">GYM101915K Chess Positions<a class="post-anchor" href="#gym101915k-chess-positions"></a></h1>
+<hr>
+<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
+<blockquote>
 <p>一串01串，将其分成多个（可以为1）个区间，分别求和，要求所得的串是回文的。求总的种类数，结果对1e9+7取模</p>
 </blockquote>
-<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>The first line contains a single integer T denoting the number of test cases.</p>
+<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
+<p>The first line contains a single integer T denoting the number of test cases.</p>
 <p>Each test case consists of one line which contains the original sequence of zeros and ones.</p>
 <p>The length of every sequence is less than or equal to 50.</p>
-<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>For each test print one line containing one integer, the number of different ways to divide the original sequence leading to a sumindrome sequence modulo (1e9+7).</p>
-<h2 id="Sample-Input">Sample Input<a class="post-anchor" href="#Sample-Input"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">0110</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">1001</span></span></pre></td></tr></table></figure>
-
-<h2 id="Sample-Output">Sample Output<a class="post-anchor" href="#Sample-Output"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">8</span></span></pre></td></tr></table></figure>
-
-<h2 id="Note">Note<a class="post-anchor" href="#Note"></a></h2><p>The ways of dividing the sequence in the second sample are:</p>
-<p>(1001) -&gt; 2</p>
+<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
+<p>For each test print one line containing one integer, the number of different ways to divide the original sequence leading to a sumindrome sequence modulo (1e9+7).</p>
+<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bn">0110</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">1001</span></span></code></pre></div>
+<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">4</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">8</span></span></code></pre></div>
+<h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
+<p>The ways of dividing the sequence in the second sample are:</p>
+<ol start="1001" type="1">
+<li>-&gt; 2</li>
+</ol>
 <p>(1)(001) -&gt; 1, 1</p>
 <p>(100)(1) -&gt; 1, 1</p>
 <p>(10)(01) -&gt; 1, 1</p>
@@ -228,9 +238,54 @@
 <p>(10)(0)(1) -&gt; 1, 0, 1</p>
 <p>(1)(0)(0)(1) -&gt; 1, 0, 0, 1</p>
 <blockquote>
-<p>思路：<br>回文数的要求就是从左和从右一样，那么从左开始和从右开始的总值一样时，就把这些值合并，再求剩下里面的回文的种类数。</p>
+<p>思路：<br>
+回文数的要求就是从左和从右一样，那么从左开始和从右开始的总值一样时，就把这些值合并，再求剩下里面的回文的种类数。</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ll maxn=<span class="number">1e9</span>+<span class="number">7</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">60</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[<span class="number">60</span>][<span class="number">60</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">memset</span>(dp,<span class="number">-1</span>,<span class="keyword">sizeof</span>(dp));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//cout&lt;&lt;l&lt;&lt;' '&lt;&lt;r&lt;&lt;'\n';</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l&gt;=r) <span class="keyword">return</span> dp[l][r]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(dp[l][r]!=<span class="number">-1</span>) <span class="keyword">return</span> dp[l][r];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> &amp;tent=dp[l][r]=<span class="number">1</span>;<span class="comment">//这一块全部加起来作为中间项必定正确 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> suml=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;r;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        suml+=a[i]-<span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sumr=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=r;j&gt;i;j--)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            sumr+=a[j]-<span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(suml&lt;sumr) <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(suml==sumr) tent=(tent+dfs(i+<span class="number">1</span>,j<span class="number">-1</span>))%maxn;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> tent;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//freopen("text.txt","r",stdin);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(t--)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        init();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,a);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,dfs(<span class="number">0</span>,<span class="built_in">strlen</span>(a)<span class="number">-1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="at">const</span> ll maxn=<span class="fl">1e9</span>+<span class="dv">7</span>;</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">char</span> a[<span class="dv">60</span>];</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> dp[<span class="dv">60</span>][<span class="dv">60</span>];</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">void</span> init()</span>
+<span id="cb3-9"><a href="#cb3-9"></a>{</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    memset(dp,-<span class="dv">1</span>,<span class="kw">sizeof</span>(dp));</span>
+<span id="cb3-11"><a href="#cb3-11"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>ll dfs(<span class="dt">int</span> l,<span class="dt">int</span> r)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>{</span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="co">//cout&lt;&lt;l&lt;&lt;&#39; &#39;&lt;&lt;r&lt;&lt;&#39;\n&#39;;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="cf">if</span>(l&gt;=r) <span class="cf">return</span> dp[l][r]=<span class="dv">1</span>;</span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">if</span>(dp[l][r]!=-<span class="dv">1</span>) <span class="cf">return</span> dp[l][r];</span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="dt">int</span> &amp;tent=dp[l][r]=<span class="dv">1</span>;<span class="co">//这一块全部加起来作为中间项必定正确 </span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="dt">int</span> suml=<span class="dv">0</span>;</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=l;i&lt;r;i++)</span>
+<span id="cb3-21"><a href="#cb3-21"></a>    {</span>
+<span id="cb3-22"><a href="#cb3-22"></a>        suml+=a[i]-<span class="ch">&#39;0&#39;</span>;</span>
+<span id="cb3-23"><a href="#cb3-23"></a>        <span class="dt">int</span> sumr=<span class="dv">0</span>;</span>
+<span id="cb3-24"><a href="#cb3-24"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=r;j&gt;i;j--)</span>
+<span id="cb3-25"><a href="#cb3-25"></a>        {</span>
+<span id="cb3-26"><a href="#cb3-26"></a>            sumr+=a[j]-<span class="ch">&#39;0&#39;</span>;</span>
+<span id="cb3-27"><a href="#cb3-27"></a>            <span class="cf">if</span>(suml&lt;sumr) <span class="cf">break</span>;</span>
+<span id="cb3-28"><a href="#cb3-28"></a>            <span class="cf">if</span>(suml==sumr) tent=(tent+dfs(i+<span class="dv">1</span>,j-<span class="dv">1</span>))%maxn;</span>
+<span id="cb3-29"><a href="#cb3-29"></a>        }</span>
+<span id="cb3-30"><a href="#cb3-30"></a>    }</span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">return</span> tent;</span>
+<span id="cb3-32"><a href="#cb3-32"></a>}</span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="dt">int</span> main()</span>
+<span id="cb3-35"><a href="#cb3-35"></a>{</span>
+<span id="cb3-36"><a href="#cb3-36"></a>    <span class="co">//freopen(&quot;text.txt&quot;,&quot;r&quot;,stdin);</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>    <span class="dt">int</span> t;</span>
+<span id="cb3-38"><a href="#cb3-38"></a>    cin&gt;&gt;t;</span>
+<span id="cb3-39"><a href="#cb3-39"></a>    <span class="cf">while</span>(t--)</span>
+<span id="cb3-40"><a href="#cb3-40"></a>    {</span>
+<span id="cb3-41"><a href="#cb3-41"></a>        init();</span>
+<span id="cb3-42"><a href="#cb3-42"></a>        scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>,a);</span>
+<span id="cb3-43"><a href="#cb3-43"></a>        printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>,dfs(<span class="dv">0</span>,strlen(a)-<span class="dv">1</span>));</span>
+<span id="cb3-44"><a href="#cb3-44"></a>    }</span>
+<span id="cb3-45"><a href="#cb3-45"></a>}</span></code></pre></div>
 
 
   
@@ -296,7 +351,22 @@
         </footer>
       </div>
     </div>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
   
 </html>
 <script type="text/javascript">

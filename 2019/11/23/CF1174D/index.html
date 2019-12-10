@@ -12,7 +12,7 @@
 </script> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="null" />
     <meta name="description" content="" />
     
     <title>
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CF1174D-Ehab-and-the-Expected-XOR-Problem"><span class="toc-text">CF1174D Ehab and the Expected XOR Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-text">Examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Note"><span class="toc-text">Note</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf1174d-ehab-and-the-expected-xor-problem"><span class="toc-text">CF1174D Ehab and the Expected XOR Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#examples"><span class="toc-text">Examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#note"><span class="toc-text">Note</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -192,11 +192,11 @@
             <span>
                 
                   
-                    <a href="/tags/构造">构造</a>
+                    <a href="/tags/位运算">位运算</a>
                   
                 
                   
-                    <a href="/tags/位运算">位运算</a>
+                    <a href="/tags/构造">构造</a>
                   
                 
             </span>
@@ -206,20 +206,65 @@
       <div>
       </div>
     </div>
-    <h1 id="CF1174D-Ehab-and-the-Expected-XOR-Problem">CF1174D Ehab and the Expected XOR Problem<a class="post-anchor" href="#CF1174D-Ehab-and-the-Expected-XOR-Problem"></a></h1><hr>
-<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><p>Given two integers n and x, construct an array that satisfies the following conditions:<br>for any element ai in the array, $1&lt;=ai&lt;2n$;<br>there is no non-empty subsegment with bitwise XOR equal to 0 or x,<br>its length l should be maximized.<br>A sequence b is a subsegment of a sequence a if b can be obtained from a by deletion of several (possibly, zero or all) elements from the beginning and several (possibly, zero or all) elements from the end.</p>
-<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>The only line contains two integers n and x (1≤n≤18, 1≤x&lt;218).</p>
-<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>The first line should contain the length of the array l.<br>If l is positive, the second line should contain l space-separated integers a1, a2, …, al (1≤ai&lt;2n) — the elements of the array a.<br>If there are multiple solutions, print any of them.</p>
-<h2 id="Examples">Examples<a class="post-anchor" href="#Examples"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">input</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">1</span> <span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">input</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">input</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="number">0</span></span></pre></td></tr></table></figure>
+    <h1 id="cf1174d-ehab-and-the-expected-xor-problem">CF1174D Ehab and the Expected XOR Problem<a class="post-anchor" href="#cf1174d-ehab-and-the-expected-xor-problem"></a></h1>
+<hr>
+<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
+<p>Given two integers n and x, construct an array that satisfies the following conditions:<br>
+for any element ai in the array, <span class="math inline">\(1&lt;=ai&lt;2n\)</span>;<br>
+there is no non-empty subsegment with bitwise XOR equal to 0 or x, its length l should be maximized. A sequence b is a subsegment of a sequence a if b can be obtained from a by deletion of several (possibly, zero or all) elements from the beginning and several (possibly, zero or all) elements from the end.</p>
+<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
+<p>The only line contains two integers n and x (1≤n≤18, 1≤x&lt;218).</p>
+<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
+<p>The first line should contain the length of the array l.<br>
+If l is positive, the second line should contain l space-separated integers a1, a2, …, al (1≤ai&lt;2n) — the elements of the array a.<br>
+If there are multiple solutions, print any of them.</p>
+<h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>input</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="dv">5</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>output</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">3</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">6</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>input</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">2</span> <span class="dv">4</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>output</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">3</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>input</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>output</span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="dv">0</span></span></code></pre></div>
+<h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
+<p>In the first example, the bitwise XOR of the subsegments are {6,7,4,1,2,3}.</p>
+<blockquote>
+<p>题意：<br>
+  构造一个数列，元素为1~2^n的数，使得数列的任意子段的XOR和均不等于0与X。求数列的长度和任意一个解。</p>
+</blockquote>
+<blockquote>
+<p>思路：<br>
+  最重要的：想到取构造前缀XOR和数组，而非直接去构造数组ai。<br>
+  具体的：构造前缀XOR和数组bi，则al<sup>al+1</sup>···<sup>ar=bl-1</sup>br.则不等于0-&gt;任意的bi与bj不相等。不等于X-&gt;若bi^bj=X，则只能取其一（代码中取了更小的）。遍历一遍所有数即可。然后用前缀数组算出原数组。<br>
+  时间复杂度O（2^n）</p>
+</blockquote>
+<pre class="c++14"><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int maxn = 3e6+10;
+int n,x,t[maxn],num,f[20],cou[maxn];//cou为输出，t[i]=1表示数组b不能选i，实际上用一个即可
 
-<h2 id="Note">Note<a class="post-anchor" href="#Note"></a></h2><p>In the first example, the bitwise XOR of the subsegments are {6,7,4,1,2,3}.</p>
-<blockquote>
-<p>题意：<br>&emsp;&emsp;构造一个数列，元素为1~2^n的数，使得数列的任意子段的XOR和均不等于0与X。求数列的长度和任意一个解。</p>
-</blockquote>
-<blockquote>
-<p>思路：<br>&emsp;&emsp;最重要的：想到取构造前缀XOR和数组，而非直接去构造数组ai。<br>&emsp;&emsp;具体的：构造前缀XOR和数组bi，则al^al+1^···^ar=bl-1^br.则不等于0-&gt;任意的bi与bj不相等。不等于X-&gt;若bi^bj=X，则只能取其一（代码中取了更小的）。遍历一遍所有数即可。然后用前缀数组算出原数组。<br>&emsp;&emsp;时间复杂度O（2^n）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">using namespace std;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">typedef long long ll;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">const int maxn &#x3D; 3e6+10;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">int n,x,t[maxn],num,f[20],cou[maxn];&#x2F;&#x2F;cou为输出，t[i]&#x3D;1表示数组b不能选i，实际上用一个即可</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">int main()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    cin&gt;&gt;n&gt;&gt;x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    t[0]&#x3D;t[x]&#x3D;1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    for(int i&#x3D;1;i&lt;(ll)(pow(2,n));i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        if(t[i]&#x3D;&#x3D;0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            cou[++num]&#x3D;i,t[x^i]&#x3D;1;&#x2F;&#x2F;i^j&#x3D;x &lt;&#x3D;&#x3D;&gt; i^x&#x3D;j ,让之后选的数不为i^x或x就行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    cout&lt;&lt;num&lt;&lt;endl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    if(num!&#x3D;0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        cout&lt;&lt;cou[1]&lt;&lt;&#39; &#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    for(int i&#x3D;1;i&lt;num;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        cout&lt;&lt;(cou[i]^cou[i+1])&lt;&lt;&#39; &#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;x;
+    t[0]=t[x]=1;
+    for(int i=1;i&lt;(ll)(pow(2,n));i++)
+        if(t[i]==0)
+            cou[++num]=i,t[x^i]=1;//i^j=x &lt;==&gt; i^x=j ,让之后选的数不为i^x或x就行
+    cout&lt;&lt;num&lt;&lt;endl;
+    if(num!=0)
+        cout&lt;&lt;cou[1]&lt;&lt;&#39; &#39;;
+    for(int i=1;i&lt;num;i++)
+        cout&lt;&lt;(cou[i]^cou[i+1])&lt;&lt;&#39; &#39;;
+    return 0;
+}</code></pre>
 
 
   
@@ -285,7 +330,22 @@
         </footer>
       </div>
     </div>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
   
 </html>
 <script type="text/javascript">

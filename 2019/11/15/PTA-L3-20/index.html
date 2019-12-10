@@ -12,7 +12,7 @@
 </script> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="null" />
     <meta name="description" content="" />
     
     <title>
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PTA-L3-20-至多删三个字符"><span class="toc-text">PTA-L3-20 至多删三个字符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hint"><span class="toc-text">Hint</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pta-l3-20-至多删三个字符"><span class="toc-text">PTA-L3-20 至多删三个字符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hint"><span class="toc-text">Hint</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -202,23 +202,68 @@
       <div>
       </div>
     </div>
-    <h1 id="PTA-L3-20-至多删三个字符">PTA-L3-20 至多删三个字符<a class="post-anchor" href="#PTA-L3-20-至多删三个字符"></a></h1><hr>
-<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><p>给定一个全部由小写英文字母组成的字符串，允许你至多删掉其中3个字符，结果可能有多少种不同的字符串？</p>
-<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>输入在一行中给出全部由小写英文字母组成的、长度在区间 [4, 1e6​​] 内的字符串。</p>
-<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>在一行中输出至多删掉其中 3 个字符后不同字符串的个数。</p>
-<h2 id="Sample-Input">Sample Input<a class="post-anchor" href="#Sample-Input"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ababcc</span></pre></td></tr></table></figure>
-
-<h2 id="Sample-Output">Sample Output<a class="post-anchor" href="#Sample-Output"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">25</span></span></pre></td></tr></table></figure>
-
-<h2 id="Hint">Hint<a class="post-anchor" href="#Hint"></a></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">删掉 <span class="number">0</span> 个字符得到 <span class="string">"ababcc"</span>。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">删掉 <span class="number">1</span> 个字符得到 <span class="string">"babcc"</span>, <span class="string">"aabcc"</span>, <span class="string">"abbcc"</span>, <span class="string">"abacc"</span> 和 <span class="string">"ababc"</span>。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">删掉 <span class="number">2</span> 个字符得到 <span class="string">"abcc"</span>, <span class="string">"bbcc"</span>, <span class="string">"bacc"</span>, <span class="string">"babc"</span>, <span class="string">"aacc"</span>, <span class="string">"aabc"</span>, <span class="string">"abbc"</span>, <span class="string">"abac"</span> 和 <span class="string">"abab"</span>。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">删掉 <span class="number">3</span> 个字符得到 <span class="string">"abc"</span>, <span class="string">"bcc"</span>, <span class="string">"acc"</span>, <span class="string">"bbc"</span>, <span class="string">"bac"</span>, <span class="string">"bab"</span>, <span class="string">"aac"</span>, <span class="string">"aab"</span>, <span class="string">"abb"</span> 和 <span class="string">"aba"</span>。</span></pre></td></tr></table></figure>
-
+    <h1 id="pta-l3-20-至多删三个字符">PTA-L3-20 至多删三个字符<a class="post-anchor" href="#pta-l3-20-至多删三个字符"></a></h1>
+<hr>
+<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
+<p>给定一个全部由小写英文字母组成的字符串，允许你至多删掉其中3个字符，结果可能有多少种不同的字符串？</p>
+<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
+<p>输入在一行中给出全部由小写英文字母组成的、长度在区间 [4, 1e6​​] 内的字符串。</p>
+<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
+<p>在一行中输出至多删掉其中 3 个字符后不同字符串的个数。</p>
+<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>ababcc</span></code></pre></div>
+<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">25</span></span></code></pre></div>
+<h2 id="hint">Hint<a class="post-anchor" href="#hint"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>删掉 <span class="dv">0</span> 个字符得到 <span class="st">&quot;ababcc&quot;</span>。</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>删掉 <span class="dv">1</span> 个字符得到 <span class="st">&quot;babcc&quot;</span>, <span class="st">&quot;aabcc&quot;</span>, <span class="st">&quot;abbcc&quot;</span>, <span class="st">&quot;abacc&quot;</span> 和 <span class="st">&quot;ababc&quot;</span>。</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>删掉 <span class="dv">2</span> 个字符得到 <span class="st">&quot;abcc&quot;</span>, <span class="st">&quot;bbcc&quot;</span>, <span class="st">&quot;bacc&quot;</span>, <span class="st">&quot;babc&quot;</span>, <span class="st">&quot;aacc&quot;</span>, <span class="st">&quot;aabc&quot;</span>, <span class="st">&quot;abbc&quot;</span>, <span class="st">&quot;abac&quot;</span> 和 <span class="st">&quot;abab&quot;</span>。</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>删掉 <span class="dv">3</span> 个字符得到 <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcc&quot;</span>, <span class="st">&quot;acc&quot;</span>, <span class="st">&quot;bbc&quot;</span>, <span class="st">&quot;bac&quot;</span>, <span class="st">&quot;bab&quot;</span>, <span class="st">&quot;aac&quot;</span>, <span class="st">&quot;aab&quot;</span>, <span class="st">&quot;abb&quot;</span> 和 <span class="st">&quot;aba&quot;</span>。</span></code></pre></div>
 <blockquote>
-<p>思路：<br>为了避免重复，以及枚举或者组合数在此用起来不现实，因而使用DP。<br>d[i][j]表示前i个字符中删除j个字符后得到的不同字符串的个数。则<br>d[i][j+1]+=d[i-1][j]（删除第i个字符）&amp;&amp; d[i][j]+=d[i-1][j]（不删除第i个字符）<br>如果只是这样转移肯定会有重复的。例如一个字符串cdabnaxy，你删除abn和删除bna后得到的字符串都是cdaxy。  </p>
+<p>思路：<br>
+为了避免重复，以及枚举或者组合数在此用起来不现实，因而使用DP。<br>
+d[i][j]表示前i个字符中删除j个字符后得到的不同字符串的个数。则 d[i][j+1]+=d[i-1][j]（删除第i个字符）&amp;&amp; d[i][j]+=d[i-1][j]（不删除第i个字符）<br>
+如果只是这样转移肯定会有重复的。例如一个字符串cdabnaxy，你删除abn和删除bna后得到的字符串都是cdaxy。</p>
 </blockquote>
 <blockquote>
 <p><strong>这时候就要去重了，根据上面那个栗子可以发现对于一个字符s[i]，如果在i之前存在一个x使得s[x]==s[i]，那么删除[x,i-1]间的字符和删除[x+1,i]间的字符其实是重复的，等价的，那么d[i][j]就要减去d[x-1][j-(i-x)]，减去删除这段造成的重复串。</strong></p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">1e6</span> + <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> s[MAX];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">ll d[MAX][<span class="number">4</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> n = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    d[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">3</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (d[i - <span class="number">1</span>][j] == <span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (j &lt; <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                d[i][j + <span class="number">1</span>] += d[i - <span class="number">1</span>][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            d[i][j] += d[i - <span class="number">1</span>][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i - <span class="number">1</span>; k &gt;= <span class="number">1</span> &amp;&amp; i - k &lt;= j; k--) <span class="comment">//往前找到第一个k使得s[k]=s[i]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (s[k] == s[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                    d[i][j] -= d[k - <span class="number">1</span>][j - (i - k)];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, d[n][<span class="number">0</span>] + d[n][<span class="number">1</span>] + d[n][<span class="number">2</span>] + d[n][<span class="number">3</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="at">const</span> <span class="dt">int</span> MAX = <span class="fl">1e6</span> + <span class="dv">5</span>;</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">char</span> s[MAX];</span>
+<span id="cb4-6"><a href="#cb4-6"></a>ll d[MAX][<span class="dv">4</span>];</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="dt">int</span> main()</span>
+<span id="cb4-8"><a href="#cb4-8"></a>{</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>, s + <span class="dv">1</span>);</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="dt">int</span> n = strlen(s + <span class="dv">1</span>);</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    d[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    {</span>
+<span id="cb4-14"><a href="#cb4-14"></a>        <span class="cf">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= <span class="dv">3</span>; j++)</span>
+<span id="cb4-15"><a href="#cb4-15"></a>        {</span>
+<span id="cb4-16"><a href="#cb4-16"></a>            <span class="cf">if</span> (d[i - <span class="dv">1</span>][j] == <span class="dv">0</span>)</span>
+<span id="cb4-17"><a href="#cb4-17"></a>                <span class="cf">continue</span>;</span>
+<span id="cb4-18"><a href="#cb4-18"></a>            <span class="cf">if</span> (j &lt; <span class="dv">3</span>)</span>
+<span id="cb4-19"><a href="#cb4-19"></a>                d[i][j + <span class="dv">1</span>] += d[i - <span class="dv">1</span>][j];</span>
+<span id="cb4-20"><a href="#cb4-20"></a>            d[i][j] += d[i - <span class="dv">1</span>][j];</span>
+<span id="cb4-21"><a href="#cb4-21"></a>            <span class="cf">for</span> (<span class="dt">int</span> k = i - <span class="dv">1</span>; k &gt;= <span class="dv">1</span> &amp;&amp; i - k &lt;= j; k--) <span class="co">//往前找到第一个k使得s[k]=s[i]</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>            {</span>
+<span id="cb4-23"><a href="#cb4-23"></a>                <span class="cf">if</span> (s[k] == s[i])</span>
+<span id="cb4-24"><a href="#cb4-24"></a>                {</span>
+<span id="cb4-25"><a href="#cb4-25"></a>                    d[i][j] -= d[k - <span class="dv">1</span>][j - (i - k)];</span>
+<span id="cb4-26"><a href="#cb4-26"></a>                    <span class="cf">break</span>;</span>
+<span id="cb4-27"><a href="#cb4-27"></a>                }</span>
+<span id="cb4-28"><a href="#cb4-28"></a>            }</span>
+<span id="cb4-29"><a href="#cb4-29"></a>        }</span>
+<span id="cb4-30"><a href="#cb4-30"></a>    }</span>
+<span id="cb4-31"><a href="#cb4-31"></a>    printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>, d[n][<span class="dv">0</span>] + d[n][<span class="dv">1</span>] + d[n][<span class="dv">2</span>] + d[n][<span class="dv">3</span>]);</span>
+<span id="cb4-32"><a href="#cb4-32"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb4-33"><a href="#cb4-33"></a>}</span></code></pre></div>
 
 
   
@@ -284,7 +329,22 @@
         </footer>
       </div>
     </div>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
   
 </html>
 <script type="text/javascript">

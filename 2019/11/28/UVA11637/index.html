@@ -12,7 +12,7 @@
 </script> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="null" />
     <meta name="description" content="" />
     
     <title>
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UVA11637-Garbage-Remembering-Exam"><span class="toc-text">UVA11637 - Garbage Remembering Exam</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#uva11637---garbage-remembering-exam"><span class="toc-text">UVA11637 - Garbage Remembering Exam</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -202,15 +202,49 @@
       <div>
       </div>
     </div>
-    <h1 id="UVA11637-Garbage-Remembering-Exam">UVA11637 - Garbage Remembering Exam<a class="post-anchor" href="#UVA11637-Garbage-Remembering-Exam"></a></h1><hr>
+    <h1 id="uva11637---garbage-remembering-exam">UVA11637 - Garbage Remembering Exam<a class="post-anchor" href="#uva11637---garbage-remembering-exam"></a></h1>
+<hr>
 <blockquote>
-<p>题意：<br>&emsp;&emsp;大概意思是，有n个单词，分别打乱放在一个环形的，一个非环形里面，环形的两个单词距离为顺时针逆时针的最小值，非环形的就是位置的差的绝对值，如果有一对单词，在两个里面的距离都是不大于k，那么这单词为无效单词，问平均会出现多少个无效单词</p>
+<p>题意：<br>
+  大概意思是，有n个单词，分别打乱放在一个环形的，一个非环形里面，环形的两个单词距离为顺时针逆时针的最小值，非环形的就是位置的差的绝对值，如果有一对单词，在两个里面的距离都是不大于k，那么这单词为无效单词，问平均会出现多少个无效单词</p>
 </blockquote>
-<p>　</p>
-<blockquote>
-<p>思路：<br>&emsp;&emsp;组合概率，假设在非环形形成了一个随机序列，那么我们给它标号1-n,如果我们能分别算出1-n的有效概率，那么就等于算出了无效概率，那么有效概率等于和它距离大于k的那些位置的所有单词拿出来，假设有x个，在环形序列中选一个位置放这个单词，然后它周围的2k的位置（因为是环形序列）要放入这些x个，就是x个选2k个放进去，再全排列，然后剩下n-2k-1个位置再全排列，然后总情况数为n的全排列，所以这样公式一组合起来就是nC(2k,x)2k!(n−2k−1)!/n!，化简一下公式得到x!(n−2k−1)!/(x−2k)!/(n−1)!，这个数值无法直接运算，然后观察能发现他的分子和分母可以合起来考虑变成乘除的项数相同，分子为(n−2k−1)∗(n−2k−2)∗…∗(x−2k+1)，分母为(n−1)∗(n−2)∗…∗(x+1)，那么就可以先递推预处理出一个p数组，p[x]就表示原公式解，那么整个答案为就是非环形序列每个位置的概率*1求出期望，然后累加求总和，最后再用n减去该值得到无效单词的期望。</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//转化计算式，变成多个x-i/n-i相乘（x指在非环中当前数在它k范围外数的个数），然后预处理 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n, k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> p[N];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    p[n - <span class="number">1</span>] = <span class="number">1.0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">2</span> * k; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    p[i - <span class="number">1</span>] = p[i] * (i - <span class="number">2</span> * k) * <span class="number">1.0</span> / (i * <span class="number">1.0</span>) ;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    init(n, k);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">double</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> x = <span class="built_in">max</span>(i - k - <span class="number">1</span>, <span class="number">0</span>) + <span class="built_in">max</span>(n - i - k, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    ans += p[x];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> n - ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> cas = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k) &amp;&amp; n || k) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">printf</span>(<span class="string">"Case %d: %.4lf\n"</span>, ++cas, solve(n, k));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>　 &gt; 思路：<br>
+  组合概率，假设在非环形形成了一个随机序列，那么我们给它标号1-n,如果我们能分别算出1-n的有效概率，那么就等于算出了无效概率，那么有效概率等于和它距离大于k的那些位置的所有单词拿出来，假设有x个，在环形序列中选一个位置放这个单词，然后它周围的2k的位置（因为是环形序列）要放入这些x个，就是x个选2k个放进去，再全排列，然后剩下n-2k-1个位置再全排列，然后总情况数为n的全排列，所以这样公式一组合起来就是nC(2k,x)2k!(n−2k−1)!/n!，化简一下公式得到x!(n−2k−1)!/(x−2k)!/(n−1)!，这个数值无法直接运算，然后观察能发现他的分子和分母可以合起来考虑变成乘除的项数相同，分子为(n−2k−1)∗(n−2k−2)∗...∗(x−2k+1)，分母为(n−1)∗(n−2)∗...∗(x+1)，那么就可以先递推预处理出一个p数组，p[x]就表示原公式解，那么整个答案为就是非环形序列每个位置的概率*1求出期望，然后累加求总和，最后再用n减去该值得到无效单词的期望。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;cstring&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">//转化计算式，变成多个x-i/n-i相乘（x指在非环中当前数在它k范围外数的个数），然后预处理 </span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">const</span> <span class="dt">int</span> N = <span class="dv">100005</span>;</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="dt">int</span> n, k;</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">double</span> p[N];</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="dt">void</span> init(<span class="dt">int</span> n, <span class="dt">int</span> k) {</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    memset(p, <span class="dv">0</span>, <span class="kw">sizeof</span>(p));</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    p[n - <span class="dv">1</span>] = <span class="fl">1.0</span>;</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt; <span class="dv">2</span> * k; i--) {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    p[i - <span class="dv">1</span>] = p[i] * (i - <span class="dv">2</span> * k) * <span class="fl">1.0</span> / (i * <span class="fl">1.0</span>) ;</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    }</span>
+<span id="cb1-17"><a href="#cb1-17"></a>}</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="dt">double</span> solve(<span class="dt">int</span> n, <span class="dt">int</span> k) {</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    init(n, k);</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="dt">double</span> ans = <span class="dv">0</span>;</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="dt">int</span> x = max(i - k - <span class="dv">1</span>, <span class="dv">0</span>) + max(n - i - k, <span class="dv">0</span>);</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    ans += p[x];</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    }</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="cf">return</span> n - ans;</span>
+<span id="cb1-27"><a href="#cb1-27"></a>}</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="dt">int</span> main() {</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="dt">int</span> cas = <span class="dv">0</span>;</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    <span class="cf">while</span> (~scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>, &amp;n, &amp;k) &amp;&amp; n || k) {</span>
+<span id="cb1-32"><a href="#cb1-32"></a>    printf(<span class="st">&quot;Case </span><span class="sc">%d</span><span class="st">: %.4lf</span><span class="sc">\n</span><span class="st">&quot;</span>, ++cas, solve(n, k));</span>
+<span id="cb1-33"><a href="#cb1-33"></a>    }</span>
+<span id="cb1-34"><a href="#cb1-34"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb1-35"><a href="#cb1-35"></a>}</span></code></pre></div>
 
 
   
@@ -276,7 +310,22 @@
         </footer>
       </div>
     </div>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
   
 </html>
 <script type="text/javascript">
