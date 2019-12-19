@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      CF1174D - Welcome to sher-wu&#39;s home !
+      CF1272F - Welcome to sher-wu&#39;s home !
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf1174d-ehab-and-the-expected-xor-problem"><span class="toc-text">CF1174D Ehab and the Expected XOR Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#examples"><span class="toc-text">Examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#note"><span class="toc-text">Note</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf1272f-two-bracket-sequences"><span class="toc-text">CF1272F Two Bracket Sequences</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -164,11 +164,11 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">CF1174D</div>
+      <div class="title">CF1272F</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2019/11/23</span>
+          <span>2019/12/19</span>
         </span>
 
         
@@ -192,11 +192,7 @@
             <span>
                 
                   
-                    <a href="/tags/位运算">位运算</a>
-                  
-                
-                  
-                    <a href="/tags/构造">构造</a>
+                    <a href="/tags/三维DP">三维DP</a>
                   
                 
             </span>
@@ -206,64 +202,67 @@
       <div>
       </div>
     </div>
-    <h1 id="cf1174d-ehab-and-the-expected-xor-problem">CF1174D Ehab and the Expected XOR Problem<a class="post-anchor" href="#cf1174d-ehab-and-the-expected-xor-problem"></a></h1>
-<hr>
-<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>Given two integers n and x, construct an array that satisfies the following conditions:<br>
-for any element ai in the array, <span class="math inline">\(1&lt;=ai&lt;2n\)</span>;<br>
-there is no non-empty subsegment with bitwise XOR equal to 0 or x, its length l should be maximized. A sequence b is a subsegment of a sequence a if b can be obtained from a by deletion of several (possibly, zero or all) elements from the beginning and several (possibly, zero or all) elements from the end.</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>The only line contains two integers n and x (1≤n≤18, 1≤x&lt;218).</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>The first line should contain the length of the array l.<br>
-If l is positive, the second line should contain l space-separated integers a1, a2, …, al (1≤ai&lt;2n) — the elements of the array a.<br>
-If there are multiple solutions, print any of them.</p>
-<h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
-<pre><code class="hljs c++">input
-<span class="hljs-number">3</span> <span class="hljs-number">5</span>
-output
-<span class="hljs-number">3</span>
-<span class="hljs-number">6</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span>
-input
-<span class="hljs-number">2</span> <span class="hljs-number">4</span>
-output
-<span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span>
-input
-<span class="hljs-number">1</span> <span class="hljs-number">1</span>
-output
-<span class="hljs-number">0</span></code></pre>
-<h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
-<p>In the first example, the bitwise XOR of the subsegments are {6,7,4,1,2,3}.</p>
+    <h1 id="cf1272f-two-bracket-sequences">CF1272F Two Bracket Sequences<a class="post-anchor" href="#cf1272f-two-bracket-sequences"></a></h1>
 <blockquote>
 <p>题意：<br>
-  构造一个数列，元素为1~2^n的数，使得数列的任意子段的XOR和均不等于0与X。求数列的长度和任意一个解。</p>
+  求一个最短的合法的由 <code>(</code> 和 <code>)</code> 构成的字符串，且两个给定的由 <code>(</code> 和 <code>)</code> 构成的字符串是它的子序列。<span class="math inline">\((length&lt;=200)\)</span></p>
 </blockquote>
 <blockquote>
 <p>思路：<br>
-  最重要的：想到取构造前缀XOR和数组，而非直接去构造数组ai。<br>
-  具体的：构造前缀XOR和数组bi，则al<sup>al+1</sup>···<sup>ar=bl-1</sup>br.则不等于0-&gt;任意的bi与bj不相等。不等于X-&gt;若bi^bj=X，则只能取其一（代码中取了更小的）。遍历一遍所有数即可。然后用前缀数组算出原数组。<br>
-  时间复杂度O（2^n）</p>
+  合法就是指要先有 <code>(</code> 再有 <code>)</code> ，并且 <code>(</code> 和 <code>)</code> 数量相同。那么根据数据范围，可以考虑使用DP，并且在记录字符串长度的同时，还要记录 <code>(</code> 的数量。</p>
 </blockquote>
-<pre><code class="hljs c++14">#include&lt;bits&#x2F;stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-const int maxn &#x3D; 3e6+10;
-int n,x,t[maxn],num,f[20],cou[maxn];&#x2F;&#x2F;cou为输出，t[i]&#x3D;1表示数组b不能选i，实际上用一个即可
+<center>
+<p>dp[i][j][k]表示考虑到第一个字符串的第<code>i</code>个字符(前<code>i-1</code>个已经考虑完了)，<code>j</code>类似。<br>
+k表示求出的<strong>前缀</strong>字符串中 <code>(</code> 比 <code>)</code> 多多少 ( <span class="math inline">\(k\geq0\)</span> ，不然字符串不合法)。<br>
+其值为还需要添加的<strong>后缀</strong>字符串的字符数。</p>
+</center>
+<blockquote>
+<p>  那么递推式也就是判断一下当前这个字符是否和生成字符串里的字符相同就行了。<br>
+  为了减小复杂度，用了记忆化搜索。</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
 
-int main()
-&#123;
-    cin&gt;&gt;n&gt;&gt;x;
-    t[0]&#x3D;t[x]&#x3D;1;
-    for(int i&#x3D;1;i&lt;(ll)(pow(2,n));i++)
-        if(t[i]&#x3D;&#x3D;0)
-            cou[++num]&#x3D;i,t[x^i]&#x3D;1;&#x2F;&#x2F;i^j&#x3D;x &lt;&#x3D;&#x3D;&gt; i^x&#x3D;j ,让之后选的数不为i^x或x就行
-    cout&lt;&lt;num&lt;&lt;endl;
-    if(num!&#x3D;0)
-        cout&lt;&lt;cou[1]&lt;&lt;&#39; &#39;;
-    for(int i&#x3D;1;i&lt;num;i++)
-        cout&lt;&lt;(cou[i]^cou[i+1])&lt;&lt;&#39; &#39;;
-    return 0;
+<span class="hljs-keyword">int</span> slen, tlen;
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">210</span>][<span class="hljs-number">210</span>][<span class="hljs-number">410</span>];
+<span class="hljs-keyword">char</span> s[<span class="hljs-number">210</span>], t[<span class="hljs-number">210</span>];
+<span class="hljs-keyword">char</span> ji[<span class="hljs-number">210</span>][<span class="hljs-number">210</span>][<span class="hljs-number">410</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j, <span class="hljs-keyword">int</span> k)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (k &lt; <span class="hljs-number">0</span> || k &gt; <span class="hljs-number">400</span>)
+        <span class="hljs-keyword">return</span> INF;
+    <span class="hljs-keyword">if</span> (dp[i][j][k] != <span class="hljs-number">-1</span>)
+        <span class="hljs-keyword">return</span> dp[i][j][k];
+    <span class="hljs-keyword">if</span> (i &gt; slen &amp;&amp; j &gt; tlen)
+        <span class="hljs-keyword">return</span> k;
+    <span class="hljs-keyword">int</span> le = search(i + (i &lt;= slen &amp;&amp; s[i] == <span class="hljs-string">'('</span>), j + (j &lt;= tlen &amp;&amp; t[j] == <span class="hljs-string">'('</span>), k + <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> ri = search(i + (i &lt;= slen &amp;&amp; s[i] == <span class="hljs-string">')'</span>), j + (j &lt;= tlen &amp;&amp; t[j] == <span class="hljs-string">')'</span>), k - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;
+    ji[i][j][k] = le &lt; ri ? <span class="hljs-string">'('</span> : <span class="hljs-string">')'</span>;
+    <span class="hljs-keyword">return</span> dp[i][j][k] = <span class="hljs-built_in">min</span>(le, ri);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> dp);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s%s"</span>, s + <span class="hljs-number">1</span>, t + <span class="hljs-number">1</span>);
+    slen = <span class="hljs-built_in">strlen</span>(s + <span class="hljs-number">1</span>);
+    tlen = <span class="hljs-built_in">strlen</span>(t + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">int</span> ans = search(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), le = <span class="hljs-number">1</span>, ri = <span class="hljs-number">1</span>, _k = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (le &lt;= slen || ri &lt;= tlen)
+    &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, ji[le][ri][_k]);
+        <span class="hljs-keyword">if</span> (ji[le][ri][_k] == <span class="hljs-string">'('</span>)
+            le += (le &lt;= slen &amp;&amp; s[le] == <span class="hljs-string">'('</span>), ri += (ri &lt;= tlen &amp;&amp; t[ri] == <span class="hljs-string">'('</span>), ++_k;
+        <span class="hljs-keyword">else</span>
+            le += (le &lt;= slen &amp;&amp; s[le] == <span class="hljs-string">')'</span>), ri += (ri &lt;= tlen &amp;&amp; t[ri] == <span class="hljs-string">')'</span>), --_k;
+    &#125;
+    <span class="hljs-keyword">while</span> (_k--)
+        <span class="hljs-built_in">putchar</span>(<span class="hljs-string">')'</span>);
+    <span class="hljs-comment">//printf("%d", ans);</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 
 
@@ -291,12 +290,12 @@ int main()
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2019/11/24/CF558E/">CF558E</a>
+          <a href="/2019/12/19/CF1264E/">CF1264E</a>
         
     </div>
     <div class="item right">
         
-          <a href="/2019/11/18/GYM101915K/">GYM101915K</a>
+          <a href="/2019/12/11/%E5%8D%8E%E4%B8%BA%E6%9D%AF-%E5%A4%A7%E8%BF%9E%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6%E7%AC%AC12%E5%B1%8A%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A7%E8%B5%9B%E9%A2%98%E8%A7%A3/">华为杯-大连理工大学第12届大学生程序设计大赛题解</a>
         
     </div>
   </div>
@@ -308,7 +307,7 @@ int main()
       本文作者：<a href="/">sher-wu</a>
     </div>
     <div class="link">
-      永久链接：<a href="/2019/11/23/CF1174D/">http://sher-wu.github.io/2019/11/23/CF1174D/</a>
+      永久链接：<a href="/2019/12/19/CF1272F/">http://sher-wu.github.io/2019/12/19/CF1272F/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/">sher-wu</a>的博客，转载请注明出处！
