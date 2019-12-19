@@ -219,20 +219,20 @@ there is no non-empty subsegment with bitwise XOR equal to 0 or x, its length l 
 If l is positive, the second line should contain l space-separated integers a1, a2, …, al (1≤ai&lt;2n) — the elements of the array a.<br>
 If there are multiple solutions, print any of them.</p>
 <h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>input</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="dv">5</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>output</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">3</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">6</span> <span class="dv">1</span> <span class="dv">3</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>input</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">2</span> <span class="dv">4</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>output</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">3</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>input</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dv">1</span> <span class="dv">1</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>output</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="dv">0</span></span></code></pre></div>
+<pre><code class="hljs c++">input
+<span class="hljs-number">3</span> <span class="hljs-number">5</span>
+output
+<span class="hljs-number">3</span>
+<span class="hljs-number">6</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span>
+input
+<span class="hljs-number">2</span> <span class="hljs-number">4</span>
+output
+<span class="hljs-number">3</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span>
+input
+<span class="hljs-number">1</span> <span class="hljs-number">1</span>
+output
+<span class="hljs-number">0</span></code></pre>
 <h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
 <p>In the first example, the bitwise XOR of the subsegments are {6,7,4,1,2,3}.</p>
 <blockquote>
@@ -245,26 +245,26 @@ If there are multiple solutions, print any of them.</p>
   具体的：构造前缀XOR和数组bi，则al<sup>al+1</sup>···<sup>ar=bl-1</sup>br.则不等于0-&gt;任意的bi与bj不相等。不等于X-&gt;若bi^bj=X，则只能取其一（代码中取了更小的）。遍历一遍所有数即可。然后用前缀数组算出原数组。<br>
   时间复杂度O（2^n）</p>
 </blockquote>
-<pre class="c++14"><code>#include&lt;bits/stdc++.h&gt;
+<pre><code class="hljs c++14">#include&lt;bits&#x2F;stdc++.h&gt;
 using namespace std;
 typedef long long ll;
-const int maxn = 3e6+10;
-int n,x,t[maxn],num,f[20],cou[maxn];//cou为输出，t[i]=1表示数组b不能选i，实际上用一个即可
+const int maxn &#x3D; 3e6+10;
+int n,x,t[maxn],num,f[20],cou[maxn];&#x2F;&#x2F;cou为输出，t[i]&#x3D;1表示数组b不能选i，实际上用一个即可
 
 int main()
-{
+&#123;
     cin&gt;&gt;n&gt;&gt;x;
-    t[0]=t[x]=1;
-    for(int i=1;i&lt;(ll)(pow(2,n));i++)
-        if(t[i]==0)
-            cou[++num]=i,t[x^i]=1;//i^j=x &lt;==&gt; i^x=j ,让之后选的数不为i^x或x就行
+    t[0]&#x3D;t[x]&#x3D;1;
+    for(int i&#x3D;1;i&lt;(ll)(pow(2,n));i++)
+        if(t[i]&#x3D;&#x3D;0)
+            cou[++num]&#x3D;i,t[x^i]&#x3D;1;&#x2F;&#x2F;i^j&#x3D;x &lt;&#x3D;&#x3D;&gt; i^x&#x3D;j ,让之后选的数不为i^x或x就行
     cout&lt;&lt;num&lt;&lt;endl;
-    if(num!=0)
+    if(num!&#x3D;0)
         cout&lt;&lt;cou[1]&lt;&lt;&#39; &#39;;
-    for(int i=1;i&lt;num;i++)
+    for(int i&#x3D;1;i&lt;num;i++)
         cout&lt;&lt;(cou[i]^cou[i+1])&lt;&lt;&#39; &#39;;
     return 0;
-}</code></pre>
+&#125;</code></pre>
 
 
   
@@ -349,7 +349,7 @@ int main()
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

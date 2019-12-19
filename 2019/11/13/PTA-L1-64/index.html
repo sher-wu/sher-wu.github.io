@@ -211,27 +211,27 @@
 <p>输入首先在第一行给出不超过 10 的正整数 N，随后 N 行，每行给出一句不超过 1000 个字符的、以回车结尾的用户的对话，对话为非空字符串，仅包括字母、数字、空格、可见的半角标点符号。</p>
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>按题面要求输出，每个 AI 的回答前要加上 AI: 和一个空格。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>输入样例：</span>
-<span id="cb1-2"><a href="#cb1-2"></a> <span class="dv">6</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>Hello ?</span>
-<span id="cb1-4"><a href="#cb1-4"></a> Good to chat   with you</span>
-<span id="cb1-5"><a href="#cb1-5"></a>can   you speak Chinese?</span>
-<span id="cb1-6"><a href="#cb1-6"></a>Really?</span>
-<span id="cb1-7"><a href="#cb1-7"></a>Could you show me <span class="dv">5</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>What Is <span class="kw">this</span> prime? I,don <span class="ch">&#39;t</span><span class="er"> know</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>输出样例：</span>
-<span id="cb1-10"><a href="#cb1-10"></a> Hello ?</span>
-<span id="cb1-11"><a href="#cb1-11"></a>AI: hello!</span>
-<span id="cb1-12"><a href="#cb1-12"></a> Good to chat   with you</span>
-<span id="cb1-13"><a href="#cb1-13"></a>AI: good to chat with you</span>
-<span id="cb1-14"><a href="#cb1-14"></a>can   you speak Chinese?</span>
-<span id="cb1-15"><a href="#cb1-15"></a>AI: I can speak chinese!</span>
-<span id="cb1-16"><a href="#cb1-16"></a>Really?</span>
-<span id="cb1-17"><a href="#cb1-17"></a>AI: really!</span>
-<span id="cb1-18"><a href="#cb1-18"></a>Could you show me <span class="dv">5</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>AI: I could show you <span class="dv">5</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>What Is <span class="kw">this</span> prime? I,don <span class="ch">&#39;t</span><span class="er"> know</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>AI: what Is <span class="kw">this</span> prime! you,don<span class="ch">&#39;t</span><span class="er"> know</span></span></code></pre></div>
+<pre><code class="hljs c++">输入样例：
+ 6
+Hello ?
+ Good to chat   with you
+can   you speak Chinese?
+Really?
+Could you show me 5
+What Is this prime? I,don 't know
+输出样例：
+ Hello ?
+AI: hello!
+ Good to chat   with you
+AI: good to chat with you
+can   you speak Chinese?
+AI: I can speak chinese!
+Really?
+AI: really!
+Could you show me 5
+AI: I could show you 5
+What Is this prime? I,don 't know
+AI: what Is this prime! you,don't know</code></pre>
 <p>第一次出去比赛，rating拿了全组第一还是挺开心的。 代码就懒得再写一遍了。讲白了就是一道码农模拟题，难点也主要就在特判怎么设。 &gt; 1、从头开始检测空格，检测的连续的两个空格就连删直到只剩一个（用了char的strcpy，string的erase应该也行） 2、删头尾的空格，与字符前面的空格 3、变换所有大写字母与？-&gt;! 4、开始输出 {   Ⅰ 输出个 ’AI: ‘   Ⅱ 一位一位输出直到 a[i]==’\0'   Ⅲ 用连续的字符特判判定 “can you”&amp;&amp;“could you”，并使I+=7,i+=9;   Ⅳ 判定I&amp;&amp;me前后是不是字符(是否独立）      *A:65 a:97 0:48   Ⅴ 输出’‘ }</p>
 
 
@@ -317,7 +317,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

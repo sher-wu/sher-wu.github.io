@@ -214,112 +214,112 @@ The next <code>K</code> lines each contain two integers <code>s</code> and <code
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>An integer specifying the maximum amount of milk pumped through any stall in the barn.</p>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">5</span> <span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="dv">4</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">1</span> <span class="dv">5</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">4</span> <span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">5</span> <span class="dv">4</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dv">5</span> <span class="dv">4</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">5</span> <span class="dv">4</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="dv">3</span> <span class="dv">5</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">4</span> <span class="dv">3</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dv">4</span> <span class="dv">3</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="dv">1</span> <span class="dv">3</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dv">3</span> <span class="dv">5</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="dv">5</span> <span class="dv">4</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="dv">1</span> <span class="dv">5</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="dv">3</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">5</span> <span class="hljs-number">10</span>
+<span class="hljs-number">3</span> <span class="hljs-number">4</span>
+<span class="hljs-number">1</span> <span class="hljs-number">5</span>
+<span class="hljs-number">4</span> <span class="hljs-number">2</span>
+<span class="hljs-number">5</span> <span class="hljs-number">4</span>
+<span class="hljs-number">5</span> <span class="hljs-number">4</span>
+<span class="hljs-number">5</span> <span class="hljs-number">4</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span>
+<span class="hljs-number">4</span> <span class="hljs-number">3</span>
+<span class="hljs-number">4</span> <span class="hljs-number">3</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span>
+<span class="hljs-number">5</span> <span class="hljs-number">4</span>
+<span class="hljs-number">1</span> <span class="hljs-number">5</span>
+<span class="hljs-number">3</span> <span class="hljs-number">4</span></code></pre>
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">9</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">9</span></code></pre>
 <blockquote>
 <p>思路：<br>
   N个节点构成了一棵树，然后在树上的边有流量，给定一条路线，其所经过的边流量都+1.<br>
   典型的含边权的树上差分。根据树上差分思想，把边的流量保存在儿子节点上，当从u到v有一条路线时，只跟u到v上所有的边有关系，而跟lca(u,v)到根的边全都无关。因而flow[u]++,flow[v]++,flow[lca(u,v)]-=2.<br>
   全部加完后，用一次DFS即可。</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="fl">5e4</span>+<span class="dv">20</span>;</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">int</span> n,k;</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> bei[<span class="dv">22</span>],f[maxn],high,tot[maxn];<span class="co">//flow</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="dt">int</span> d[maxn],fir[maxn],nex[<span class="dv">2</span>*maxn],to[<span class="dv">2</span>*maxn];</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">int</span> fa[maxn][<span class="dv">22</span>];</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">inline</span> ll read(){</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    ll x=<span class="dv">0</span>,f=<span class="dv">1</span>;</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    <span class="dt">char</span> ch=getchar();</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="cf">while</span>(ch&lt;<span class="ch">&#39;0&#39;</span>||ch&gt;<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb3-14"><a href="#cb3-14"></a>        <span class="cf">if</span>(ch==<span class="ch">&#39;-&#39;</span>) f=-<span class="dv">1</span>;</span>
-<span id="cb3-15"><a href="#cb3-15"></a>        ch=getchar();</span>
-<span id="cb3-16"><a href="#cb3-16"></a>    }</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">while</span>(ch&gt;=<span class="ch">&#39;0&#39;</span>&amp;&amp;ch&lt;=<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb3-18"><a href="#cb3-18"></a>        x=(x&lt;&lt;<span class="dv">1</span>)+(x&lt;&lt;<span class="dv">3</span>)+(ch^<span class="dv">48</span>);</span>
-<span id="cb3-19"><a href="#cb3-19"></a>        ch=getchar();</span>
-<span id="cb3-20"><a href="#cb3-20"></a>    }</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    <span class="cf">return</span> x;</span>
-<span id="cb3-22"><a href="#cb3-22"></a>}</span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="kw">inline</span> <span class="dt">void</span> dfs1(<span class="dt">int</span> now,<span class="dt">int</span> pre,<span class="dt">int</span> depth)<span class="co">//init for lca</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>{</span>
-<span id="cb3-26"><a href="#cb3-26"></a>    d[now]=depth;</span>
-<span id="cb3-27"><a href="#cb3-27"></a>    fa[now][<span class="dv">0</span>]=pre;</span>
-<span id="cb3-28"><a href="#cb3-28"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=<span class="dv">20</span>;++i)</span>
-<span id="cb3-29"><a href="#cb3-29"></a>        fa[now][i]=fa[fa[now][i-<span class="dv">1</span>]][i-<span class="dv">1</span>];</span>
-<span id="cb3-30"><a href="#cb3-30"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=fir[now];i;i=nex[i])</span>
-<span id="cb3-31"><a href="#cb3-31"></a>    {</span>
-<span id="cb3-32"><a href="#cb3-32"></a>        <span class="cf">if</span>(to[i]==pre) <span class="cf">continue</span>;</span>
-<span id="cb3-33"><a href="#cb3-33"></a>        dfs1(to[i],now,depth+<span class="dv">1</span>);</span>
-<span id="cb3-34"><a href="#cb3-34"></a>    }</span>
-<span id="cb3-35"><a href="#cb3-35"></a>}</span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a><span class="kw">inline</span> <span class="dt">int</span> lca(<span class="dt">int</span> x,<span class="dt">int</span> y)</span>
-<span id="cb3-38"><a href="#cb3-38"></a>{</span>
-<span id="cb3-39"><a href="#cb3-39"></a>    <span class="cf">if</span>(d[x]&lt;d[y]) swap(x,y);</span>
-<span id="cb3-40"><a href="#cb3-40"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">20</span>;i&gt;=<span class="dv">0</span>;--i) <span class="cf">if</span>(d[x]-bei[i]&gt;=d[y])</span>
-<span id="cb3-41"><a href="#cb3-41"></a>        x=fa[x][i];</span>
-<span id="cb3-42"><a href="#cb3-42"></a>    <span class="cf">if</span>(x==y) <span class="cf">return</span> x;</span>
-<span id="cb3-43"><a href="#cb3-43"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">20</span>;i&gt;=<span class="dv">0</span>;--i) <span class="cf">if</span>(fa[x][i]!=fa[y][i])</span>
-<span id="cb3-44"><a href="#cb3-44"></a>    x=fa[x][i],y=fa[y][i];</span>
-<span id="cb3-45"><a href="#cb3-45"></a>    <span class="cf">return</span> fa[x][<span class="dv">0</span>]; </span>
-<span id="cb3-46"><a href="#cb3-46"></a>}</span>
-<span id="cb3-47"><a href="#cb3-47"></a></span>
-<span id="cb3-48"><a href="#cb3-48"></a><span class="kw">inline</span> <span class="dt">void</span> dfs2(<span class="dt">int</span> x,<span class="dt">int</span> y)<span class="co">//add values</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a>{</span>
-<span id="cb3-50"><a href="#cb3-50"></a>    <span class="dt">int</span> l=lca(x,y);</span>
-<span id="cb3-51"><a href="#cb3-51"></a>    ++f[x],++f[y],--f[l],--f[fa[l][<span class="dv">0</span>]]; </span>
-<span id="cb3-52"><a href="#cb3-52"></a>}</span>
-<span id="cb3-53"><a href="#cb3-53"></a></span>
-<span id="cb3-54"><a href="#cb3-54"></a><span class="kw">inline</span> <span class="dt">void</span> dfs3(<span class="dt">int</span> now,<span class="dt">int</span> pre)<span class="co">//find the point with highest value</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a>{</span>
-<span id="cb3-56"><a href="#cb3-56"></a>    <span class="cf">for</span>(<span class="dt">int</span> p=fir[now];p;p=nex[p])</span>
-<span id="cb3-57"><a href="#cb3-57"></a>    {</span>
-<span id="cb3-58"><a href="#cb3-58"></a>        <span class="cf">if</span>(to[p]==pre) <span class="cf">continue</span>;</span>
-<span id="cb3-59"><a href="#cb3-59"></a>        dfs3(to[p],now);</span>
-<span id="cb3-60"><a href="#cb3-60"></a>        tot[now]+=tot[to[p]];</span>
-<span id="cb3-61"><a href="#cb3-61"></a>    }</span>
-<span id="cb3-62"><a href="#cb3-62"></a>    tot[now]+=f[now];</span>
-<span id="cb3-63"><a href="#cb3-63"></a>    <span class="cf">if</span>(tot[now]&gt;high) high=tot[now];</span>
-<span id="cb3-64"><a href="#cb3-64"></a>}</span>
-<span id="cb3-65"><a href="#cb3-65"></a></span>
-<span id="cb3-66"><a href="#cb3-66"></a><span class="dt">int</span> main()</span>
-<span id="cb3-67"><a href="#cb3-67"></a>{</span>
-<span id="cb3-68"><a href="#cb3-68"></a>    n=read(),k=read();</span>
-<span id="cb3-69"><a href="#cb3-69"></a>    bei[<span class="dv">0</span>]=<span class="dv">1</span>;</span>
-<span id="cb3-70"><a href="#cb3-70"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=<span class="dv">20</span>;++i) bei[i]=bei[i-<span class="dv">1</span>]*<span class="dv">2</span>;</span>
-<span id="cb3-71"><a href="#cb3-71"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;n;++i)</span>
-<span id="cb3-72"><a href="#cb3-72"></a>    {</span>
-<span id="cb3-73"><a href="#cb3-73"></a>        <span class="dt">int</span> p=read(),q=read();</span>
-<span id="cb3-74"><a href="#cb3-74"></a>        nex[i]=fir[p],fir[p]=i,to[i]=q;</span>
-<span id="cb3-75"><a href="#cb3-75"></a>        nex[n+i]=fir[q],fir[q]=n+i,to[n+i]=p;</span>
-<span id="cb3-76"><a href="#cb3-76"></a>    }</span>
-<span id="cb3-77"><a href="#cb3-77"></a>    dfs1(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>);</span>
-<span id="cb3-78"><a href="#cb3-78"></a>    <span class="cf">while</span>(k--) </span>
-<span id="cb3-79"><a href="#cb3-79"></a>        dfs2(read(),read());</span>
-<span id="cb3-80"><a href="#cb3-80"></a>    dfs3(<span class="dv">1</span>,<span class="dv">0</span>);</span>
-<span id="cb3-81"><a href="#cb3-81"></a>    printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,high);</span>
-<span id="cb3-82"><a href="#cb3-82"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb3-83"><a href="#cb3-83"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">5e4</span>+<span class="hljs-number">20</span>;
+<span class="hljs-keyword">int</span> n,k;
+<span class="hljs-keyword">int</span> bei[<span class="hljs-number">22</span>],f[maxn],high,tot[maxn];<span class="hljs-comment">//flow</span>
+<span class="hljs-keyword">int</span> d[maxn],fir[maxn],nex[<span class="hljs-number">2</span>*maxn],to[<span class="hljs-number">2</span>*maxn];
+<span class="hljs-keyword">int</span> fa[maxn][<span class="hljs-number">22</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;
+    ll x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>)&#123;
+        <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'-'</span>) f=<span class="hljs-number">-1</span>;
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>)&#123;
+        x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>);
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">return</span> x;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> now,<span class="hljs-keyword">int</span> pre,<span class="hljs-keyword">int</span> depth)</span><span class="hljs-comment">//init for lca</span>
+</span>&#123;
+    d[now]=depth;
+    fa[now][<span class="hljs-number">0</span>]=pre;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">20</span>;++i)
+        fa[now][i]=fa[fa[now][i<span class="hljs-number">-1</span>]][i<span class="hljs-number">-1</span>];
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=fir[now];i;i=nex[i])
+    &#123;
+        <span class="hljs-keyword">if</span>(to[i]==pre) <span class="hljs-keyword">continue</span>;
+        dfs1(to[i],now,depth+<span class="hljs-number">1</span>);
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lca</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(d[x]&lt;d[y]) swap(x,y);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">20</span>;i&gt;=<span class="hljs-number">0</span>;--i) <span class="hljs-keyword">if</span>(d[x]-bei[i]&gt;=d[y])
+        x=fa[x][i];
+    <span class="hljs-keyword">if</span>(x==y) <span class="hljs-keyword">return</span> x;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">20</span>;i&gt;=<span class="hljs-number">0</span>;--i) <span class="hljs-keyword">if</span>(fa[x][i]!=fa[y][i])
+    x=fa[x][i],y=fa[y][i];
+    <span class="hljs-keyword">return</span> fa[x][<span class="hljs-number">0</span>]; 
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span><span class="hljs-comment">//add values</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> l=lca(x,y);
+    ++f[x],++f[y],--f[l],--f[fa[l][<span class="hljs-number">0</span>]]; 
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs3</span><span class="hljs-params">(<span class="hljs-keyword">int</span> now,<span class="hljs-keyword">int</span> pre)</span><span class="hljs-comment">//find the point with highest value</span>
+</span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> p=fir[now];p;p=nex[p])
+    &#123;
+        <span class="hljs-keyword">if</span>(to[p]==pre) <span class="hljs-keyword">continue</span>;
+        dfs3(to[p],now);
+        tot[now]+=tot[to[p]];
+    &#125;
+    tot[now]+=f[now];
+    <span class="hljs-keyword">if</span>(tot[now]&gt;high) high=tot[now];
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    n=<span class="hljs-built_in">read</span>(),k=<span class="hljs-built_in">read</span>();
+    bei[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">20</span>;++i) bei[i]=bei[i<span class="hljs-number">-1</span>]*<span class="hljs-number">2</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)
+    &#123;
+        <span class="hljs-keyword">int</span> p=<span class="hljs-built_in">read</span>(),q=<span class="hljs-built_in">read</span>();
+        nex[i]=fir[p],fir[p]=i,to[i]=q;
+        nex[n+i]=fir[q],fir[q]=n+i,to[n+i]=p;
+    &#125;
+    dfs1(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">while</span>(k--) 
+        dfs2(<span class="hljs-built_in">read</span>(),<span class="hljs-built_in">read</span>());
+    dfs3(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,high);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -404,7 +404,7 @@ The next <code>K</code> lines each contain two integers <code>s</code> and <code
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

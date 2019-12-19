@@ -223,23 +223,23 @@
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>Output one number for each question, separated by spaces — the number of different pitches.</p>
 <h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>input</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">6</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">5</span> <span class="dv">9</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">3</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">7</span> <span class="dv">7</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dv">0</span> <span class="dv">2</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">8</span> <span class="dv">17</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>output</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">5</span> <span class="dv">10</span> <span class="dv">18</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>input</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">2</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dv">1</span> <span class="dv">500000000000000000</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dv">2</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="dv">1000000000000000000</span> <span class="dv">1000000000000000000</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="dv">0</span> <span class="dv">1000000000000000000</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>output</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="dv">2</span> <span class="dv">1500000000000000000</span></span></code></pre></div>
+<pre><code class="hljs c++">input
+<span class="hljs-number">6</span>
+<span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">4</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">9</span>
+<span class="hljs-number">3</span>
+<span class="hljs-number">7</span> <span class="hljs-number">7</span>
+<span class="hljs-number">0</span> <span class="hljs-number">2</span>
+<span class="hljs-number">8</span> <span class="hljs-number">17</span>
+output
+<span class="hljs-number">5</span> <span class="hljs-number">10</span> <span class="hljs-number">18</span></code></pre>
+<pre><code class="hljs c++">input
+<span class="hljs-number">2</span>
+<span class="hljs-number">1</span> <span class="hljs-number">500000000000000000</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">1000000000000000000</span> <span class="hljs-number">1000000000000000000</span>
+<span class="hljs-number">0</span> <span class="hljs-number">1000000000000000000</span>
+output
+<span class="hljs-number">2</span> <span class="hljs-number">1500000000000000000</span></code></pre>
 <blockquote>
 <p>题意：<br>
 有n个以ai开头，依次+1的数列，问在每个数列中去li~ri项，总共有多少不相同的项</p>
@@ -256,196 +256,196 @@ li与ri怎么取并没有意义，只有长度才有意义。<br>
     所求 = num[i]的总贡献+(len-num[i])间有效数个数</em>长度</p>
 </blockquote>
 <p>DXR &lt;1&gt; :</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">//总的来说，就是差大于len的，都有贡献，小于len的全体，有c[i]的贡献</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">//有一个极大的好处，就是没有用到离散化的知识点</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="pp">#include </span><span class="im">&lt;cstring&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> ull;</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="at">const</span> <span class="dt">int</span> NN = <span class="dv">110000</span>;</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="dt">int</span> n, num;</span>
-<span id="cb3-11"><a href="#cb3-11"></a>ull b[NN], c[NN], tmp, h, len, l, r, ans, m, a[NN];</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="dt">bool</span> cmp(ull a, ull b)</span>
-<span id="cb3-14"><a href="#cb3-14"></a>{</span>
-<span id="cb3-15"><a href="#cb3-15"></a>    <span class="cf">return</span> a &lt; b;</span>
-<span id="cb3-16"><a href="#cb3-16"></a>}</span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="dt">int</span> main()</span>
-<span id="cb3-19"><a href="#cb3-19"></a>{</span>
-<span id="cb3-20"><a href="#cb3-20"></a>    <span class="co">//freopen(&quot;1.in&quot;, &quot;r&quot;, stdin);</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;n);</span>
-<span id="cb3-22"><a href="#cb3-22"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)</span>
-<span id="cb3-23"><a href="#cb3-23"></a>    {</span>
-<span id="cb3-24"><a href="#cb3-24"></a>        scanf(<span class="st">&quot;</span><span class="sc">%llu</span><span class="st">&quot;</span>, &amp;a[i]);</span>
-<span id="cb3-25"><a href="#cb3-25"></a>    }</span>
-<span id="cb3-26"><a href="#cb3-26"></a>    <span class="co">//首先对a排序</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a>    sort(a + <span class="dv">1</span>, a + n + <span class="dv">1</span>, cmp);</span>
-<span id="cb3-28"><a href="#cb3-28"></a></span>
-<span id="cb3-29"><a href="#cb3-29"></a>    num = <span class="dv">0</span>;</span>
-<span id="cb3-30"><a href="#cb3-30"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)</span>
-<span id="cb3-31"><a href="#cb3-31"></a>        <span class="cf">if</span> (a[i] - a[i - <span class="dv">1</span>])</span>
-<span id="cb3-32"><a href="#cb3-32"></a>            b[++num] = a[i] - a[i - <span class="dv">1</span>]; <span class="co">//求两个大小相邻的，不同的数字之间（去重）的差</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a>    sort(b + <span class="dv">1</span>, b + num + <span class="dv">1</span>, cmp);</span>
-<span id="cb3-34"><a href="#cb3-34"></a>    <span class="co">//对差排序，求部分和（因为差&lt;len的所有点都有部分重复，需要减去）</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a>    c[<span class="dv">0</span>] = <span class="dv">0</span>;</span>
-<span id="cb3-36"><a href="#cb3-36"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= num; i++)</span>
-<span id="cb3-37"><a href="#cb3-37"></a>        c[i] = b[i] + c[i - <span class="dv">1</span>];</span>
-<span id="cb3-38"><a href="#cb3-38"></a>    <span class="co">//len到b[i]时，该数与该数-1有b[i]未重合</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a>    <span class="co">//c[i]表示到第i个数时，如果len&gt;=b[i]，前面所有数的获得的有效数的总数</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a>    <span class="co">/*</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="co">    for (int i=1; i&lt;=n; i++) printf(&quot;%d &quot;, a[i]);</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a><span class="co">    printf(&quot;\n&quot;);</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a><span class="co">    for (int i=1; i&lt;=num; i++) printf(&quot;%d &quot;, b[i]);</span></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="co">    printf(&quot;\n&quot;);</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="co">    for (int i=1; i&lt;=num; i++) printf(&quot;%d &quot;, c[i]);</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="co">    printf(&quot;\n&quot;);</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="co">    */</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;m);</span>
-<span id="cb3-49"><a href="#cb3-49"></a>    <span class="cf">while</span> (m--)</span>
-<span id="cb3-50"><a href="#cb3-50"></a>    {</span>
-<span id="cb3-51"><a href="#cb3-51"></a>        scanf(<span class="st">&quot;</span><span class="sc">%llu%llu</span><span class="st">&quot;</span>, &amp;l, &amp;r);</span>
-<span id="cb3-52"><a href="#cb3-52"></a>        len = r - l + <span class="dv">1</span>; <span class="co">//由题目，最终答案与起点终点无关，至于起点与终点之间的距离有关</span></span>
-<span id="cb3-53"><a href="#cb3-53"></a>        <span class="co">//由题, 每个点与上一个点重复的个数=len-它与上一个点的差（若差&gt;=len, 则无重复点）</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a>        <span class="co">//num是差的个数，有效数的总数为num+1</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a>        ans = (num + <span class="dv">1</span>) * len;                            <span class="co">//先将每个数字可以引出的新数都算上（很可能中间有重复的）</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a>        tmp = lower_bound(b + <span class="dv">1</span>, b + num + <span class="dv">1</span>, len) - b; <span class="co">//找到比len小的最大的差，即为（tmp-1），</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a>        ans -= len * (tmp - <span class="dv">1</span>) - c[tmp - <span class="dv">1</span>];</span>
-<span id="cb3-58"><a href="#cb3-58"></a>        <span class="co">//减去重复的个数（每个点仅考虑与上一个点重复的）</span></span>
-<span id="cb3-59"><a href="#cb3-59"></a>        <span class="co">//假设所有&lt;len的数都产生了重复，全部删去，再补上实际上未产生重复的</span></span>
-<span id="cb3-60"><a href="#cb3-60"></a>        <span class="co">//printf(&quot;\n%llu\n&quot;, tmp);</span></span>
-<span id="cb3-61"><a href="#cb3-61"></a></span>
-<span id="cb3-62"><a href="#cb3-62"></a>        printf(<span class="st">&quot;</span><span class="sc">%llu</span><span class="st"> &quot;</span>, ans);</span>
-<span id="cb3-63"><a href="#cb3-63"></a>    }</span>
-<span id="cb3-64"><a href="#cb3-64"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb3-65"><a href="#cb3-65"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-comment">//总的来说，就是差大于len的，都有贡献，小于len的全体，有c[i]的贡献</span>
+<span class="hljs-comment">//有一个极大的好处，就是没有用到离散化的知识点</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ull;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> NN = <span class="hljs-number">110000</span>;
+<span class="hljs-keyword">int</span> n, num;
+ull b[NN], c[NN], tmp, h, len, l, r, ans, m, a[NN];
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(ull a, ull b)</span>
+</span>&#123;
+    <span class="hljs-keyword">return</span> a &lt; b;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-comment">//freopen("1.in", "r", stdin);</span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%llu"</span>, &amp;a[i]);
+    &#125;
+    <span class="hljs-comment">//首先对a排序</span>
+    sort(a + <span class="hljs-number">1</span>, a + n + <span class="hljs-number">1</span>, cmp);
+
+    num = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++)
+        <span class="hljs-keyword">if</span> (a[i] - a[i - <span class="hljs-number">1</span>])
+            b[++num] = a[i] - a[i - <span class="hljs-number">1</span>]; <span class="hljs-comment">//求两个大小相邻的，不同的数字之间（去重）的差</span>
+    sort(b + <span class="hljs-number">1</span>, b + num + <span class="hljs-number">1</span>, cmp);
+    <span class="hljs-comment">//对差排序，求部分和（因为差&lt;len的所有点都有部分重复，需要减去）</span>
+    c[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= num; i++)
+        c[i] = b[i] + c[i - <span class="hljs-number">1</span>];
+    <span class="hljs-comment">//len到b[i]时，该数与该数-1有b[i]未重合</span>
+    <span class="hljs-comment">//c[i]表示到第i个数时，如果len&gt;=b[i]，前面所有数的获得的有效数的总数</span>
+    <span class="hljs-comment">/*
+    for (int i=1; i&lt;=n; i++) printf("%d ", a[i]);
+    printf("\n");
+    for (int i=1; i&lt;=num; i++) printf("%d ", b[i]);
+    printf("\n");
+    for (int i=1; i&lt;=num; i++) printf("%d ", c[i]);
+    printf("\n");
+    */</span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;m);
+    <span class="hljs-keyword">while</span> (m--)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%llu%llu"</span>, &amp;l, &amp;r);
+        len = r - l + <span class="hljs-number">1</span>; <span class="hljs-comment">//由题目，最终答案与起点终点无关，至于起点与终点之间的距离有关</span>
+        <span class="hljs-comment">//由题, 每个点与上一个点重复的个数=len-它与上一个点的差（若差&gt;=len, 则无重复点）</span>
+        <span class="hljs-comment">//num是差的个数，有效数的总数为num+1</span>
+        ans = (num + <span class="hljs-number">1</span>) * len;                            <span class="hljs-comment">//先将每个数字可以引出的新数都算上（很可能中间有重复的）</span>
+        tmp = lower_bound(b + <span class="hljs-number">1</span>, b + num + <span class="hljs-number">1</span>, len) - b; <span class="hljs-comment">//找到比len小的最大的差，即为（tmp-1），</span>
+        ans -= len * (tmp - <span class="hljs-number">1</span>) - c[tmp - <span class="hljs-number">1</span>];
+        <span class="hljs-comment">//减去重复的个数（每个点仅考虑与上一个点重复的）</span>
+        <span class="hljs-comment">//假设所有&lt;len的数都产生了重复，全部删去，再补上实际上未产生重复的</span>
+        <span class="hljs-comment">//printf("\n%llu\n", tmp);</span>
+
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%llu "</span>, ans);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <p>MS &lt;1&gt; :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">//离线完成，极大的降低了复杂度</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="pp">#include </span><span class="im">&lt;map&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">typedef</span> pair&lt;ll, ll&gt; P;</span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">typedef</span> pair&lt;P, <span class="dt">int</span>&gt; PP;</span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="fl">1e5</span> + <span class="dv">100</span>;</span>
-<span id="cb4-14"><a href="#cb4-14"></a>ll a[maxn], b[maxn];</span>
-<span id="cb4-15"><a href="#cb4-15"></a>P ans[maxn];</span>
-<span id="cb4-16"><a href="#cb4-16"></a>PP q[maxn];</span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="dt">bool</span> cmp(PP p1, PP p2)</span>
-<span id="cb4-18"><a href="#cb4-18"></a>{</span>
-<span id="cb4-19"><a href="#cb4-19"></a>    <span class="cf">if</span> (p1.first.second - p1.first.first &lt; p2.first.second - p2.first.first)</span>
-<span id="cb4-20"><a href="#cb4-20"></a>        <span class="cf">return</span> <span class="dv">1</span>;</span>
-<span id="cb4-21"><a href="#cb4-21"></a>    <span class="cf">else</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>        <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-23"><a href="#cb4-23"></a>}</span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="dt">bool</span> cmp1(PP p1, PP p2)</span>
-<span id="cb4-25"><a href="#cb4-25"></a>{</span>
-<span id="cb4-26"><a href="#cb4-26"></a>    <span class="cf">if</span> (p1.second &lt; p2.second)</span>
-<span id="cb4-27"><a href="#cb4-27"></a>        <span class="cf">return</span> <span class="dv">1</span>;</span>
-<span id="cb4-28"><a href="#cb4-28"></a>    <span class="cf">else</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a>        <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-30"><a href="#cb4-30"></a>}</span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="dt">int</span> main()</span>
-<span id="cb4-32"><a href="#cb4-32"></a>{</span>
-<span id="cb4-33"><a href="#cb4-33"></a>    <span class="dt">int</span> n;</span>
-<span id="cb4-34"><a href="#cb4-34"></a>    cin &gt;&gt; n;</span>
-<span id="cb4-35"><a href="#cb4-35"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)</span>
-<span id="cb4-36"><a href="#cb4-36"></a>        cin &gt;&gt; a[i];</span>
-<span id="cb4-37"><a href="#cb4-37"></a>    sort(a, a + n);</span>
-<span id="cb4-38"><a href="#cb4-38"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n - <span class="dv">1</span>; i++)</span>
-<span id="cb4-39"><a href="#cb4-39"></a>        b[i] = (a[i + <span class="dv">1</span>] - a[i]);</span>
-<span id="cb4-40"><a href="#cb4-40"></a>    sort(b, b + n - <span class="dv">1</span>);</span>
-<span id="cb4-41"><a href="#cb4-41"></a>    <span class="dt">int</span> t;</span>
-<span id="cb4-42"><a href="#cb4-42"></a>    cin &gt;&gt; t;</span>
-<span id="cb4-43"><a href="#cb4-43"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; t; i++)</span>
-<span id="cb4-44"><a href="#cb4-44"></a>    {</span>
-<span id="cb4-45"><a href="#cb4-45"></a>        cin &gt;&gt; q[i].first.first &gt;&gt; q[i].first.second;</span>
-<span id="cb4-46"><a href="#cb4-46"></a>        q[i].second = i;</span>
-<span id="cb4-47"><a href="#cb4-47"></a>    }</span>
-<span id="cb4-48"><a href="#cb4-48"></a>    sort(q, q + t, cmp);</span>
-<span id="cb4-49"><a href="#cb4-49"></a>    ll now = <span class="dv">0</span>, coun = <span class="dv">0</span>;</span>
-<span id="cb4-50"><a href="#cb4-50"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; t; i++)</span>
-<span id="cb4-51"><a href="#cb4-51"></a>    {</span>
-<span id="cb4-52"><a href="#cb4-52"></a>        ll cha = q[i].first.second - q[i].first.first + <span class="dv">1</span>;</span>
-<span id="cb4-53"><a href="#cb4-53"></a>        <span class="cf">while</span> (coun != n - <span class="dv">1</span> &amp;&amp; cha &gt;= b[coun])</span>
-<span id="cb4-54"><a href="#cb4-54"></a>        {</span>
-<span id="cb4-55"><a href="#cb4-55"></a>            now += b[coun];</span>
-<span id="cb4-56"><a href="#cb4-56"></a>            coun++;</span>
-<span id="cb4-57"><a href="#cb4-57"></a>        }</span>
-<span id="cb4-58"><a href="#cb4-58"></a>        ans[i].first = q[i].second;</span>
-<span id="cb4-59"><a href="#cb4-59"></a>        ans[i].second = now + cha * (n - coun);</span>
-<span id="cb4-60"><a href="#cb4-60"></a>    }</span>
-<span id="cb4-61"><a href="#cb4-61"></a>    sort(ans, ans + t);</span>
-<span id="cb4-62"><a href="#cb4-62"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; t; i++)</span>
-<span id="cb4-63"><a href="#cb4-63"></a>    {</span>
-<span id="cb4-64"><a href="#cb4-64"></a>        cout &lt;&lt; ans[i].second &lt;&lt; <span class="st">&quot; &quot;</span>;</span>
-<span id="cb4-65"><a href="#cb4-65"></a>    }</span>
-<span id="cb4-66"><a href="#cb4-66"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-comment">//离线完成，极大的降低了复杂度</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">typedef</span> pair&lt;ll, ll&gt; P;
+<span class="hljs-keyword">typedef</span> pair&lt;P, <span class="hljs-keyword">int</span>&gt; PP;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">1e5</span> + <span class="hljs-number">100</span>;
+ll a[maxn], b[maxn];
+P ans[maxn];
+PP q[maxn];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(PP p1, PP p2)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (p1.first.second - p1.first.first &lt; p2.first.second - p2.first.first)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp1</span><span class="hljs-params">(PP p1, PP p2)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (p1.second &lt; p2.second)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        <span class="hljs-built_in">cin</span> &gt;&gt; a[i];
+    sort(a, a + n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)
+        b[i] = (a[i + <span class="hljs-number">1</span>] - a[i]);
+    sort(b, b + n - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">int</span> t;
+    <span class="hljs-built_in">cin</span> &gt;&gt; t;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; t; i++)
+    &#123;
+        <span class="hljs-built_in">cin</span> &gt;&gt; q[i].first.first &gt;&gt; q[i].first.second;
+        q[i].second = i;
+    &#125;
+    sort(q, q + t, cmp);
+    ll now = <span class="hljs-number">0</span>, coun = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; t; i++)
+    &#123;
+        ll cha = q[i].first.second - q[i].first.first + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (coun != n - <span class="hljs-number">1</span> &amp;&amp; cha &gt;= b[coun])
+        &#123;
+            now += b[coun];
+            coun++;
+        &#125;
+        ans[i].first = q[i].second;
+        ans[i].second = now + cha * (n - coun);
+    &#125;
+    sort(ans, ans + t);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; t; i++)
+    &#123;
+        <span class="hljs-built_in">cout</span> &lt;&lt; ans[i].second &lt;&lt; <span class="hljs-string">" "</span>;
+    &#125;
+&#125;</code></pre>
 <p>YZM &lt;2&gt; :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="fl">1e5</span> + <span class="dv">10</span>;</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="dt">int</span> n, q, tot;</span>
-<span id="cb5-6"><a href="#cb5-6"></a>ll s[maxn];</span>
-<span id="cb5-7"><a href="#cb5-7"></a>ll l, r, len;</span>
-<span id="cb5-8"><a href="#cb5-8"></a>map&lt;ll, ll&gt; vis, res, ans;</span>
-<span id="cb5-9"><a href="#cb5-9"></a>ll num[maxn], cnt;</span>
-<span id="cb5-10"><a href="#cb5-10"></a>ll out[maxn];</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="dt">int</span> main()</span>
-<span id="cb5-12"><a href="#cb5-12"></a>{</span>
-<span id="cb5-13"><a href="#cb5-13"></a>    cin &gt;&gt; n;</span>
-<span id="cb5-14"><a href="#cb5-14"></a>    tot = n;</span>
-<span id="cb5-15"><a href="#cb5-15"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; ++i)</span>
-<span id="cb5-16"><a href="#cb5-16"></a>        scanf(<span class="st">&quot;</span><span class="sc">%lld</span><span class="st">&quot;</span>, &amp;s[i]);</span>
-<span id="cb5-17"><a href="#cb5-17"></a>    sort(s + <span class="dv">1</span>, s + n + <span class="dv">1</span>);</span>
-<span id="cb5-18"><a href="#cb5-18"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; n; ++i)</span>
-<span id="cb5-19"><a href="#cb5-19"></a>    {</span>
-<span id="cb5-20"><a href="#cb5-20"></a>        ll p = s[i + <span class="dv">1</span>] - s[i];</span>
-<span id="cb5-21"><a href="#cb5-21"></a>        <span class="cf">if</span> (!p)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>            tot--;</span>
-<span id="cb5-23"><a href="#cb5-23"></a>        <span class="cf">else</span> <span class="cf">if</span> (!vis[p])</span>
-<span id="cb5-24"><a href="#cb5-24"></a>            num[++cnt] = p; <span class="co">//用num保存所有的数</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>        vis[p]++;</span>
-<span id="cb5-26"><a href="#cb5-26"></a>    }</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    <span class="co">//for(map&lt;ll,ll&gt;::iterator it=vis.begin();it!=vis.end();it++)</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>    <span class="co">//printf(&quot;%I64d:%I64d\n&quot;,it-&gt;first,it-&gt;second);</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a>    sort(num + <span class="dv">1</span>, num + cnt + <span class="dv">1</span>);</span>
-<span id="cb5-30"><a href="#cb5-30"></a>    ans[<span class="dv">0</span>] = num[<span class="dv">0</span>] = <span class="dv">0</span>;</span>
-<span id="cb5-31"><a href="#cb5-31"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= cnt; ++i)</span>
-<span id="cb5-32"><a href="#cb5-32"></a>    {</span>
-<span id="cb5-33"><a href="#cb5-33"></a>        ans[num[i]] = ans[num[i - <span class="dv">1</span>]] + tot * (num[i] - num[i - <span class="dv">1</span>]);</span>
-<span id="cb5-34"><a href="#cb5-34"></a>        <span class="co">//到num[i]这个数为止，所有数的贡献=上一段的贡献+num[i-1]+1到num[i]间有效数的贡献</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a>        <span class="co">//cout&lt;&lt;i&lt;&lt;&#39; &#39;&lt;&lt;ans[num[i]]&lt;&lt;endl;</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a>        res[num[i - <span class="dv">1</span>]] = tot;</span>
-<span id="cb5-37"><a href="#cb5-37"></a>        tot -= vis[num[i]]; <span class="co">//tot为下一段中仍有贡献的数的个数</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a>    }</span>
-<span id="cb5-39"><a href="#cb5-39"></a>    res[num[cnt]] = tot;</span>
-<span id="cb5-40"><a href="#cb5-40"></a>    <span class="co">//for(int i=0;i&lt;=cnt;++i)</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a>    <span class="co">//printf(&quot;-&gt;%I64d:%I64d + %I64d\n&quot;,num[i],ans[num[i]],res[num[i]]);</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;q);</span>
-<span id="cb5-43"><a href="#cb5-43"></a>    <span class="cf">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= q; ++k)</span>
-<span id="cb5-44"><a href="#cb5-44"></a>    {</span>
-<span id="cb5-45"><a href="#cb5-45"></a>        scanf(<span class="st">&quot;</span><span class="sc">%lld%lld</span><span class="st">&quot;</span>, &amp;l, &amp;r);</span>
-<span id="cb5-46"><a href="#cb5-46"></a>        len = r - l + <span class="dv">1</span>;</span>
-<span id="cb5-47"><a href="#cb5-47"></a>        <span class="dt">int</span> pos = upper_bound(num, num + cnt + <span class="dv">1</span>, len) - num;</span>
-<span id="cb5-48"><a href="#cb5-48"></a>        pos--; <span class="co">//num[pos]&lt;=len</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a>        <span class="co">//cout&lt;&lt;pos&lt;&lt;endl;</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a>        <span class="co">//printf(&quot;pos:%d\n&quot;,pos);</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a>        <span class="co">//printf(&quot;v:%I64d +:%I64d\n&quot;,ans[num[pos]],res[num[pos]]);</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a>        out[k] = ans[num[pos]] + (res[num[pos]]) * (len - num[pos]);</span>
-<span id="cb5-53"><a href="#cb5-53"></a>    }</span>
-<span id="cb5-54"><a href="#cb5-54"></a>    <span class="cf">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= q; ++k)</span>
-<span id="cb5-55"><a href="#cb5-55"></a>        printf(<span class="st">&quot;</span><span class="sc">%lld</span><span class="st"> &quot;</span>, out[k]);</span>
-<span id="cb5-56"><a href="#cb5-56"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb5-57"><a href="#cb5-57"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> n, q, tot;
+ll s[maxn];
+ll l, r, len;
+<span class="hljs-built_in">map</span>&lt;ll, ll&gt; vis, res, ans;
+ll num[maxn], cnt;
+ll out[maxn];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    tot = n;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>, &amp;s[i]);
+    sort(s + <span class="hljs-number">1</span>, s + n + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i)
+    &#123;
+        ll p = s[i + <span class="hljs-number">1</span>] - s[i];
+        <span class="hljs-keyword">if</span> (!p)
+            tot--;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!vis[p])
+            num[++cnt] = p; <span class="hljs-comment">//用num保存所有的数</span>
+        vis[p]++;
+    &#125;
+    <span class="hljs-comment">//for(map&lt;ll,ll&gt;::iterator it=vis.begin();it!=vis.end();it++)</span>
+    <span class="hljs-comment">//printf("%I64d:%I64d\n",it-&gt;first,it-&gt;second);</span>
+    sort(num + <span class="hljs-number">1</span>, num + cnt + <span class="hljs-number">1</span>);
+    ans[<span class="hljs-number">0</span>] = num[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= cnt; ++i)
+    &#123;
+        ans[num[i]] = ans[num[i - <span class="hljs-number">1</span>]] + tot * (num[i] - num[i - <span class="hljs-number">1</span>]);
+        <span class="hljs-comment">//到num[i]这个数为止，所有数的贡献=上一段的贡献+num[i-1]+1到num[i]间有效数的贡献</span>
+        <span class="hljs-comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;ans[num[i]]&lt;&lt;endl;</span>
+        res[num[i - <span class="hljs-number">1</span>]] = tot;
+        tot -= vis[num[i]]; <span class="hljs-comment">//tot为下一段中仍有贡献的数的个数</span>
+    &#125;
+    res[num[cnt]] = tot;
+    <span class="hljs-comment">//for(int i=0;i&lt;=cnt;++i)</span>
+    <span class="hljs-comment">//printf("-&gt;%I64d:%I64d + %I64d\n",num[i],ans[num[i]],res[num[i]]);</span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;q);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= q; ++k)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld"</span>, &amp;l, &amp;r);
+        len = r - l + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> pos = upper_bound(num, num + cnt + <span class="hljs-number">1</span>, len) - num;
+        pos--; <span class="hljs-comment">//num[pos]&lt;=len</span>
+        <span class="hljs-comment">//cout&lt;&lt;pos&lt;&lt;endl;</span>
+        <span class="hljs-comment">//printf("pos:%d\n",pos);</span>
+        <span class="hljs-comment">//printf("v:%I64d +:%I64d\n",ans[num[pos]],res[num[pos]]);</span>
+        out[k] = ans[num[pos]] + (res[num[pos]]) * (len - num[pos]);
+    &#125;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= q; ++k)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld "</span>, out[k]);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -530,7 +530,7 @@ li与ri怎么取并没有意义，只有长度才有意义。<br>
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

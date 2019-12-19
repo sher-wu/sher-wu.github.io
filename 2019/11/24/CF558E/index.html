@@ -219,21 +219,21 @@ Output the final string after applying the queries.</p>
 <p>Output one line, the string S after applying the queries.</p>
 <h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
 <h3 id="input-1">input<a class="post-anchor" href="#input-1"></a></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">10</span> <span class="dv">5</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>abacdabcda</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">7</span> <span class="dv">10</span> <span class="dv">0</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">5</span> <span class="dv">8</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">1</span> <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dv">3</span> <span class="dv">6</span> <span class="dv">0</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">7</span> <span class="dv">10</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">10</span> <span class="hljs-number">5</span>
+abacdabcda
+<span class="hljs-number">7</span> <span class="hljs-number">10</span> <span class="hljs-number">0</span>
+<span class="hljs-number">5</span> <span class="hljs-number">8</span> <span class="hljs-number">1</span>
+<span class="hljs-number">1</span> <span class="hljs-number">4</span> <span class="hljs-number">0</span>
+<span class="hljs-number">3</span> <span class="hljs-number">6</span> <span class="hljs-number">0</span>
+<span class="hljs-number">7</span> <span class="hljs-number">10</span> <span class="hljs-number">1</span></code></pre>
 <h3 id="output-1">output<a class="post-anchor" href="#output-1"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>cbcaaaabdd</span></code></pre></div>
+<pre><code class="hljs c++">cbcaaaabdd</code></pre>
 <h3 id="input-2">input<a class="post-anchor" href="#input-2"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">10</span> <span class="dv">1</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>agjucbvdfk</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="dv">1</span> <span class="dv">10</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">10</span> <span class="hljs-number">1</span>
+agjucbvdfk
+<span class="hljs-number">1</span> <span class="hljs-number">10</span> <span class="hljs-number">1</span></code></pre>
 <h3 id="output-2">output<a class="post-anchor" href="#output-2"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>abcdfgjkuv</span></code></pre></div>
+<pre><code class="hljs c++">abcdfgjkuv</code></pre>
 <p>Note First sample test explanation:<br>
 <a href="http://codeforces.com/predownloaded/4d/ba/4dba2cdd1938e078339a4ded2f82dc7192817ef3.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/4d/ba/4dba2cdd1938e078339a4ded2f82dc7192817ef3.png" alt="Example"></a><br>
 <a href="http://codeforces.com/predownloaded/9d/a8/9da8cab5fbde6c79046676f417e837247d83300c.png" target="_blank" rel="noopener" data-caption="Example" data-fancybox="images"><img src="http://codeforces.com/predownloaded/9d/a8/9da8cab5fbde6c79046676f417e837247d83300c.png" alt="Example"></a><br>
@@ -250,150 +250,150 @@ Output the final string after applying the queries.</p>
   比如ababa，变为升序时，t=1，1<sub>（1+3-1）变为a，然后t变为4，4</sub>（4+2-1）变为b.<br>
   复杂度O（m*26logn）</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="at">const</span> <span class="dt">int</span> maxn=<span class="fl">1e5</span>+<span class="dv">10</span>;</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="dt">int</span> tree[<span class="dv">30</span>][<span class="dv">4</span>*maxn],lazy[<span class="dv">30</span>][<span class="dv">4</span>*maxn];</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="dt">int</span> n,m;</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="dt">char</span> c;</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">//lazy -1 未使用, 0或1 区间赋值为0或1</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="dt">void</span> pushup(<span class="dt">int</span> trnum,<span class="dt">int</span> now)</span>
-<span id="cb5-10"><a href="#cb5-10"></a>{</span>
-<span id="cb5-11"><a href="#cb5-11"></a>    tree[trnum][now]=tree[trnum][now&lt;&lt;<span class="dv">1</span>]+tree[trnum][now&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>];</span>
-<span id="cb5-12"><a href="#cb5-12"></a>}</span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="dt">void</span> pushdown(<span class="dt">int</span> trnum,<span class="dt">int</span> num,<span class="dt">int</span> l,<span class="dt">int</span> mid,<span class="dt">int</span> r)</span>
-<span id="cb5-15"><a href="#cb5-15"></a>{</span>
-<span id="cb5-16"><a href="#cb5-16"></a>    <span class="cf">if</span>(lazy[trnum][num]==<span class="dv">0</span>)</span>
-<span id="cb5-17"><a href="#cb5-17"></a>    {</span>
-<span id="cb5-18"><a href="#cb5-18"></a>        tree[trnum][num&lt;&lt;<span class="dv">1</span>]=tree[trnum][num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>]=lazy[trnum][num&lt;&lt;<span class="dv">1</span>]=lazy[trnum][num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>]=<span class="dv">0</span>;</span>
-<span id="cb5-19"><a href="#cb5-19"></a>        lazy[trnum][num]=-<span class="dv">1</span>;</span>
-<span id="cb5-20"><a href="#cb5-20"></a>    }</span>
-<span id="cb5-21"><a href="#cb5-21"></a>    <span class="cf">else</span> <span class="cf">if</span>(lazy[trnum][num]==<span class="dv">1</span>)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>    {</span>
-<span id="cb5-23"><a href="#cb5-23"></a>        tree[trnum][num&lt;&lt;<span class="dv">1</span>]=mid-l+<span class="dv">1</span>;</span>
-<span id="cb5-24"><a href="#cb5-24"></a>        tree[trnum][num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>]=r-mid;</span>
-<span id="cb5-25"><a href="#cb5-25"></a>        lazy[trnum][num&lt;&lt;<span class="dv">1</span>]=lazy[trnum][num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb5-26"><a href="#cb5-26"></a>        lazy[trnum][num]=-<span class="dv">1</span>;</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    }</span>
-<span id="cb5-28"><a href="#cb5-28"></a>}</span>
-<span id="cb5-29"><a href="#cb5-29"></a></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="dt">void</span> addline(<span class="dt">int</span> trnum,<span class="dt">int</span> num,<span class="dt">int</span> le,<span class="dt">int</span> ri,<span class="dt">int</span> l,<span class="dt">int</span> r)</span>
-<span id="cb5-31"><a href="#cb5-31"></a>{</span>
-<span id="cb5-32"><a href="#cb5-32"></a>    <span class="cf">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)</span>
-<span id="cb5-33"><a href="#cb5-33"></a>    {</span>
-<span id="cb5-34"><a href="#cb5-34"></a>        tree[trnum][num]=r-l+<span class="dv">1</span>;</span>
-<span id="cb5-35"><a href="#cb5-35"></a>        lazy[trnum][num]=<span class="dv">1</span>;</span>
-<span id="cb5-36"><a href="#cb5-36"></a>        <span class="cf">return</span>;</span>
-<span id="cb5-37"><a href="#cb5-37"></a>    }</span>
-<span id="cb5-38"><a href="#cb5-38"></a>    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;</span>
-<span id="cb5-39"><a href="#cb5-39"></a>    pushdown(trnum,num,l,mid,r);</span>
-<span id="cb5-40"><a href="#cb5-40"></a>    <span class="cf">if</span>(mid&gt;=le) addline(trnum,num&lt;&lt;<span class="dv">1</span>,le,ri,l,mid);</span>
-<span id="cb5-41"><a href="#cb5-41"></a>    <span class="cf">if</span>(mid&lt;ri) addline(trnum,num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,le,ri,mid+<span class="dv">1</span>,r);</span>
-<span id="cb5-42"><a href="#cb5-42"></a>    pushup(trnum,num);</span>
-<span id="cb5-43"><a href="#cb5-43"></a>}</span>
-<span id="cb5-44"><a href="#cb5-44"></a></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="dt">void</span> add(<span class="dt">int</span> num,<span class="dt">int</span> pos,<span class="dt">int</span> trnum,<span class="dt">int</span> l,<span class="dt">int</span> r)</span>
-<span id="cb5-46"><a href="#cb5-46"></a>{</span>
-<span id="cb5-47"><a href="#cb5-47"></a>    <span class="cf">if</span>(l==r)</span>
-<span id="cb5-48"><a href="#cb5-48"></a>    {</span>
-<span id="cb5-49"><a href="#cb5-49"></a>        tree[trnum][num]=<span class="dv">1</span>;</span>
-<span id="cb5-50"><a href="#cb5-50"></a>        <span class="cf">return</span>;</span>
-<span id="cb5-51"><a href="#cb5-51"></a>    }</span>
-<span id="cb5-52"><a href="#cb5-52"></a>    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;</span>
-<span id="cb5-53"><a href="#cb5-53"></a>    <span class="cf">if</span>(pos&lt;=mid) add(num&lt;&lt;<span class="dv">1</span>,pos,trnum,l,mid);</span>
-<span id="cb5-54"><a href="#cb5-54"></a>    <span class="cf">else</span> add(num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,pos,trnum,mid+<span class="dv">1</span>,r);</span>
-<span id="cb5-55"><a href="#cb5-55"></a>    pushup(trnum,num);</span>
-<span id="cb5-56"><a href="#cb5-56"></a>}<span class="co">//其实add可以和addline合并但是当时没想到这么多就先写了个单点的</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="dt">int</span> counts(<span class="dt">int</span> trnum,<span class="dt">int</span> num,<span class="dt">int</span> le,<span class="dt">int</span> ri,<span class="dt">int</span> l,<span class="dt">int</span> r)</span>
-<span id="cb5-59"><a href="#cb5-59"></a>{</span>
-<span id="cb5-60"><a href="#cb5-60"></a>    <span class="cf">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)</span>
-<span id="cb5-61"><a href="#cb5-61"></a>    {</span>
-<span id="cb5-62"><a href="#cb5-62"></a>        lazy[trnum][num]=<span class="dv">0</span>;</span>
-<span id="cb5-63"><a href="#cb5-63"></a>        <span class="dt">int</span> t=tree[trnum][num];</span>
-<span id="cb5-64"><a href="#cb5-64"></a>        tree[trnum][num]=<span class="dv">0</span>;</span>
-<span id="cb5-65"><a href="#cb5-65"></a>        <span class="cf">return</span> t;</span>
-<span id="cb5-66"><a href="#cb5-66"></a>    }</span>
-<span id="cb5-67"><a href="#cb5-67"></a>    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>,sum=<span class="dv">0</span>;</span>
-<span id="cb5-68"><a href="#cb5-68"></a>    pushdown(trnum,num,l,mid,r);</span>
-<span id="cb5-69"><a href="#cb5-69"></a>    <span class="cf">if</span>(mid&gt;=le) sum+=counts(trnum,num&lt;&lt;<span class="dv">1</span>,le,ri,l,mid);</span>
-<span id="cb5-70"><a href="#cb5-70"></a>    <span class="cf">if</span>(mid&lt;ri) sum+=counts(trnum,num&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,le,ri,mid+<span class="dv">1</span>,r);</span>
-<span id="cb5-71"><a href="#cb5-71"></a>    pushup(trnum,num);</span>
-<span id="cb5-72"><a href="#cb5-72"></a>    <span class="cf">return</span> sum;</span>
-<span id="cb5-73"><a href="#cb5-73"></a>}</span>
-<span id="cb5-74"><a href="#cb5-74"></a></span>
-<span id="cb5-75"><a href="#cb5-75"></a><span class="dt">void</span> run()</span>
-<span id="cb5-76"><a href="#cb5-76"></a>{</span>
-<span id="cb5-77"><a href="#cb5-77"></a>    cin&gt;&gt;n&gt;&gt;m;</span>
-<span id="cb5-78"><a href="#cb5-78"></a>    c=getchar();</span>
-<span id="cb5-79"><a href="#cb5-79"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)</span>
-<span id="cb5-80"><a href="#cb5-80"></a>    {</span>
-<span id="cb5-81"><a href="#cb5-81"></a>        c=getchar();</span>
-<span id="cb5-82"><a href="#cb5-82"></a>        add(<span class="dv">1</span>,i,c-<span class="ch">&#39;a&#39;</span>,<span class="dv">1</span>,n);</span>
-<span id="cb5-83"><a href="#cb5-83"></a>    }</span>
-<span id="cb5-84"><a href="#cb5-84"></a>    <span class="cf">while</span>(m--)</span>
-<span id="cb5-85"><a href="#cb5-85"></a>    {</span>
-<span id="cb5-86"><a href="#cb5-86"></a>        <span class="dt">int</span> le,ri,t,xu,totnum;</span>
-<span id="cb5-87"><a href="#cb5-87"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d%d%d</span><span class="st">&quot;</span>,&amp;le,&amp;ri,&amp;xu);</span>
-<span id="cb5-88"><a href="#cb5-88"></a>        </span>
-<span id="cb5-89"><a href="#cb5-89"></a>        <span class="cf">if</span>(xu)</span>
-<span id="cb5-90"><a href="#cb5-90"></a>        {</span>
-<span id="cb5-91"><a href="#cb5-91"></a>            t=le;</span>
-<span id="cb5-92"><a href="#cb5-92"></a>            <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">26</span>;i++)</span>
-<span id="cb5-93"><a href="#cb5-93"></a>            {</span>
-<span id="cb5-94"><a href="#cb5-94"></a>                totnum=counts(i,<span class="dv">1</span>,le,ri,<span class="dv">1</span>,n);</span>
-<span id="cb5-95"><a href="#cb5-95"></a>                <span class="co">//cout&lt;&lt;i&lt;&lt;&#39; &#39;&lt;&lt;totnum&lt;&lt;endl;</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a>                <span class="cf">if</span>(totnum)</span>
-<span id="cb5-97"><a href="#cb5-97"></a>                {</span>
-<span id="cb5-98"><a href="#cb5-98"></a>                    addline(i,<span class="dv">1</span>,t,t+totnum-<span class="dv">1</span>,<span class="dv">1</span>,n);</span>
-<span id="cb5-99"><a href="#cb5-99"></a>                    t+=totnum;</span>
-<span id="cb5-100"><a href="#cb5-100"></a>                }</span>
-<span id="cb5-101"><a href="#cb5-101"></a>            }</span>
-<span id="cb5-102"><a href="#cb5-102"></a>        }</span>
-<span id="cb5-103"><a href="#cb5-103"></a>        <span class="cf">else</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a>        {</span>
-<span id="cb5-105"><a href="#cb5-105"></a>            t=ri;</span>
-<span id="cb5-106"><a href="#cb5-106"></a>            <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">26</span>;i++)</span>
-<span id="cb5-107"><a href="#cb5-107"></a>            {</span>
-<span id="cb5-108"><a href="#cb5-108"></a>                totnum=counts(i,<span class="dv">1</span>,le,ri,<span class="dv">1</span>,n);</span>
-<span id="cb5-109"><a href="#cb5-109"></a>                <span class="co">//cout&lt;&lt;i&lt;&lt;&#39; &#39;&lt;&lt;totnum&lt;&lt;endl;</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a>                <span class="cf">if</span>(totnum)</span>
-<span id="cb5-111"><a href="#cb5-111"></a>                {</span>
-<span id="cb5-112"><a href="#cb5-112"></a>                    addline(i,<span class="dv">1</span>,t-totnum+<span class="dv">1</span>,t,<span class="dv">1</span>,n);</span>
-<span id="cb5-113"><a href="#cb5-113"></a>                    t-=totnum;</span>
-<span id="cb5-114"><a href="#cb5-114"></a>                }</span>
-<span id="cb5-115"><a href="#cb5-115"></a>            }</span>
-<span id="cb5-116"><a href="#cb5-116"></a>        }</span>
-<span id="cb5-117"><a href="#cb5-117"></a>    }</span>
-<span id="cb5-118"><a href="#cb5-118"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)</span>
-<span id="cb5-119"><a href="#cb5-119"></a>    {</span>
-<span id="cb5-120"><a href="#cb5-120"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>;j&lt;<span class="dv">26</span>;j++)</span>
-<span id="cb5-121"><a href="#cb5-121"></a>        {</span>
-<span id="cb5-122"><a href="#cb5-122"></a>            <span class="cf">if</span>(counts(j,<span class="dv">1</span>,i,i,<span class="dv">1</span>,n))</span>
-<span id="cb5-123"><a href="#cb5-123"></a>            {</span>
-<span id="cb5-124"><a href="#cb5-124"></a>                printf(<span class="st">&quot;</span><span class="sc">%c</span><span class="st">&quot;</span>,<span class="ch">&#39;a&#39;</span>+j);</span>
-<span id="cb5-125"><a href="#cb5-125"></a>                <span class="cf">break</span>;</span>
-<span id="cb5-126"><a href="#cb5-126"></a>            }</span>
-<span id="cb5-127"><a href="#cb5-127"></a>            <span class="co">//cout&lt;&lt;i&lt;&lt;&#39; &#39;&lt;&lt;j&lt;&lt;endl;</span></span>
-<span id="cb5-128"><a href="#cb5-128"></a>        }</span>
-<span id="cb5-129"><a href="#cb5-129"></a>    }</span>
-<span id="cb5-130"><a href="#cb5-130"></a>}</span>
-<span id="cb5-131"><a href="#cb5-131"></a></span>
-<span id="cb5-132"><a href="#cb5-132"></a><span class="dt">void</span> init()</span>
-<span id="cb5-133"><a href="#cb5-133"></a>{</span>
-<span id="cb5-134"><a href="#cb5-134"></a>    memset(lazy,-<span class="dv">1</span>,<span class="kw">sizeof</span>(lazy));</span>
-<span id="cb5-135"><a href="#cb5-135"></a>} </span>
-<span id="cb5-136"><a href="#cb5-136"></a></span>
-<span id="cb5-137"><a href="#cb5-137"></a><span class="dt">int</span> main()</span>
-<span id="cb5-138"><a href="#cb5-138"></a>{</span>
-<span id="cb5-139"><a href="#cb5-139"></a>    <span class="cf">if</span>(fopen(<span class="st">&quot;test.txt&quot;</span>,<span class="st">&quot;r&quot;</span>)!=NULL)</span>
-<span id="cb5-140"><a href="#cb5-140"></a>        freopen(<span class="st">&quot;test.txt&quot;</span>,<span class="st">&quot;r&quot;</span>,stdin);</span>
-<span id="cb5-141"><a href="#cb5-141"></a>    init();</span>
-<span id="cb5-142"><a href="#cb5-142"></a>    run();</span>
-<span id="cb5-143"><a href="#cb5-143"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb5-144"><a href="#cb5-144"></a>} </span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">1e5</span>+<span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">int</span> tree[<span class="hljs-number">30</span>][<span class="hljs-number">4</span>*maxn],lazy[<span class="hljs-number">30</span>][<span class="hljs-number">4</span>*maxn];
+<span class="hljs-keyword">int</span> n,m;
+<span class="hljs-keyword">char</span> c;
+<span class="hljs-comment">//lazy -1 未使用, 0或1 区间赋值为0或1</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pushup</span><span class="hljs-params">(<span class="hljs-keyword">int</span> trnum,<span class="hljs-keyword">int</span> now)</span>
+</span>&#123;
+    tree[trnum][now]=tree[trnum][now&lt;&lt;<span class="hljs-number">1</span>]+tree[trnum][now&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>];
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-keyword">int</span> trnum,<span class="hljs-keyword">int</span> num,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> mid,<span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(lazy[trnum][num]==<span class="hljs-number">0</span>)
+    &#123;
+        tree[trnum][num&lt;&lt;<span class="hljs-number">1</span>]=tree[trnum][num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]=lazy[trnum][num&lt;&lt;<span class="hljs-number">1</span>]=lazy[trnum][num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;
+        lazy[trnum][num]=<span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(lazy[trnum][num]==<span class="hljs-number">1</span>)
+    &#123;
+        tree[trnum][num&lt;&lt;<span class="hljs-number">1</span>]=mid-l+<span class="hljs-number">1</span>;
+        tree[trnum][num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]=r-mid;
+        lazy[trnum][num&lt;&lt;<span class="hljs-number">1</span>]=lazy[trnum][num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;
+        lazy[trnum][num]=<span class="hljs-number">-1</span>;
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addline</span><span class="hljs-params">(<span class="hljs-keyword">int</span> trnum,<span class="hljs-keyword">int</span> num,<span class="hljs-keyword">int</span> le,<span class="hljs-keyword">int</span> ri,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)
+    &#123;
+        tree[trnum][num]=r-l+<span class="hljs-number">1</span>;
+        lazy[trnum][num]=<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    pushdown(trnum,num,l,mid,r);
+    <span class="hljs-keyword">if</span>(mid&gt;=le) addline(trnum,num&lt;&lt;<span class="hljs-number">1</span>,le,ri,l,mid);
+    <span class="hljs-keyword">if</span>(mid&lt;ri) addline(trnum,num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,le,ri,mid+<span class="hljs-number">1</span>,r);
+    pushup(trnum,num);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num,<span class="hljs-keyword">int</span> pos,<span class="hljs-keyword">int</span> trnum,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(l==r)
+    &#123;
+        tree[trnum][num]=<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(pos&lt;=mid) add(num&lt;&lt;<span class="hljs-number">1</span>,pos,trnum,l,mid);
+    <span class="hljs-keyword">else</span> add(num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,pos,trnum,mid+<span class="hljs-number">1</span>,r);
+    pushup(trnum,num);
+&#125;<span class="hljs-comment">//其实add可以和addline合并但是当时没想到这么多就先写了个单点的</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">counts</span><span class="hljs-params">(<span class="hljs-keyword">int</span> trnum,<span class="hljs-keyword">int</span> num,<span class="hljs-keyword">int</span> le,<span class="hljs-keyword">int</span> ri,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(l&gt;=le&amp;&amp;r&lt;=ri)
+    &#123;
+        lazy[trnum][num]=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> t=tree[trnum][num];
+        tree[trnum][num]=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> t;
+    &#125;
+    <span class="hljs-keyword">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>,sum=<span class="hljs-number">0</span>;
+    pushdown(trnum,num,l,mid,r);
+    <span class="hljs-keyword">if</span>(mid&gt;=le) sum+=counts(trnum,num&lt;&lt;<span class="hljs-number">1</span>,le,ri,l,mid);
+    <span class="hljs-keyword">if</span>(mid&lt;ri) sum+=counts(trnum,num&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,le,ri,mid+<span class="hljs-number">1</span>,r);
+    pushup(trnum,num);
+    <span class="hljs-keyword">return</span> sum;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">cin</span>&gt;&gt;n&gt;&gt;m;
+    c=getchar();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+    &#123;
+        c=getchar();
+        add(<span class="hljs-number">1</span>,i,c-<span class="hljs-string">'a'</span>,<span class="hljs-number">1</span>,n);
+    &#125;
+    <span class="hljs-keyword">while</span>(m--)
+    &#123;
+        <span class="hljs-keyword">int</span> le,ri,t,xu,totnum;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;le,&amp;ri,&amp;xu);
+        
+        <span class="hljs-keyword">if</span>(xu)
+        &#123;
+            t=le;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">26</span>;i++)
+            &#123;
+                totnum=counts(i,<span class="hljs-number">1</span>,le,ri,<span class="hljs-number">1</span>,n);
+                <span class="hljs-comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;totnum&lt;&lt;endl;</span>
+                <span class="hljs-keyword">if</span>(totnum)
+                &#123;
+                    addline(i,<span class="hljs-number">1</span>,t,t+totnum<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>,n);
+                    t+=totnum;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">else</span>
+        &#123;
+            t=ri;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">26</span>;i++)
+            &#123;
+                totnum=counts(i,<span class="hljs-number">1</span>,le,ri,<span class="hljs-number">1</span>,n);
+                <span class="hljs-comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;totnum&lt;&lt;endl;</span>
+                <span class="hljs-keyword">if</span>(totnum)
+                &#123;
+                    addline(i,<span class="hljs-number">1</span>,t-totnum+<span class="hljs-number">1</span>,t,<span class="hljs-number">1</span>,n);
+                    t-=totnum;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">26</span>;j++)
+        &#123;
+            <span class="hljs-keyword">if</span>(counts(j,<span class="hljs-number">1</span>,i,i,<span class="hljs-number">1</span>,n))
+            &#123;
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>,<span class="hljs-string">'a'</span>+j);
+                <span class="hljs-keyword">break</span>;
+            &#125;
+            <span class="hljs-comment">//cout&lt;&lt;i&lt;&lt;' '&lt;&lt;j&lt;&lt;endl;</span>
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">memset</span>(lazy,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(lazy));
+&#125; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(fopen(<span class="hljs-string">"test.txt"</span>,<span class="hljs-string">"r"</span>)!=<span class="hljs-literal">NULL</span>)
+        freopen(<span class="hljs-string">"test.txt"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);
+    init();
+    <span class="hljs-built_in">run</span>();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -478,7 +478,7 @@ Output the final string after applying the queries.</p>
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

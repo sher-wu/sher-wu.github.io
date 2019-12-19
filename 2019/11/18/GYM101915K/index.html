@@ -219,12 +219,12 @@
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>For each test print one line containing one integer, the number of different ways to divide the original sequence leading to a sumindrome sequence modulo (1e9+7).</p>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="bn">0110</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">1001</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">2</span>
+<span class="hljs-number">0110</span>
+<span class="hljs-number">1001</span></code></pre>
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">4</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">8</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">4</span>
+<span class="hljs-number">8</span></code></pre>
 <h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
 <p>The ways of dividing the sequence in the second sample are:</p>
 <ol start="1001" type="1">
@@ -241,51 +241,51 @@
 <p>思路：<br>
 回文数的要求就是从左和从右一样，那么从左开始和从右开始的总值一样时，就把这些值合并，再求剩下里面的回文的种类数。</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="at">const</span> ll maxn=<span class="fl">1e9</span>+<span class="dv">7</span>;</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">char</span> a[<span class="dv">60</span>];</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> dp[<span class="dv">60</span>][<span class="dv">60</span>];</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="dt">void</span> init()</span>
-<span id="cb3-9"><a href="#cb3-9"></a>{</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    memset(dp,-<span class="dv">1</span>,<span class="kw">sizeof</span>(dp));</span>
-<span id="cb3-11"><a href="#cb3-11"></a>}</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a>ll dfs(<span class="dt">int</span> l,<span class="dt">int</span> r)</span>
-<span id="cb3-14"><a href="#cb3-14"></a>{</span>
-<span id="cb3-15"><a href="#cb3-15"></a>    <span class="co">//cout&lt;&lt;l&lt;&lt;&#39; &#39;&lt;&lt;r&lt;&lt;&#39;\n&#39;;</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="cf">if</span>(l&gt;=r) <span class="cf">return</span> dp[l][r]=<span class="dv">1</span>;</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">if</span>(dp[l][r]!=-<span class="dv">1</span>) <span class="cf">return</span> dp[l][r];</span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="dt">int</span> &amp;tent=dp[l][r]=<span class="dv">1</span>;<span class="co">//这一块全部加起来作为中间项必定正确 </span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>    <span class="dt">int</span> suml=<span class="dv">0</span>;</span>
-<span id="cb3-20"><a href="#cb3-20"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=l;i&lt;r;i++)</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    {</span>
-<span id="cb3-22"><a href="#cb3-22"></a>        suml+=a[i]-<span class="ch">&#39;0&#39;</span>;</span>
-<span id="cb3-23"><a href="#cb3-23"></a>        <span class="dt">int</span> sumr=<span class="dv">0</span>;</span>
-<span id="cb3-24"><a href="#cb3-24"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=r;j&gt;i;j--)</span>
-<span id="cb3-25"><a href="#cb3-25"></a>        {</span>
-<span id="cb3-26"><a href="#cb3-26"></a>            sumr+=a[j]-<span class="ch">&#39;0&#39;</span>;</span>
-<span id="cb3-27"><a href="#cb3-27"></a>            <span class="cf">if</span>(suml&lt;sumr) <span class="cf">break</span>;</span>
-<span id="cb3-28"><a href="#cb3-28"></a>            <span class="cf">if</span>(suml==sumr) tent=(tent+dfs(i+<span class="dv">1</span>,j-<span class="dv">1</span>))%maxn;</span>
-<span id="cb3-29"><a href="#cb3-29"></a>        }</span>
-<span id="cb3-30"><a href="#cb3-30"></a>    }</span>
-<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">return</span> tent;</span>
-<span id="cb3-32"><a href="#cb3-32"></a>}</span>
-<span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="dt">int</span> main()</span>
-<span id="cb3-35"><a href="#cb3-35"></a>{</span>
-<span id="cb3-36"><a href="#cb3-36"></a>    <span class="co">//freopen(&quot;text.txt&quot;,&quot;r&quot;,stdin);</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>    <span class="dt">int</span> t;</span>
-<span id="cb3-38"><a href="#cb3-38"></a>    cin&gt;&gt;t;</span>
-<span id="cb3-39"><a href="#cb3-39"></a>    <span class="cf">while</span>(t--)</span>
-<span id="cb3-40"><a href="#cb3-40"></a>    {</span>
-<span id="cb3-41"><a href="#cb3-41"></a>        init();</span>
-<span id="cb3-42"><a href="#cb3-42"></a>        scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>,a);</span>
-<span id="cb3-43"><a href="#cb3-43"></a>        printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>,dfs(<span class="dv">0</span>,strlen(a)-<span class="dv">1</span>));</span>
-<span id="cb3-44"><a href="#cb3-44"></a>    }</span>
-<span id="cb3-45"><a href="#cb3-45"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> ll maxn=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;
+<span class="hljs-keyword">char</span> a[<span class="hljs-number">60</span>];
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">60</span>][<span class="hljs-number">60</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(dp));
+&#125;
+
+<span class="hljs-function">ll <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-comment">//cout&lt;&lt;l&lt;&lt;' '&lt;&lt;r&lt;&lt;'\n';</span>
+    <span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span> dp[l][r]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(dp[l][r]!=<span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> dp[l][r];
+    <span class="hljs-keyword">int</span> &amp;tent=dp[l][r]=<span class="hljs-number">1</span>;<span class="hljs-comment">//这一块全部加起来作为中间项必定正确 </span>
+    <span class="hljs-keyword">int</span> suml=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=l;i&lt;r;i++)
+    &#123;
+        suml+=a[i]-<span class="hljs-string">'0'</span>;
+        <span class="hljs-keyword">int</span> sumr=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=r;j&gt;i;j--)
+        &#123;
+            sumr+=a[j]-<span class="hljs-string">'0'</span>;
+            <span class="hljs-keyword">if</span>(suml&lt;sumr) <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">if</span>(suml==sumr) tent=(tent+dfs(i+<span class="hljs-number">1</span>,j<span class="hljs-number">-1</span>))%maxn;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> tent;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-comment">//freopen("text.txt","r",stdin);</span>
+    <span class="hljs-keyword">int</span> t;
+    <span class="hljs-built_in">cin</span>&gt;&gt;t;
+    <span class="hljs-keyword">while</span>(t--)
+    &#123;
+        init();
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>,a);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,dfs(<span class="hljs-number">0</span>,<span class="hljs-built_in">strlen</span>(a)<span class="hljs-number">-1</span>));
+    &#125;
+&#125;</code></pre>
 
 
   
@@ -370,7 +370,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

@@ -222,22 +222,22 @@
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>共n行，每行输出奶牛i的下属中有几个能力值比i大</p>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">5</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">804289384</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">846930887</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">681692778</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">714636916</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dv">957747794</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">1</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="dv">1</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">2</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="dv">3</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">5</span>
+<span class="hljs-number">804289384</span>
+<span class="hljs-number">846930887</span>
+<span class="hljs-number">681692778</span>
+<span class="hljs-number">714636916</span>
+<span class="hljs-number">957747794</span>
+<span class="hljs-number">1</span>
+<span class="hljs-number">1</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">3</span></code></pre>
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">2</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">0</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dv">1</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dv">0</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="dv">0</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">2</span>
+<span class="hljs-number">0</span>
+<span class="hljs-number">1</span>
+<span class="hljs-number">0</span>
+<span class="hljs-number">0</span></code></pre>
 <h2 id="solution">Solution<a class="post-anchor" href="#solution"></a></h2>
 <blockquote>
 <p>如果每个节点都给一个线段树，然后暴力的在父节点将两个线段树合并，那么空间肯定是不够的。因而首先要在空间上进行优化。这里引入了树上的线段树合并。<br>
@@ -248,16 +248,16 @@
   ②如果v为空，返回u<br>
   ③否则，新建节点t，整合u和v的信息，然后递归合并u和v的左右子树</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">inline</span> <span class="dt">int</span> merge(<span class="dt">int</span> u,<span class="dt">int</span> v)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>{</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="cf">if</span>(!u) <span class="cf">return</span> v;</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">if</span>(!v) <span class="cf">return</span> u;</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">int</span> t = ++cnt;</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    sum[t]=sum[u]+sum[v];</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    les[t]=merge(les[u],les[v]);</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    ris[t]=merge(ris[u],ris[v]);</span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="cf">return</span> t;</span>
-<span id="cb3-10"><a href="#cb3-10"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u,<span class="hljs-keyword">int</span> v)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(!u) <span class="hljs-keyword">return</span> v;
+    <span class="hljs-keyword">if</span>(!v) <span class="hljs-keyword">return</span> u;
+    <span class="hljs-keyword">int</span> t = ++cnt;
+    sum[t]=sum[u]+sum[v];
+    les[t]=merge(les[u],les[v]);
+    ris[t]=merge(ris[u],ris[v]);
+    <span class="hljs-keyword">return</span> t;
+&#125;</code></pre>
 <blockquote>
 <p>思考可知，每有一个位置权值同样存在，就要<span class="math inline">\(O(logn)\)</span>的复杂度。那么合并的复杂度取决于两棵线段树重合部分的大小。<br>
 由于权值线段树中被更新的位置通常很均匀分布，所以合并的两棵线段树通常具有很小的相似性。<br>
@@ -268,85 +268,85 @@
 <p>后来看了网上的博客，发现其实这题有更简单的做法。。。<br>
 按DFS序把所有点放入并取出一个栈，放入时计算小于<span class="math inline">\(a_i\)</span>的数量并把<span class="math inline">\(a_i\)</span>放入线段树中，取出时再计算一次小于<span class="math inline">\(a_i\)</span>的数量，那么两者之差就是答案。</p>
 </blockquote>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="fl">2e5</span>+<span class="dv">20</span>;</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="at">const</span> <span class="dt">int</span> maxm = <span class="fl">2e7</span>+<span class="dv">20</span>;</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="dt">int</span> n,id[maxn],a[maxn],b[maxn],fa[maxn],ans[maxn];</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="dt">int</span> cnt,pid[maxn],sum[maxm],les[maxm],ris[maxm];</span>
-<span id="cb4-8"><a href="#cb4-8"></a>vector&lt;<span class="dt">int</span>&gt; son[maxn];</span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">inline</span> ll read(){</span>
-<span id="cb4-10"><a href="#cb4-10"></a>    ll x=<span class="dv">0</span>,f=<span class="dv">1</span>;</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    <span class="dt">char</span> ch=getchar();</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    <span class="cf">while</span>(ch&lt;<span class="ch">&#39;0&#39;</span>||ch&gt;<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb4-13"><a href="#cb4-13"></a>        <span class="cf">if</span>(ch==<span class="ch">&#39;-&#39;</span>) f=-<span class="dv">1</span>;</span>
-<span id="cb4-14"><a href="#cb4-14"></a>        ch=getchar();</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    }</span>
-<span id="cb4-16"><a href="#cb4-16"></a>    <span class="cf">while</span>(ch&gt;=<span class="ch">&#39;0&#39;</span>&amp;&amp;ch&lt;=<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb4-17"><a href="#cb4-17"></a>        x=(x&lt;&lt;<span class="dv">1</span>)+(x&lt;&lt;<span class="dv">3</span>)+(ch^<span class="dv">48</span>);</span>
-<span id="cb4-18"><a href="#cb4-18"></a>        ch=getchar();</span>
-<span id="cb4-19"><a href="#cb4-19"></a>    }</span>
-<span id="cb4-20"><a href="#cb4-20"></a>    <span class="cf">return</span> x*f;</span>
-<span id="cb4-21"><a href="#cb4-21"></a>}</span>
-<span id="cb4-22"><a href="#cb4-22"></a></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="kw">inline</span> <span class="dt">void</span> readin()</span>
-<span id="cb4-24"><a href="#cb4-24"></a>{</span>
-<span id="cb4-25"><a href="#cb4-25"></a>    n=read();</span>
-<span id="cb4-26"><a href="#cb4-26"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i) a[i]=read(),b[i]=a[i];</span>
-<span id="cb4-27"><a href="#cb4-27"></a>    sort(b+<span class="dv">1</span>,b+<span class="dv">1</span>+n);<span class="co">//题目给定了能力值互异，故不用去重 </span></span>
-<span id="cb4-28"><a href="#cb4-28"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i) id[i]=lower_bound(b+<span class="dv">1</span>,b+<span class="dv">1</span>+n,a[i])-b;</span>
-<span id="cb4-29"><a href="#cb4-29"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">2</span>;i&lt;=n;++i) fa[i]=read(),son[fa[i]].push_back(i);</span>
-<span id="cb4-30"><a href="#cb4-30"></a>}</span>
-<span id="cb4-31"><a href="#cb4-31"></a></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="kw">inline</span> <span class="dt">int</span> query(<span class="dt">int</span> qid,<span class="dt">int</span> l,<span class="dt">int</span> r,<span class="dt">int</span> pos)</span>
-<span id="cb4-33"><a href="#cb4-33"></a>{</span>
-<span id="cb4-34"><a href="#cb4-34"></a>    <span class="cf">if</span>(!qid) <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-35"><a href="#cb4-35"></a>    <span class="cf">if</span>(l&gt;pos) <span class="cf">return</span> sum[qid];</span>
-<span id="cb4-36"><a href="#cb4-36"></a>    <span class="dt">int</span> m=(l+r)&gt;&gt;<span class="dv">1</span>;</span>
-<span id="cb4-37"><a href="#cb4-37"></a>    <span class="cf">if</span>(m&gt;pos) <span class="cf">return</span> query(ris[qid],m+<span class="dv">1</span>,r,pos)+query(les[qid],l,m,pos);</span>
-<span id="cb4-38"><a href="#cb4-38"></a>    <span class="cf">return</span> query(ris[qid],m+<span class="dv">1</span>,r,pos);</span>
-<span id="cb4-39"><a href="#cb4-39"></a>}</span>
-<span id="cb4-40"><a href="#cb4-40"></a></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="kw">inline</span> <span class="dt">int</span> merge(<span class="dt">int</span> u,<span class="dt">int</span> v)<span class="co">//the core</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a>{</span>
-<span id="cb4-43"><a href="#cb4-43"></a>    <span class="cf">if</span>(!u) <span class="cf">return</span> v;<span class="co">//某个没有，就直接用另一个，儿子信息可以直接用，不需要更新</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a>    <span class="cf">if</span>(!v) <span class="cf">return</span> u;</span>
-<span id="cb4-45"><a href="#cb4-45"></a>    <span class="dt">int</span> t = ++cnt;<span class="co">//都有，就另建一个点记录合并后的信息</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a>    sum[t]=sum[u]+sum[v];</span>
-<span id="cb4-47"><a href="#cb4-47"></a>    les[t]=merge(les[u],les[v]);<span class="co">//并且维护新节点的儿子信息</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a>    ris[t]=merge(ris[u],ris[v]);</span>
-<span id="cb4-49"><a href="#cb4-49"></a>    <span class="cf">return</span> t;</span>
-<span id="cb4-50"><a href="#cb4-50"></a>}</span>
-<span id="cb4-51"><a href="#cb4-51"></a></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="kw">inline</span> <span class="dt">void</span> modify(<span class="dt">int</span>&amp; qid,<span class="dt">int</span> l,<span class="dt">int</span> r,<span class="dt">int</span> pos)<span class="co">//add the current point</span></span>
-<span id="cb4-53"><a href="#cb4-53"></a>{</span>
-<span id="cb4-54"><a href="#cb4-54"></a>    <span class="cf">if</span>(!qid) qid=++cnt;</span>
-<span id="cb4-55"><a href="#cb4-55"></a>    ++sum[qid];</span>
-<span id="cb4-56"><a href="#cb4-56"></a>    <span class="cf">if</span>(l==r) <span class="cf">return</span>;</span>
-<span id="cb4-57"><a href="#cb4-57"></a>    <span class="dt">int</span> m=(l+r)&gt;&gt;<span class="dv">1</span>;</span>
-<span id="cb4-58"><a href="#cb4-58"></a>    <span class="cf">if</span>(m&gt;=pos) modify(les[qid],l,m,pos);</span>
-<span id="cb4-59"><a href="#cb4-59"></a>    <span class="cf">else</span> modify(ris[qid],m+<span class="dv">1</span>,r,pos);</span>
-<span id="cb4-60"><a href="#cb4-60"></a>}</span>
-<span id="cb4-61"><a href="#cb4-61"></a></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="kw">inline</span> <span class="dt">int</span> dfs(<span class="dt">int</span> now)</span>
-<span id="cb4-63"><a href="#cb4-63"></a>{</span>
-<span id="cb4-64"><a href="#cb4-64"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;son[now].size();++i)</span>
-<span id="cb4-65"><a href="#cb4-65"></a>    {</span>
-<span id="cb4-66"><a href="#cb4-66"></a>        dfs(son[now][i]);</span>
-<span id="cb4-67"><a href="#cb4-67"></a>        pid[now]=merge(pid[now],pid[son[now][i]]);</span>
-<span id="cb4-68"><a href="#cb4-68"></a>    }</span>
-<span id="cb4-69"><a href="#cb4-69"></a>    ans[now]=query(pid[now],<span class="dv">1</span>,n,id[now]);</span>
-<span id="cb4-70"><a href="#cb4-70"></a>    modify(pid[now],<span class="dv">1</span>,n,id[now]);<span class="co">//add the current point</span></span>
-<span id="cb4-71"><a href="#cb4-71"></a>}</span>
-<span id="cb4-72"><a href="#cb4-72"></a></span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="dt">int</span> main()</span>
-<span id="cb4-74"><a href="#cb4-74"></a>{</span>
-<span id="cb4-75"><a href="#cb4-75"></a>    readin();</span>
-<span id="cb4-76"><a href="#cb4-76"></a>    dfs(<span class="dv">1</span>);</span>
-<span id="cb4-77"><a href="#cb4-77"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i) printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,ans[i]);</span>
-<span id="cb4-78"><a href="#cb4-78"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-79"><a href="#cb4-79"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">2e5</span>+<span class="hljs-number">20</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxm = <span class="hljs-number">2e7</span>+<span class="hljs-number">20</span>;
+<span class="hljs-keyword">int</span> n,id[maxn],a[maxn],b[maxn],fa[maxn],ans[maxn];
+<span class="hljs-keyword">int</span> cnt,pid[maxn],sum[maxm],les[maxm],ris[maxm];
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; son[maxn];
+<span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;
+    ll x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>)&#123;
+        <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'-'</span>) f=<span class="hljs-number">-1</span>;
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>)&#123;
+        x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>);
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">return</span> x*f;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readin</span><span class="hljs-params">()</span>
+</span>&#123;
+    n=<span class="hljs-built_in">read</span>();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) a[i]=<span class="hljs-built_in">read</span>(),b[i]=a[i];
+    sort(b+<span class="hljs-number">1</span>,b+<span class="hljs-number">1</span>+n);<span class="hljs-comment">//题目给定了能力值互异，故不用去重 </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) id[i]=lower_bound(b+<span class="hljs-number">1</span>,b+<span class="hljs-number">1</span>+n,a[i])-b;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;=n;++i) fa[i]=<span class="hljs-built_in">read</span>(),son[fa[i]].push_back(i);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-keyword">int</span> qid,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> pos)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(!qid) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(l&gt;pos) <span class="hljs-keyword">return</span> sum[qid];
+    <span class="hljs-keyword">int</span> m=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(m&gt;pos) <span class="hljs-keyword">return</span> query(ris[qid],m+<span class="hljs-number">1</span>,r,pos)+query(les[qid],l,m,pos);
+    <span class="hljs-keyword">return</span> query(ris[qid],m+<span class="hljs-number">1</span>,r,pos);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u,<span class="hljs-keyword">int</span> v)</span><span class="hljs-comment">//the core</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(!u) <span class="hljs-keyword">return</span> v;<span class="hljs-comment">//某个没有，就直接用另一个，儿子信息可以直接用，不需要更新</span>
+    <span class="hljs-keyword">if</span>(!v) <span class="hljs-keyword">return</span> u;
+    <span class="hljs-keyword">int</span> t = ++cnt;<span class="hljs-comment">//都有，就另建一个点记录合并后的信息</span>
+    sum[t]=sum[u]+sum[v];
+    les[t]=merge(les[u],les[v]);<span class="hljs-comment">//并且维护新节点的儿子信息</span>
+    ris[t]=merge(ris[u],ris[v]);
+    <span class="hljs-keyword">return</span> t;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; qid,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> pos)</span><span class="hljs-comment">//add the current point</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(!qid) qid=++cnt;
+    ++sum[qid];
+    <span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> m=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(m&gt;=pos) modify(les[qid],l,m,pos);
+    <span class="hljs-keyword">else</span> modify(ris[qid],m+<span class="hljs-number">1</span>,r,pos);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> now)</span>
+</span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;son[now].<span class="hljs-built_in">size</span>();++i)
+    &#123;
+        dfs(son[now][i]);
+        pid[now]=merge(pid[now],pid[son[now][i]]);
+    &#125;
+    ans[now]=query(pid[now],<span class="hljs-number">1</span>,n,id[now]);
+    modify(pid[now],<span class="hljs-number">1</span>,n,id[now]);<span class="hljs-comment">//add the current point</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    readin();
+    dfs(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans[i]);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -431,7 +431,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

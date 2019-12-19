@@ -221,27 +221,27 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
 <p><strong>Note: The numeration of edges doesn't matter for this task. Your solution will be considered correct if your tree produces the same pairs as given in the input file (possibly reordered). That means that you can print the edges of the tree you reconstructed in any order.</strong></p>
 <h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
 <h3 id="input-1">input<a class="post-anchor" href="#input-1"></a></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">4</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="dv">4</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">1</span> <span class="dv">4</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">3</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">4</span>
+<span class="hljs-number">3</span> <span class="hljs-number">4</span>
+<span class="hljs-number">1</span> <span class="hljs-number">4</span>
+<span class="hljs-number">3</span> <span class="hljs-number">4</span></code></pre>
 <h3 id="output-1">output<a class="post-anchor" href="#output-1"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a>YES</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">1</span> <span class="dv">3</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dv">3</span> <span class="dv">2</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dv">2</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code class="hljs c++">YES
+<span class="hljs-number">1</span> <span class="hljs-number">3</span>
+<span class="hljs-number">3</span> <span class="hljs-number">2</span>
+<span class="hljs-number">2</span> <span class="hljs-number">4</span></code></pre>
 <h3 id="input-2">input<a class="post-anchor" href="#input-2"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">3</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="dv">1</span> <span class="dv">3</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="dv">1</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">3</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span></code></pre>
 <h3 id="output-2">output<a class="post-anchor" href="#output-2"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a>NO</span></code></pre></div>
+<pre><code class="hljs c++">NO</code></pre>
 <h3 id="input-3">input<a class="post-anchor" href="#input-3"></a></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">3</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="dv">1</span> <span class="dv">2</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="dv">2</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">3</span>
+<span class="hljs-number">1</span> <span class="hljs-number">2</span>
+<span class="hljs-number">2</span> <span class="hljs-number">3</span></code></pre>
 <h3 id="output-3">output<a class="post-anchor" href="#output-3"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a>NO</span></code></pre></div>
+<pre><code class="hljs c++">NO</code></pre>
 <h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
 <p>Possible tree from the first example. Dotted lines show edges you need to remove to get appropriate pairs.</p>
 <figure>
@@ -255,66 +255,66 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
 <p>思路：<br>
 最最最基本的，它的某一边最大一定是n，否则直接No。 如果n，x只出现了一次，那直接n，x相连即可。 如果出现了两次，那么要在n与x中间加一个比x小的数i。 如果三次。。。 那么就直接是贪心，从最小的x开始，i也从1开始递增，根据n，x出现的次数多少决定在n，x中间加多少个数（次数-1）。</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="dt">int</span> n,a[<span class="dv">1010</span>],b[<span class="dv">1010</span>],c[<span class="dv">1010</span>],now,add[<span class="dv">1010</span>],nown=<span class="dv">1</span>;</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="dt">int</span> main(){</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    cin&gt;&gt;n;</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;n;i++){</span>
-<span id="cb7-9"><a href="#cb7-9"></a>        <span class="dt">int</span> x,y;</span>
-<span id="cb7-10"><a href="#cb7-10"></a>        cin&gt;&gt;x&gt;&gt;y;</span>
-<span id="cb7-11"><a href="#cb7-11"></a>        <span class="cf">if</span>(x==n) a[y]++;<span class="co">//（x,n）中x的出现次数</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>        <span class="cf">else</span> <span class="cf">if</span>(y==n) a[x]++; </span>
-<span id="cb7-13"><a href="#cb7-13"></a>        <span class="cf">else</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>        {</span>
-<span id="cb7-15"><a href="#cb7-15"></a>            cout&lt;&lt;<span class="st">&quot;NO&quot;</span>;</span>
-<span id="cb7-16"><a href="#cb7-16"></a>            <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb7-17"><a href="#cb7-17"></a>        }</span>
-<span id="cb7-18"><a href="#cb7-18"></a>    }</span>
-<span id="cb7-19"><a href="#cb7-19"></a>    <span class="dt">int</span> ch=<span class="dv">1</span>;</span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;n;i++)</span>
-<span id="cb7-21"><a href="#cb7-21"></a>    {</span>
-<span id="cb7-22"><a href="#cb7-22"></a>        <span class="cf">if</span>(a[i])<span class="co">//没有就跳过</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a>        {</span>
-<span id="cb7-24"><a href="#cb7-24"></a>            <span class="dt">int</span> t=n;</span>
-<span id="cb7-25"><a href="#cb7-25"></a>            <span class="cf">while</span>(a[i]&gt;<span class="dv">1</span>&amp;&amp;nown&lt;=i)<span class="co">//是1，直接建边</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a>            {</span>
-<span id="cb7-27"><a href="#cb7-27"></a>                <span class="cf">if</span>(add[nown]==<span class="dv">0</span>){</span>
-<span id="cb7-28"><a href="#cb7-28"></a>                    b[++now]=t;</span>
-<span id="cb7-29"><a href="#cb7-29"></a>                    c[now]=nown;</span>
-<span id="cb7-30"><a href="#cb7-30"></a>                    add[nown]=<span class="dv">1</span>;</span>
-<span id="cb7-31"><a href="#cb7-31"></a>                    t=nown;</span>
-<span id="cb7-32"><a href="#cb7-32"></a>                    a[i]--;</span>
-<span id="cb7-33"><a href="#cb7-33"></a>                }</span>
-<span id="cb7-34"><a href="#cb7-34"></a>                nown++;</span>
-<span id="cb7-35"><a href="#cb7-35"></a>            }</span>
-<span id="cb7-36"><a href="#cb7-36"></a>            <span class="cf">if</span>(nown&gt;i)<span class="co">//不是1，先往小的连，到1以后，再建边</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a>            {</span>
-<span id="cb7-38"><a href="#cb7-38"></a>                ch=<span class="dv">0</span>;</span>
-<span id="cb7-39"><a href="#cb7-39"></a>                <span class="cf">break</span>;</span>
-<span id="cb7-40"><a href="#cb7-40"></a>            }</span>
-<span id="cb7-41"><a href="#cb7-41"></a>            b[++now]=t;</span>
-<span id="cb7-42"><a href="#cb7-42"></a>            c[now]=i;</span>
-<span id="cb7-43"><a href="#cb7-43"></a>            add[i]=<span class="dv">1</span>;</span>
-<span id="cb7-44"><a href="#cb7-44"></a>            a[i]--;</span>
-<span id="cb7-45"><a href="#cb7-45"></a>        }</span>
-<span id="cb7-46"><a href="#cb7-46"></a>    }</span>
-<span id="cb7-47"><a href="#cb7-47"></a>    <span class="cf">if</span>(ch==<span class="dv">0</span>)<span class="co">//（x,n）的次数少于剩余的小于x的数的总数了，No</span></span>
-<span id="cb7-48"><a href="#cb7-48"></a>    {</span>
-<span id="cb7-49"><a href="#cb7-49"></a>        cout&lt;&lt;<span class="st">&quot;NO&quot;</span>;</span>
-<span id="cb7-50"><a href="#cb7-50"></a>    }</span>
-<span id="cb7-51"><a href="#cb7-51"></a>    <span class="cf">else</span></span>
-<span id="cb7-52"><a href="#cb7-52"></a>    {</span>
-<span id="cb7-53"><a href="#cb7-53"></a>        cout&lt;&lt;<span class="st">&quot;YES&quot;</span>&lt;&lt;endl;</span>
-<span id="cb7-54"><a href="#cb7-54"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;n;i++)</span>
-<span id="cb7-55"><a href="#cb7-55"></a>        {</span>
-<span id="cb7-56"><a href="#cb7-56"></a>            cout&lt;&lt;b[i]&lt;&lt;<span class="ch">&#39; &#39;</span>&lt;&lt;c[i]&lt;&lt;endl;</span>
-<span id="cb7-57"><a href="#cb7-57"></a>        }</span>
-<span id="cb7-58"><a href="#cb7-58"></a>    }</span>
-<span id="cb7-59"><a href="#cb7-59"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb7-60"><a href="#cb7-60"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> n,a[<span class="hljs-number">1010</span>],b[<span class="hljs-number">1010</span>],c[<span class="hljs-number">1010</span>],now,add[<span class="hljs-number">1010</span>],nown=<span class="hljs-number">1</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-built_in">cin</span>&gt;&gt;n;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)&#123;
+        <span class="hljs-keyword">int</span> x,y;
+        <span class="hljs-built_in">cin</span>&gt;&gt;x&gt;&gt;y;
+        <span class="hljs-keyword">if</span>(x==n) a[y]++;<span class="hljs-comment">//（x,n）中x的出现次数</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(y==n) a[x]++; 
+        <span class="hljs-keyword">else</span>
+        &#123;
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">int</span> ch=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
+    &#123;
+        <span class="hljs-keyword">if</span>(a[i])<span class="hljs-comment">//没有就跳过</span>
+        &#123;
+            <span class="hljs-keyword">int</span> t=n;
+            <span class="hljs-keyword">while</span>(a[i]&gt;<span class="hljs-number">1</span>&amp;&amp;nown&lt;=i)<span class="hljs-comment">//是1，直接建边</span>
+            &#123;
+                <span class="hljs-keyword">if</span>(add[nown]==<span class="hljs-number">0</span>)&#123;
+                    b[++now]=t;
+                    c[now]=nown;
+                    add[nown]=<span class="hljs-number">1</span>;
+                    t=nown;
+                    a[i]--;
+                &#125;
+                nown++;
+            &#125;
+            <span class="hljs-keyword">if</span>(nown&gt;i)<span class="hljs-comment">//不是1，先往小的连，到1以后，再建边</span>
+            &#123;
+                ch=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;
+            b[++now]=t;
+            c[now]=i;
+            add[i]=<span class="hljs-number">1</span>;
+            a[i]--;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">if</span>(ch==<span class="hljs-number">0</span>)<span class="hljs-comment">//（x,n）的次数少于剩余的小于x的数的总数了，No</span>
+    &#123;
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"YES"</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
+        &#123;
+            <span class="hljs-built_in">cout</span>&lt;&lt;b[i]&lt;&lt;<span class="hljs-string">' '</span>&lt;&lt;c[i]&lt;&lt;<span class="hljs-built_in">endl</span>;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -399,7 +399,7 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

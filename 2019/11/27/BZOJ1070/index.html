@@ -217,11 +217,11 @@
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>　　最小平均等待时间，答案精确到小数点后2位。</p>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span> <span class="dv">2</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="dv">2</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">1</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">2</span> <span class="hljs-number">2</span>
+<span class="hljs-number">3</span> <span class="hljs-number">2</span>
+<span class="hljs-number">1</span> <span class="hljs-number">4</span></code></pre>
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="fl">1.50</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">1.50</span></code></pre>
 <h2 id="hint">HINT<a class="post-anchor" href="#hint"></a></h2>
 <p>数据范围: (2&lt;=M&lt;=9,1&lt;=N&lt;=60),(1&lt;=T&lt;=1000)</p>
 <blockquote>
@@ -229,123 +229,123 @@
   对同一个技术人员，如果车i倒数第x个被修理，那么该车对总时间的贡献就是ti<em>x。每个技术人员都可以把任何一辆车倒数第1个修，第2个修...第n个修，那么他们对总时间分别有不同的贡献。<br>
   因而建图：s到所有车连flow=1,cost=0的边，车向每个技工的倒数第x个位置连flow=1,cost=ti</em>x的边，每个技工的每个位置向t连flow=1,cost=0的边。</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="dv">2020</span>;</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="at">const</span> <span class="dt">int</span> INF = <span class="fl">1e9</span>+<span class="dv">7</span>;</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">int</span> le,ri,sp[<span class="dv">12</span>][<span class="dv">70</span>];</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">struct</span> MCMF{</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="kw">struct</span> Edge{</span>
-<span id="cb3-9"><a href="#cb3-9"></a>        <span class="dt">int</span> from,to,cap,cost;</span>
-<span id="cb3-10"><a href="#cb3-10"></a>        Edge(){}</span>
-<span id="cb3-11"><a href="#cb3-11"></a>        Edge(<span class="dt">int</span> from,<span class="dt">int</span> to,<span class="dt">int</span> cap,<span class="dt">int</span> cost):from(from),to(to),cap(cap),cost(cost){}</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    };</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="dt">int</span> n,m,s,t;</span>
-<span id="cb3-14"><a href="#cb3-14"></a>    vector&lt;Edge&gt; edges;</span>
-<span id="cb3-15"><a href="#cb3-15"></a>    vector&lt;<span class="dt">int</span>&gt; G[maxn];</span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="dt">int</span> inq[maxn];<span class="co">//inqueue</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="dt">int</span> d[maxn];<span class="co">//dis</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="dt">int</span> p[maxn];<span class="co">//pre</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>    <span class="dt">int</span> a[maxn];<span class="co">//flow</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>    <span class="dt">void</span> init()</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    {</span>
-<span id="cb3-22"><a href="#cb3-22"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;=n;++i) G[i].clear();</span>
-<span id="cb3-23"><a href="#cb3-23"></a>        edges.clear();</span>
-<span id="cb3-24"><a href="#cb3-24"></a>    }</span>
-<span id="cb3-25"><a href="#cb3-25"></a>    <span class="dt">void</span> AddEdge(<span class="dt">int</span> from,<span class="dt">int</span> to,<span class="dt">int</span> cap,<span class="dt">int</span> cost)</span>
-<span id="cb3-26"><a href="#cb3-26"></a>    {</span>
-<span id="cb3-27"><a href="#cb3-27"></a>        edges.push_back(Edge(from,to,cap,cost));</span>
-<span id="cb3-28"><a href="#cb3-28"></a>        edges.push_back(Edge(to,from,<span class="dv">0</span>,-cost));</span>
-<span id="cb3-29"><a href="#cb3-29"></a>        m=edges.size();</span>
-<span id="cb3-30"><a href="#cb3-30"></a>        G[from].push_back(m-<span class="dv">2</span>);</span>
-<span id="cb3-31"><a href="#cb3-31"></a>        G[to].push_back(m-<span class="dv">1</span>);</span>
-<span id="cb3-32"><a href="#cb3-32"></a>    }</span>
-<span id="cb3-33"><a href="#cb3-33"></a>    <span class="dt">bool</span> BF(<span class="dt">int</span>&amp; flow,<span class="dt">int</span>&amp; cost)</span>
-<span id="cb3-34"><a href="#cb3-34"></a>    {</span>
-<span id="cb3-35"><a href="#cb3-35"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i) d[i]=INF,inq[i]=<span class="dv">0</span>;</span>
-<span id="cb3-36"><a href="#cb3-36"></a>        d[s]=<span class="dv">0</span>,inq[s]=<span class="dv">1</span>,p[s]=<span class="dv">0</span>,a[s]=INF;</span>
-<span id="cb3-37"><a href="#cb3-37"></a>        queue&lt;<span class="dt">int</span>&gt; Q;</span>
-<span id="cb3-38"><a href="#cb3-38"></a>        Q.push(s);</span>
-<span id="cb3-39"><a href="#cb3-39"></a>        <span class="cf">while</span>(!Q.empty())</span>
-<span id="cb3-40"><a href="#cb3-40"></a>        {</span>
-<span id="cb3-41"><a href="#cb3-41"></a>            <span class="dt">int</span> u=Q.front();Q.pop();</span>
-<span id="cb3-42"><a href="#cb3-42"></a>            inq[u]=<span class="dv">0</span>;</span>
-<span id="cb3-43"><a href="#cb3-43"></a>            <span class="co">//cout&lt;&lt;u&lt;&lt;&#39; &#39;&lt;&lt;G[u].size()&lt;&lt;&#39; &#39;&lt;&lt;d[u]&lt;&lt;&#39;\n&#39;;</span></span>
-<span id="cb3-44"><a href="#cb3-44"></a>            <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;G[u].size();++i)</span>
-<span id="cb3-45"><a href="#cb3-45"></a>            {</span>
-<span id="cb3-46"><a href="#cb3-46"></a>                Edge&amp; e=edges[G[u][i]];</span>
-<span id="cb3-47"><a href="#cb3-47"></a>                <span class="cf">if</span>(e.cap&amp;&amp;d[e.to]&gt;d[u]+e.cost)</span>
-<span id="cb3-48"><a href="#cb3-48"></a>                {</span>
-<span id="cb3-49"><a href="#cb3-49"></a>                    d[e.to]=d[u]+e.cost;</span>
-<span id="cb3-50"><a href="#cb3-50"></a>                    p[e.to]=G[u][i];</span>
-<span id="cb3-51"><a href="#cb3-51"></a>                    a[e.to]=min(a[u],e.cap);</span>
-<span id="cb3-52"><a href="#cb3-52"></a>                    <span class="cf">if</span>(!inq[e.to])</span>
-<span id="cb3-53"><a href="#cb3-53"></a>                    {</span>
-<span id="cb3-54"><a href="#cb3-54"></a>                        Q.push(e.to);</span>
-<span id="cb3-55"><a href="#cb3-55"></a>                        inq[e.to]=<span class="dv">1</span>;</span>
-<span id="cb3-56"><a href="#cb3-56"></a>                    }</span>
-<span id="cb3-57"><a href="#cb3-57"></a>                }</span>
-<span id="cb3-58"><a href="#cb3-58"></a>            }</span>
-<span id="cb3-59"><a href="#cb3-59"></a>        }</span>
-<span id="cb3-60"><a href="#cb3-60"></a>        <span class="cf">if</span>(d[t]==INF) <span class="cf">return</span> <span class="kw">false</span>;</span>
-<span id="cb3-61"><a href="#cb3-61"></a>        flow+=a[t];</span>
-<span id="cb3-62"><a href="#cb3-62"></a>        cost+=d[t]*a[t];</span>
-<span id="cb3-63"><a href="#cb3-63"></a>        <span class="dt">int</span> u=t;</span>
-<span id="cb3-64"><a href="#cb3-64"></a>        <span class="cf">while</span>(u!=s)</span>
-<span id="cb3-65"><a href="#cb3-65"></a>        {</span>
-<span id="cb3-66"><a href="#cb3-66"></a>            edges[p[u]].cap-=a[t];</span>
-<span id="cb3-67"><a href="#cb3-67"></a>            edges[p[u]^<span class="dv">1</span>].cap+=a[t];</span>
-<span id="cb3-68"><a href="#cb3-68"></a>            u=edges[p[u]].from;</span>
-<span id="cb3-69"><a href="#cb3-69"></a>        }</span>
-<span id="cb3-70"><a href="#cb3-70"></a>        <span class="cf">return</span> <span class="kw">true</span>;</span>
-<span id="cb3-71"><a href="#cb3-71"></a>    }</span>
-<span id="cb3-72"><a href="#cb3-72"></a>    <span class="dt">int</span> Mincost()</span>
-<span id="cb3-73"><a href="#cb3-73"></a>    {</span>
-<span id="cb3-74"><a href="#cb3-74"></a>        <span class="dt">int</span> flow=<span class="dv">0</span>,cost=<span class="dv">0</span>;</span>
-<span id="cb3-75"><a href="#cb3-75"></a>        <span class="co">//cout&lt;&lt;m&lt;&lt;endl;</span></span>
-<span id="cb3-76"><a href="#cb3-76"></a>        <span class="cf">while</span>(BF(flow,cost));</span>
-<span id="cb3-77"><a href="#cb3-77"></a>        <span class="co">//for(int i=1;i&lt;=10;++i) cout&lt;&lt;i&lt;&lt;&#39; &#39;&lt;&lt;p[i]&lt;&lt;endl;</span></span>
-<span id="cb3-78"><a href="#cb3-78"></a>        <span class="cf">return</span> cost;</span>
-<span id="cb3-79"><a href="#cb3-79"></a>    }</span>
-<span id="cb3-80"><a href="#cb3-80"></a>}NF;</span>
-<span id="cb3-81"><a href="#cb3-81"></a></span>
-<span id="cb3-82"><a href="#cb3-82"></a><span class="kw">inline</span> <span class="dt">int</span> read(){</span>
-<span id="cb3-83"><a href="#cb3-83"></a>    <span class="dt">int</span> x=<span class="dv">0</span>,f=<span class="dv">1</span>;</span>
-<span id="cb3-84"><a href="#cb3-84"></a>    <span class="dt">char</span> ch=getchar();</span>
-<span id="cb3-85"><a href="#cb3-85"></a>    <span class="cf">while</span>(ch&lt;<span class="ch">&#39;0&#39;</span>||ch&gt;<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb3-86"><a href="#cb3-86"></a>        <span class="co">//if(ch==&#39;-&#39;) f=-1;</span></span>
-<span id="cb3-87"><a href="#cb3-87"></a>        ch=getchar();</span>
-<span id="cb3-88"><a href="#cb3-88"></a>    }</span>
-<span id="cb3-89"><a href="#cb3-89"></a>    <span class="cf">while</span>(ch&gt;=<span class="ch">&#39;0&#39;</span>&amp;&amp;ch&lt;=<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb3-90"><a href="#cb3-90"></a>        x=(x&lt;&lt;<span class="dv">1</span>)+(x&lt;&lt;<span class="dv">3</span>)+(ch^<span class="dv">48</span>);</span>
-<span id="cb3-91"><a href="#cb3-91"></a>        ch=getchar();</span>
-<span id="cb3-92"><a href="#cb3-92"></a>    }</span>
-<span id="cb3-93"><a href="#cb3-93"></a>    <span class="cf">return</span> x;</span>
-<span id="cb3-94"><a href="#cb3-94"></a>}</span>
-<span id="cb3-95"><a href="#cb3-95"></a></span>
-<span id="cb3-96"><a href="#cb3-96"></a><span class="kw">inline</span> <span class="dt">void</span> readin()</span>
-<span id="cb3-97"><a href="#cb3-97"></a>{</span>
-<span id="cb3-98"><a href="#cb3-98"></a>    <span class="dt">int</span> temp;</span>
-<span id="cb3-99"><a href="#cb3-99"></a>    le=read(),ri=read();</span>
-<span id="cb3-100"><a href="#cb3-100"></a>    NF.s=<span class="dv">0</span>;</span>
-<span id="cb3-101"><a href="#cb3-101"></a>    NF.n=NF.t=ri*(le+<span class="dv">1</span>)+<span class="dv">1</span>;</span>
-<span id="cb3-102"><a href="#cb3-102"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=ri;++i) NF.AddEdge(<span class="dv">0</span>,i,<span class="dv">1</span>,<span class="dv">0</span>);</span>
-<span id="cb3-103"><a href="#cb3-103"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=ri;++i) <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=le;++j)</span>
-<span id="cb3-104"><a href="#cb3-104"></a>    {</span>
-<span id="cb3-105"><a href="#cb3-105"></a>        sp[j][i]=read();</span>
-<span id="cb3-106"><a href="#cb3-106"></a>        <span class="cf">for</span>(<span class="dt">int</span> k=<span class="dv">1</span>;k&lt;=ri;++k) NF.AddEdge(i,j*ri+k,<span class="dv">1</span>,k*sp[j][i]);</span>
-<span id="cb3-107"><a href="#cb3-107"></a>    }</span>
-<span id="cb3-108"><a href="#cb3-108"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=ri+<span class="dv">1</span>;i&lt;NF.t;++i) NF.AddEdge(i,NF.t,<span class="dv">1</span>,<span class="dv">0</span>);</span>
-<span id="cb3-109"><a href="#cb3-109"></a>}</span>
-<span id="cb3-110"><a href="#cb3-110"></a></span>
-<span id="cb3-111"><a href="#cb3-111"></a><span class="dt">int</span> main()</span>
-<span id="cb3-112"><a href="#cb3-112"></a>{</span>
-<span id="cb3-113"><a href="#cb3-113"></a>    NF.init();</span>
-<span id="cb3-114"><a href="#cb3-114"></a>    readin();</span>
-<span id="cb3-115"><a href="#cb3-115"></a>    printf(<span class="st">&quot;%.2lf&quot;</span>,<span class="fl">1.0</span>*NF.Mincost()/ri);</span>
-<span id="cb3-116"><a href="#cb3-116"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb3-117"><a href="#cb3-117"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">2020</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> le,ri,sp[<span class="hljs-number">12</span>][<span class="hljs-number">70</span>];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">MCMF</span>&#123;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span>&#123;</span>
+        <span class="hljs-keyword">int</span> from,to,cap,cost;
+        Edge()&#123;&#125;
+        Edge(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap,<span class="hljs-keyword">int</span> cost):from(from),to(to),cap(cap),cost(cost)&#123;&#125;
+    &#125;;
+    <span class="hljs-keyword">int</span> n,m,s,t;
+    <span class="hljs-built_in">vector</span>&lt;Edge&gt; edges;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[maxn];
+    <span class="hljs-keyword">int</span> inq[maxn];<span class="hljs-comment">//inqueue</span>
+    <span class="hljs-keyword">int</span> d[maxn];<span class="hljs-comment">//dis</span>
+    <span class="hljs-keyword">int</span> p[maxn];<span class="hljs-comment">//pre</span>
+    <span class="hljs-keyword">int</span> a[maxn];<span class="hljs-comment">//flow</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+    </span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=n;++i) G[i].<span class="hljs-built_in">clear</span>();
+        edges.<span class="hljs-built_in">clear</span>();
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap,<span class="hljs-keyword">int</span> cost)</span>
+    </span>&#123;
+        edges.push_back(Edge(from,to,cap,cost));
+        edges.push_back(Edge(to,from,<span class="hljs-number">0</span>,-cost));
+        m=edges.<span class="hljs-built_in">size</span>();
+        G[from].push_back(m<span class="hljs-number">-2</span>);
+        G[to].push_back(m<span class="hljs-number">-1</span>);
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">BF</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; flow,<span class="hljs-keyword">int</span>&amp; cost)</span>
+    </span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) d[i]=INF,inq[i]=<span class="hljs-number">0</span>;
+        d[s]=<span class="hljs-number">0</span>,inq[s]=<span class="hljs-number">1</span>,p[s]=<span class="hljs-number">0</span>,a[s]=INF;
+        <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; Q;
+        Q.push(s);
+        <span class="hljs-keyword">while</span>(!Q.empty())
+        &#123;
+            <span class="hljs-keyword">int</span> u=Q.front();Q.pop();
+            inq[u]=<span class="hljs-number">0</span>;
+            <span class="hljs-comment">//cout&lt;&lt;u&lt;&lt;' '&lt;&lt;G[u].size()&lt;&lt;' '&lt;&lt;d[u]&lt;&lt;'\n';</span>
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;G[u].<span class="hljs-built_in">size</span>();++i)
+            &#123;
+                Edge&amp; e=edges[G[u][i]];
+                <span class="hljs-keyword">if</span>(e.cap&amp;&amp;d[e.to]&gt;d[u]+e.cost)
+                &#123;
+                    d[e.to]=d[u]+e.cost;
+                    p[e.to]=G[u][i];
+                    a[e.to]=<span class="hljs-built_in">min</span>(a[u],e.cap);
+                    <span class="hljs-keyword">if</span>(!inq[e.to])
+                    &#123;
+                        Q.push(e.to);
+                        inq[e.to]=<span class="hljs-number">1</span>;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(d[t]==INF) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        flow+=a[t];
+        cost+=d[t]*a[t];
+        <span class="hljs-keyword">int</span> u=t;
+        <span class="hljs-keyword">while</span>(u!=s)
+        &#123;
+            edges[p[u]].cap-=a[t];
+            edges[p[u]^<span class="hljs-number">1</span>].cap+=a[t];
+            u=edges[p[u]].from;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Mincost</span><span class="hljs-params">()</span>
+    </span>&#123;
+        <span class="hljs-keyword">int</span> flow=<span class="hljs-number">0</span>,cost=<span class="hljs-number">0</span>;
+        <span class="hljs-comment">//cout&lt;&lt;m&lt;&lt;endl;</span>
+        <span class="hljs-keyword">while</span>(BF(flow,cost));
+        <span class="hljs-comment">//for(int i=1;i&lt;=10;++i) cout&lt;&lt;i&lt;&lt;' '&lt;&lt;p[i]&lt;&lt;endl;</span>
+        <span class="hljs-keyword">return</span> cost;
+    &#125;
+&#125;NF;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>)&#123;
+        <span class="hljs-comment">//if(ch=='-') f=-1;</span>
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>)&#123;
+        x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>);
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">return</span> x;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readin</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> temp;
+    le=<span class="hljs-built_in">read</span>(),ri=<span class="hljs-built_in">read</span>();
+    NF.s=<span class="hljs-number">0</span>;
+    NF.n=NF.t=ri*(le+<span class="hljs-number">1</span>)+<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=ri;++i) NF.AddEdge(<span class="hljs-number">0</span>,i,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=ri;++i) <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=le;++j)
+    &#123;
+        sp[j][i]=<span class="hljs-built_in">read</span>();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=ri;++k) NF.AddEdge(i,j*ri+k,<span class="hljs-number">1</span>,k*sp[j][i]);
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=ri+<span class="hljs-number">1</span>;i&lt;NF.t;++i) NF.AddEdge(i,NF.t,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    NF.init();
+    readin();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf"</span>,<span class="hljs-number">1.0</span>*NF.Mincost()/ri);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -430,7 +430,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

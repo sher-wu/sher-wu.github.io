@@ -211,17 +211,17 @@
 <h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
 <p>在一行中输出至多删掉其中 3 个字符后不同字符串的个数。</p>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a>ababcc</span></code></pre></div>
+<pre><code class="hljs c++">ababcc</code></pre>
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dv">25</span></span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-number">25</span></code></pre>
 <h2 id="hint">Hint<a class="post-anchor" href="#hint"></a></h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>删掉 <span class="dv">0</span> 个字符得到 <span class="st">&quot;ababcc&quot;</span>。</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>删掉 <span class="dv">1</span> 个字符得到 <span class="st">&quot;babcc&quot;</span>, <span class="st">&quot;aabcc&quot;</span>, <span class="st">&quot;abbcc&quot;</span>, <span class="st">&quot;abacc&quot;</span> 和 <span class="st">&quot;ababc&quot;</span>。</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>删掉 <span class="dv">2</span> 个字符得到 <span class="st">&quot;abcc&quot;</span>, <span class="st">&quot;bbcc&quot;</span>, <span class="st">&quot;bacc&quot;</span>, <span class="st">&quot;babc&quot;</span>, <span class="st">&quot;aacc&quot;</span>, <span class="st">&quot;aabc&quot;</span>, <span class="st">&quot;abbc&quot;</span>, <span class="st">&quot;abac&quot;</span> 和 <span class="st">&quot;abab&quot;</span>。</span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>删掉 <span class="dv">3</span> 个字符得到 <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcc&quot;</span>, <span class="st">&quot;acc&quot;</span>, <span class="st">&quot;bbc&quot;</span>, <span class="st">&quot;bac&quot;</span>, <span class="st">&quot;bab&quot;</span>, <span class="st">&quot;aac&quot;</span>, <span class="st">&quot;aab&quot;</span>, <span class="st">&quot;abb&quot;</span> 和 <span class="st">&quot;aba&quot;</span>。</span></code></pre></div>
+<pre><code class="hljs c++">删掉 <span class="hljs-number">0</span> 个字符得到 <span class="hljs-string">"ababcc"</span>。
+
+删掉 <span class="hljs-number">1</span> 个字符得到 <span class="hljs-string">"babcc"</span>, <span class="hljs-string">"aabcc"</span>, <span class="hljs-string">"abbcc"</span>, <span class="hljs-string">"abacc"</span> 和 <span class="hljs-string">"ababc"</span>。
+
+删掉 <span class="hljs-number">2</span> 个字符得到 <span class="hljs-string">"abcc"</span>, <span class="hljs-string">"bbcc"</span>, <span class="hljs-string">"bacc"</span>, <span class="hljs-string">"babc"</span>, <span class="hljs-string">"aacc"</span>, <span class="hljs-string">"aabc"</span>, <span class="hljs-string">"abbc"</span>, <span class="hljs-string">"abac"</span> 和 <span class="hljs-string">"abab"</span>。
+
+删掉 <span class="hljs-number">3</span> 个字符得到 <span class="hljs-string">"abc"</span>, <span class="hljs-string">"bcc"</span>, <span class="hljs-string">"acc"</span>, <span class="hljs-string">"bbc"</span>, <span class="hljs-string">"bac"</span>, <span class="hljs-string">"bab"</span>, <span class="hljs-string">"aac"</span>, <span class="hljs-string">"aab"</span>, <span class="hljs-string">"abb"</span> 和 <span class="hljs-string">"aba"</span>。</code></pre>
 <blockquote>
 <p>思路：<br>
 为了避免重复，以及枚举或者组合数在此用起来不现实，因而使用DP。<br>
@@ -231,39 +231,39 @@ d[i][j]表示前i个字符中删除j个字符后得到的不同字符串的个�
 <blockquote>
 <p><strong>这时候就要去重了，根据上面那个栗子可以发现对于一个字符s[i]，如果在i之前存在一个x使得s[x]==s[i]，那么删除[x,i-1]间的字符和删除[x+1,i]间的字符其实是重复的，等价的，那么d[i][j]就要减去d[x-1][j-(i-x)]，减去删除这段造成的重复串。</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="at">const</span> <span class="dt">int</span> MAX = <span class="fl">1e6</span> + <span class="dv">5</span>;</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">char</span> s[MAX];</span>
-<span id="cb4-6"><a href="#cb4-6"></a>ll d[MAX][<span class="dv">4</span>];</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="dt">int</span> main()</span>
-<span id="cb4-8"><a href="#cb4-8"></a>{</span>
-<span id="cb4-9"><a href="#cb4-9"></a>    scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>, s + <span class="dv">1</span>);</span>
-<span id="cb4-10"><a href="#cb4-10"></a>    <span class="dt">int</span> n = strlen(s + <span class="dv">1</span>);</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    d[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    {</span>
-<span id="cb4-14"><a href="#cb4-14"></a>        <span class="cf">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= <span class="dv">3</span>; j++)</span>
-<span id="cb4-15"><a href="#cb4-15"></a>        {</span>
-<span id="cb4-16"><a href="#cb4-16"></a>            <span class="cf">if</span> (d[i - <span class="dv">1</span>][j] == <span class="dv">0</span>)</span>
-<span id="cb4-17"><a href="#cb4-17"></a>                <span class="cf">continue</span>;</span>
-<span id="cb4-18"><a href="#cb4-18"></a>            <span class="cf">if</span> (j &lt; <span class="dv">3</span>)</span>
-<span id="cb4-19"><a href="#cb4-19"></a>                d[i][j + <span class="dv">1</span>] += d[i - <span class="dv">1</span>][j];</span>
-<span id="cb4-20"><a href="#cb4-20"></a>            d[i][j] += d[i - <span class="dv">1</span>][j];</span>
-<span id="cb4-21"><a href="#cb4-21"></a>            <span class="cf">for</span> (<span class="dt">int</span> k = i - <span class="dv">1</span>; k &gt;= <span class="dv">1</span> &amp;&amp; i - k &lt;= j; k--) <span class="co">//往前找到第一个k使得s[k]=s[i]</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>            {</span>
-<span id="cb4-23"><a href="#cb4-23"></a>                <span class="cf">if</span> (s[k] == s[i])</span>
-<span id="cb4-24"><a href="#cb4-24"></a>                {</span>
-<span id="cb4-25"><a href="#cb4-25"></a>                    d[i][j] -= d[k - <span class="dv">1</span>][j - (i - k)];</span>
-<span id="cb4-26"><a href="#cb4-26"></a>                    <span class="cf">break</span>;</span>
-<span id="cb4-27"><a href="#cb4-27"></a>                }</span>
-<span id="cb4-28"><a href="#cb4-28"></a>            }</span>
-<span id="cb4-29"><a href="#cb4-29"></a>        }</span>
-<span id="cb4-30"><a href="#cb4-30"></a>    }</span>
-<span id="cb4-31"><a href="#cb4-31"></a>    printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>, d[n][<span class="dv">0</span>] + d[n][<span class="dv">1</span>] + d[n][<span class="dv">2</span>] + d[n][<span class="dv">3</span>]);</span>
-<span id="cb4-32"><a href="#cb4-32"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-33"><a href="#cb4-33"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX = <span class="hljs-number">1e6</span> + <span class="hljs-number">5</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">char</span> s[MAX];
+ll d[MAX][<span class="hljs-number">4</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, s + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">int</span> n = <span class="hljs-built_in">strlen</span>(s + <span class="hljs-number">1</span>);
+    d[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)
+    &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">3</span>; j++)
+        &#123;
+            <span class="hljs-keyword">if</span> (d[i - <span class="hljs-number">1</span>][j] == <span class="hljs-number">0</span>)
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">if</span> (j &lt; <span class="hljs-number">3</span>)
+                d[i][j + <span class="hljs-number">1</span>] += d[i - <span class="hljs-number">1</span>][j];
+            d[i][j] += d[i - <span class="hljs-number">1</span>][j];
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i - <span class="hljs-number">1</span>; k &gt;= <span class="hljs-number">1</span> &amp;&amp; i - k &lt;= j; k--) <span class="hljs-comment">//往前找到第一个k使得s[k]=s[i]</span>
+            &#123;
+                <span class="hljs-keyword">if</span> (s[k] == s[i])
+                &#123;
+                    d[i][j] -= d[k - <span class="hljs-number">1</span>][j - (i - k)];
+                    <span class="hljs-keyword">break</span>;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, d[n][<span class="hljs-number">0</span>] + d[n][<span class="hljs-number">1</span>] + d[n][<span class="hljs-number">2</span>] + d[n][<span class="hljs-number">3</span>]);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
 
   
@@ -348,7 +348,7 @@ d[i][j]表示前i个字符中删除j个字符后得到的不同字符串的个�
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {

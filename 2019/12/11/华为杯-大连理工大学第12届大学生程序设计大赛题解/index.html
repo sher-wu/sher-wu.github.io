@@ -209,21 +209,21 @@
 <blockquote>
 <p>即统计积最多能被10整除几次，积中出现了几个10。 而10可以被分解成2*5，即统计n个数中共出现了几次2和5，取小即可。</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">int</span> n,v,two,five;</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">int</span> main()</span>
-<span id="cb1-5"><a href="#cb1-5"></a>{</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;n);</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    {</span>
-<span id="cb1-9"><a href="#cb1-9"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;v);</span>
-<span id="cb1-10"><a href="#cb1-10"></a>        <span class="cf">for</span>(;v%<span class="dv">2</span>==<span class="dv">0</span>;v/=<span class="dv">2</span>)two++;</span>
-<span id="cb1-11"><a href="#cb1-11"></a>        <span class="cf">for</span>(;v%<span class="dv">5</span>==<span class="dv">0</span>;v/=<span class="dv">5</span>)five++;</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    }</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,min(two,five));</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb1-15"><a href="#cb1-15"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n,v,two,five;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;v);
+        <span class="hljs-keyword">for</span>(;v%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>;v/=<span class="hljs-number">2</span>)two++;
+        <span class="hljs-keyword">for</span>(;v%<span class="hljs-number">5</span>==<span class="hljs-number">0</span>;v/=<span class="hljs-number">5</span>)five++;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,<span class="hljs-built_in">min</span>(two,five));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="m.-后缀自动机求回旋字符串">M. 后缀自动机求回旋字符串<a class="post-anchor" href="#m.-后缀自动机求回旋字符串"></a></h3>
 <blockquote>
 <p>长度为奇显然为NO，考虑长度为偶，此处以长度为8的s串为例。<br>
@@ -232,280 +232,280 @@
 因此直接判断即可，可以推广到长度为2*n的情形。<br>
 事实上，如将串首尾相接形成一个环，该操作相当于重新选择环的起点，但无论执行多少次操作，当前字母仍应与其相距为n的字母相同。</p>
 </blockquote>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">1e6</span>+<span class="dv">10</span>;</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">char</span> s[N];</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">bool</span> ok(<span class="dt">int</span> n)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>{</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">if</span>(n%<span class="dv">2</span>)<span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    n/=<span class="dv">2</span>;</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;++i)</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="cf">if</span>(s[i]!=s[i+n])<span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb2-11"><a href="#cb2-11"></a>    <span class="cf">return</span> <span class="dv">1</span>;</span>
-<span id="cb2-12"><a href="#cb2-12"></a>}</span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="dt">int</span> main()</span>
-<span id="cb2-14"><a href="#cb2-14"></a>{</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>,s);</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="dt">int</span> len=strlen(s);</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    puts(ok(len)?<span class="st">&quot;YES&quot;</span>:<span class="st">&quot;NO&quot;</span>);</span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb2-19"><a href="#cb2-19"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">1e6</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">char</span> s[N];
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ok</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(n%<span class="hljs-number">2</span>)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    n/=<span class="hljs-number">2</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;++i)
+    <span class="hljs-keyword">if</span>(s[i]!=s[i+n])<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>,s);
+    <span class="hljs-keyword">int</span> len=<span class="hljs-built_in">strlen</span>(s);
+    <span class="hljs-built_in">puts</span>(ok(len)?<span class="hljs-string">"YES"</span>:<span class="hljs-string">"NO"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="h.-自定义排序">H. 自定义排序<a class="post-anchor" href="#h.-自定义排序"></a></h3>
 <blockquote>
 <p>按题意排序，使用一种<span class="math inline">\(O(nlogn)\)</span>的排序方式即可通过，或使用STL。</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">1e5</span>+<span class="dv">5</span>;</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">int</span> n,oa,ob,oc;</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">struct</span> node</span>
-<span id="cb3-6"><a href="#cb3-6"></a>{</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="dt">int</span> a,b,c;</span>
-<span id="cb3-8"><a href="#cb3-8"></a>}e[N];</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">bool</span> <span class="kw">operator</span>&lt;(node x,node y)</span>
-<span id="cb3-10"><a href="#cb3-10"></a>{</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="cf">if</span>(x.a!=y.a)<span class="cf">return</span> oa?x.a&lt; y.a:x.a&gt;y.a;</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    <span class="cf">if</span>(x.b!=y.b)<span class="cf">return</span> ob?x.b&lt; y.b:x.b&gt;y.b;</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="cf">if</span>(x.c!=y.c)<span class="cf">return</span> oc?x.c&lt; y.c:x.c&gt;y.c;</span>
-<span id="cb3-14"><a href="#cb3-14"></a>}</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="dt">int</span> main()</span>
-<span id="cb3-16"><a href="#cb3-16"></a>{</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;oa,&amp;ob,&amp;oc);</span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;++i)</span>
-<span id="cb3-19"><a href="#cb3-19"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d%d</span><span class="st">&quot;</span>,&amp;e[i].a,&amp;e[i].b,&amp;e[i].c);</span>
-<span id="cb3-20"><a href="#cb3-20"></a>    sort(e,e+n);</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;++i)</span>
-<span id="cb3-22"><a href="#cb3-22"></a>    printf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d\n</span><span class="st">&quot;</span>,e[i].a,e[i].b,e[i].c);</span>
-<span id="cb3-23"><a href="#cb3-23"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb3-24"><a href="#cb3-24"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">1e5</span>+<span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> n,oa,ob,oc;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>
+&#123;</span>
+    <span class="hljs-keyword">int</span> a,b,c;
+&#125;e[N];
+<span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;(node x,node y)
+&#123;
+    <span class="hljs-keyword">if</span>(x.a!=y.a)<span class="hljs-keyword">return</span> oa?x.a&lt; y.a:x.a&gt;y.a;
+    <span class="hljs-keyword">if</span>(x.b!=y.b)<span class="hljs-keyword">return</span> ob?x.b&lt; y.b:x.b&gt;y.b;
+    <span class="hljs-keyword">if</span>(x.c!=y.c)<span class="hljs-keyword">return</span> oc?x.c&lt; y.c:x.c&gt;y.c;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>,&amp;n,&amp;oa,&amp;ob,&amp;oc);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;++i)
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;e[i].a,&amp;e[i].b,&amp;e[i].c);
+    sort(e,e+n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;++i)
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d %d\n"</span>,e[i].a,e[i].b,e[i].c);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="d.-爱在公元前">D. 爱在公元前<a class="post-anchor" href="#d.-爱在公元前"></a></h3>
 <blockquote>
 <p>考虑一个月日只可能对应一个年，且9220年02月29日合法，所以先将366个合法日期处理出来。 对于每个询问日期tmp，暴力判断366个日期哪个小于等于tmp即可。</p>
 </blockquote>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="dt">int</span> t,dat[]={<span class="dv">0</span>,<span class="dv">31</span>,<span class="dv">29</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>};</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="dt">int</span> cnt,y,m,d;</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">char</span> s[<span class="dv">10</span>];</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">struct</span> node</span>
-<span id="cb4-7"><a href="#cb4-7"></a>{</span>
-<span id="cb4-8"><a href="#cb4-8"></a>    <span class="dt">int</span> y,m,d;</span>
-<span id="cb4-9"><a href="#cb4-9"></a>}e[<span class="dv">367</span>],tmp;</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="dt">bool</span> cmp(node a,node b)</span>
-<span id="cb4-11"><a href="#cb4-11"></a>{</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    <span class="cf">if</span>(a.y!=b.y)<span class="cf">return</span> a.y&lt;b.y;</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    <span class="cf">if</span>(a.m!=b.m)<span class="cf">return</span> a.m&lt;b.m;</span>
-<span id="cb4-14"><a href="#cb4-14"></a>    <span class="cf">if</span>(a.d!=b.d)<span class="cf">return</span> a.d&lt;b.d;</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    <span class="cf">return</span> <span class="dv">1</span>;</span>
-<span id="cb4-16"><a href="#cb4-16"></a>}</span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="dt">bool</span> leap(<span class="dt">int</span> x)</span>
-<span id="cb4-18"><a href="#cb4-18"></a>{</span>
-<span id="cb4-19"><a href="#cb4-19"></a>    <span class="cf">if</span>(x%<span class="dv">400</span>==<span class="dv">0</span>||(x%<span class="dv">100</span> &amp;&amp; x%<span class="dv">4</span>==<span class="dv">0</span>))<span class="cf">return</span> <span class="dv">1</span>;</span>
-<span id="cb4-20"><a href="#cb4-20"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-21"><a href="#cb4-21"></a>}</span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="dt">void</span> init()</span>
-<span id="cb4-23"><a href="#cb4-23"></a>{</span>
-<span id="cb4-24"><a href="#cb4-24"></a>    <span class="dt">int</span> y;</span>
-<span id="cb4-25"><a href="#cb4-25"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=<span class="dv">12</span>;++i)</span>
-<span id="cb4-26"><a href="#cb4-26"></a>    {</span>
-<span id="cb4-27"><a href="#cb4-27"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=<span class="dv">31</span>;++j)</span>
-<span id="cb4-28"><a href="#cb4-28"></a>        {</span>
-<span id="cb4-29"><a href="#cb4-29"></a>            <span class="cf">if</span>(j&gt;dat[i])<span class="cf">break</span>;</span>
-<span id="cb4-30"><a href="#cb4-30"></a>            y=i/<span class="dv">10</span>+(i%<span class="dv">10</span>)*<span class="dv">10</span>+(j/<span class="dv">10</span>)*<span class="dv">100</span>+(j%<span class="dv">10</span>)*<span class="dv">1000</span>;</span>
-<span id="cb4-31"><a href="#cb4-31"></a>            <span class="cf">if</span>(!leap(y) &amp;&amp; (i==<span class="dv">2</span>&amp;&amp;j==<span class="dv">29</span>))<span class="cf">break</span>;</span>
-<span id="cb4-32"><a href="#cb4-32"></a>            e[++cnt]=node{y,i,j};</span>
-<span id="cb4-33"><a href="#cb4-33"></a>        }</span>
-<span id="cb4-34"><a href="#cb4-34"></a>    }</span>
-<span id="cb4-35"><a href="#cb4-35"></a>}</span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="dt">int</span> main()</span>
-<span id="cb4-37"><a href="#cb4-37"></a>{</span>
-<span id="cb4-38"><a href="#cb4-38"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;t);</span>
-<span id="cb4-39"><a href="#cb4-39"></a>    init();</span>
-<span id="cb4-40"><a href="#cb4-40"></a>    <span class="cf">while</span>(t--)</span>
-<span id="cb4-41"><a href="#cb4-41"></a>    {</span>
-<span id="cb4-42"><a href="#cb4-42"></a>        scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>,s);</span>
-<span id="cb4-43"><a href="#cb4-43"></a>        y=m=d=<span class="dv">0</span>;</span>
-<span id="cb4-44"><a href="#cb4-44"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">4</span>;++i)</span>
-<span id="cb4-45"><a href="#cb4-45"></a>        y=y*<span class="dv">10</span>+(s[i]-<span class="ch">&#39;0&#39;</span>);</span>
-<span id="cb4-46"><a href="#cb4-46"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">4</span>;i&lt;<span class="dv">6</span>;++i)</span>
-<span id="cb4-47"><a href="#cb4-47"></a>        m=m*<span class="dv">10</span>+(s[i]-<span class="ch">&#39;0&#39;</span>);</span>
-<span id="cb4-48"><a href="#cb4-48"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">6</span>;i&lt;<span class="dv">8</span>;++i)</span>
-<span id="cb4-49"><a href="#cb4-49"></a>        d=d*<span class="dv">10</span>+(s[i]-<span class="ch">&#39;0&#39;</span>);</span>
-<span id="cb4-50"><a href="#cb4-50"></a>        tmp=node{y,m,d};</span>
-<span id="cb4-51"><a href="#cb4-51"></a>        <span class="dt">int</span> ans=<span class="dv">0</span>;</span>
-<span id="cb4-52"><a href="#cb4-52"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=cnt;++i)</span>
-<span id="cb4-53"><a href="#cb4-53"></a>        <span class="cf">if</span>(cmp(e[i],tmp))ans++;</span>
-<span id="cb4-54"><a href="#cb4-54"></a>        printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,ans);</span>
-<span id="cb4-55"><a href="#cb4-55"></a>    }</span>
-<span id="cb4-56"><a href="#cb4-56"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb4-57"><a href="#cb4-57"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> t,dat[]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">31</span>,<span class="hljs-number">29</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>&#125;;
+<span class="hljs-keyword">int</span> cnt,y,m,d;
+<span class="hljs-keyword">char</span> s[<span class="hljs-number">10</span>];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>
+&#123;</span>
+    <span class="hljs-keyword">int</span> y,m,d;
+&#125;e[<span class="hljs-number">367</span>],tmp;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(node a,node b)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(a.y!=b.y)<span class="hljs-keyword">return</span> a.y&lt;b.y;
+    <span class="hljs-keyword">if</span>(a.m!=b.m)<span class="hljs-keyword">return</span> a.m&lt;b.m;
+    <span class="hljs-keyword">if</span>(a.d!=b.d)<span class="hljs-keyword">return</span> a.d&lt;b.d;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">leap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(x%<span class="hljs-number">400</span>==<span class="hljs-number">0</span>||(x%<span class="hljs-number">100</span> &amp;&amp; x%<span class="hljs-number">4</span>==<span class="hljs-number">0</span>))<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> y;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">12</span>;++i)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=<span class="hljs-number">31</span>;++j)
+        &#123;
+            <span class="hljs-keyword">if</span>(j&gt;dat[i])<span class="hljs-keyword">break</span>;
+            y=i/<span class="hljs-number">10</span>+(i%<span class="hljs-number">10</span>)*<span class="hljs-number">10</span>+(j/<span class="hljs-number">10</span>)*<span class="hljs-number">100</span>+(j%<span class="hljs-number">10</span>)*<span class="hljs-number">1000</span>;
+            <span class="hljs-keyword">if</span>(!leap(y) &amp;&amp; (i==<span class="hljs-number">2</span>&amp;&amp;j==<span class="hljs-number">29</span>))<span class="hljs-keyword">break</span>;
+            e[++cnt]=node&#123;y,i,j&#125;;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;t);
+    init();
+    <span class="hljs-keyword">while</span>(t--)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>,s);
+        y=m=d=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">4</span>;++i)
+        y=y*<span class="hljs-number">10</span>+(s[i]-<span class="hljs-string">'0'</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">4</span>;i&lt;<span class="hljs-number">6</span>;++i)
+        m=m*<span class="hljs-number">10</span>+(s[i]-<span class="hljs-string">'0'</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">6</span>;i&lt;<span class="hljs-number">8</span>;++i)
+        d=d*<span class="hljs-number">10</span>+(s[i]-<span class="hljs-string">'0'</span>);
+        tmp=node&#123;y,m,d&#125;;
+        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=cnt;++i)
+        <span class="hljs-keyword">if</span>(cmp(e[i],tmp))ans++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="i.-oj的反作弊系统">I. OJ的反作弊系统<a class="post-anchor" href="#i.-oj的反作弊系统"></a></h3>
 <blockquote>
 <p>按题意二分，二分的位置越界即答案不存在，或使用STL。 小于等于v的最大位置即大于v的最小位置-1。 同理，小于v的最大位置即大于等于v的最小位置-1。</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">//手写二分</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">2e5</span>+<span class="dv">10</span>;</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="dt">int</span> n,m,v,x[N],pos,ans;</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="dt">char</span> s[<span class="dv">5</span>];</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="dt">int</span> upper(<span class="dt">int</span> l,<span class="dt">int</span> r,<span class="dt">int</span> v)</span>
-<span id="cb5-8"><a href="#cb5-8"></a>{</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="dt">int</span> mid;</span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="cf">while</span>(l&lt;=r)</span>
-<span id="cb5-11"><a href="#cb5-11"></a>    {</span>
-<span id="cb5-12"><a href="#cb5-12"></a>        mid=(l+r)/<span class="dv">2</span>;</span>
-<span id="cb5-13"><a href="#cb5-13"></a>        <span class="cf">if</span>(x[mid]&lt;=v)l=mid+<span class="dv">1</span>;</span>
-<span id="cb5-14"><a href="#cb5-14"></a>        <span class="cf">else</span> r=mid-<span class="dv">1</span>;</span>
-<span id="cb5-15"><a href="#cb5-15"></a>    }</span>
-<span id="cb5-16"><a href="#cb5-16"></a>    <span class="cf">return</span> l;</span>
-<span id="cb5-17"><a href="#cb5-17"></a>}</span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="dt">int</span> lower(<span class="dt">int</span> l,<span class="dt">int</span> r,<span class="dt">int</span> v)</span>
-<span id="cb5-19"><a href="#cb5-19"></a>{</span>
-<span id="cb5-20"><a href="#cb5-20"></a>    <span class="dt">int</span> mid;</span>
-<span id="cb5-21"><a href="#cb5-21"></a>    <span class="cf">while</span>(l&lt;=r)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>    {</span>
-<span id="cb5-23"><a href="#cb5-23"></a>        mid=(l+r)/<span class="dv">2</span>;</span>
-<span id="cb5-24"><a href="#cb5-24"></a>        <span class="cf">if</span>(x[mid]&lt;v)l=mid+<span class="dv">1</span>;</span>
-<span id="cb5-25"><a href="#cb5-25"></a>        <span class="cf">else</span> r=mid-<span class="dv">1</span>;</span>
-<span id="cb5-26"><a href="#cb5-26"></a>    }</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    <span class="cf">return</span> l;</span>
-<span id="cb5-28"><a href="#cb5-28"></a>}</span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="dt">int</span> main()</span>
-<span id="cb5-30"><a href="#cb5-30"></a>{</span>
-<span id="cb5-31"><a href="#cb5-31"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;m);</span>
-<span id="cb5-32"><a href="#cb5-32"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb5-33"><a href="#cb5-33"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;x[i]);</span>
-<span id="cb5-34"><a href="#cb5-34"></a>    sort(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>);</span>
-<span id="cb5-35"><a href="#cb5-35"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=m;++i)</span>
-<span id="cb5-36"><a href="#cb5-36"></a>    {</span>
-<span id="cb5-37"><a href="#cb5-37"></a>        scanf(<span class="st">&quot;</span><span class="sc">%s%d</span><span class="st">&quot;</span>,s,&amp;v);</span>
-<span id="cb5-38"><a href="#cb5-38"></a>        <span class="dt">char</span> op=s[<span class="dv">0</span>];</span>
-<span id="cb5-39"><a href="#cb5-39"></a>        <span class="cf">if</span>(op==<span class="ch">&#39;A&#39;</span>)</span>
-<span id="cb5-40"><a href="#cb5-40"></a>        {</span>
-<span id="cb5-41"><a href="#cb5-41"></a>            pos=upper(<span class="dv">1</span>,n,v);</span>
-<span id="cb5-42"><a href="#cb5-42"></a>            <span class="cf">if</span>(pos&gt;n)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb5-43"><a href="#cb5-43"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb5-44"><a href="#cb5-44"></a>        }</span>
-<span id="cb5-45"><a href="#cb5-45"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;B&#39;</span>)</span>
-<span id="cb5-46"><a href="#cb5-46"></a>        {</span>
-<span id="cb5-47"><a href="#cb5-47"></a>            pos=lower(<span class="dv">1</span>,n,v);</span>
-<span id="cb5-48"><a href="#cb5-48"></a>            pos--;</span>
-<span id="cb5-49"><a href="#cb5-49"></a>            <span class="cf">if</span>(pos&lt;<span class="dv">1</span>)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb5-50"><a href="#cb5-50"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb5-51"><a href="#cb5-51"></a>        }</span>
-<span id="cb5-52"><a href="#cb5-52"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;C&#39;</span>)</span>
-<span id="cb5-53"><a href="#cb5-53"></a>        {</span>
-<span id="cb5-54"><a href="#cb5-54"></a>            pos=lower(<span class="dv">1</span>,n,v);</span>
-<span id="cb5-55"><a href="#cb5-55"></a>            <span class="cf">if</span>(pos&gt;n)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb5-56"><a href="#cb5-56"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb5-57"><a href="#cb5-57"></a>        }</span>
-<span id="cb5-58"><a href="#cb5-58"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;D&#39;</span>)</span>
-<span id="cb5-59"><a href="#cb5-59"></a>        {</span>
-<span id="cb5-60"><a href="#cb5-60"></a>            pos=upper(<span class="dv">1</span>,n,v);</span>
-<span id="cb5-61"><a href="#cb5-61"></a>            pos--;</span>
-<span id="cb5-62"><a href="#cb5-62"></a>            <span class="cf">if</span>(pos&lt;<span class="dv">1</span>)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb5-63"><a href="#cb5-63"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb5-64"><a href="#cb5-64"></a>        }</span>
-<span id="cb5-65"><a href="#cb5-65"></a>    }</span>
-<span id="cb5-66"><a href="#cb5-66"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb5-67"><a href="#cb5-67"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">//STL</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">2e5</span>+<span class="dv">10</span>;</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="dt">int</span> n,m,v,x[N],pos,ans;</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="dt">char</span> s[<span class="dv">5</span>];</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="dt">int</span> main()</span>
-<span id="cb6-8"><a href="#cb6-8"></a>{</span>
-<span id="cb6-9"><a href="#cb6-9"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;m);</span>
-<span id="cb6-10"><a href="#cb6-10"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb6-11"><a href="#cb6-11"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;x[i]);</span>
-<span id="cb6-12"><a href="#cb6-12"></a>    sort(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>);</span>
-<span id="cb6-13"><a href="#cb6-13"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=m;++i)</span>
-<span id="cb6-14"><a href="#cb6-14"></a>    {</span>
-<span id="cb6-15"><a href="#cb6-15"></a>        scanf(<span class="st">&quot;</span><span class="sc">%s%d</span><span class="st">&quot;</span>,s,&amp;v);</span>
-<span id="cb6-16"><a href="#cb6-16"></a>        <span class="dt">char</span> op=s[<span class="dv">0</span>];</span>
-<span id="cb6-17"><a href="#cb6-17"></a>        <span class="cf">if</span>(op==<span class="ch">&#39;A&#39;</span>)</span>
-<span id="cb6-18"><a href="#cb6-18"></a>        {</span>
-<span id="cb6-19"><a href="#cb6-19"></a>            pos=upper_bound(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>,v)-x;</span>
-<span id="cb6-20"><a href="#cb6-20"></a>            <span class="cf">if</span>(pos&gt;n)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb6-21"><a href="#cb6-21"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb6-22"><a href="#cb6-22"></a>        }</span>
-<span id="cb6-23"><a href="#cb6-23"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;B&#39;</span>)</span>
-<span id="cb6-24"><a href="#cb6-24"></a>        {</span>
-<span id="cb6-25"><a href="#cb6-25"></a>            pos=lower_bound(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>,v)-x;</span>
-<span id="cb6-26"><a href="#cb6-26"></a>            pos--;</span>
-<span id="cb6-27"><a href="#cb6-27"></a>            <span class="cf">if</span>(pos&lt;<span class="dv">1</span>)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb6-28"><a href="#cb6-28"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb6-29"><a href="#cb6-29"></a>        }</span>
-<span id="cb6-30"><a href="#cb6-30"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;C&#39;</span>)</span>
-<span id="cb6-31"><a href="#cb6-31"></a>        {</span>
-<span id="cb6-32"><a href="#cb6-32"></a>            pos=lower_bound(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>,v)-x;</span>
-<span id="cb6-33"><a href="#cb6-33"></a>            <span class="cf">if</span>(pos&gt;n)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb6-34"><a href="#cb6-34"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb6-35"><a href="#cb6-35"></a>        }</span>
-<span id="cb6-36"><a href="#cb6-36"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="ch">&#39;D&#39;</span>)</span>
-<span id="cb6-37"><a href="#cb6-37"></a>        {</span>
-<span id="cb6-38"><a href="#cb6-38"></a>            pos=upper_bound(x+<span class="dv">1</span>,x+n+<span class="dv">1</span>,v)-x;</span>
-<span id="cb6-39"><a href="#cb6-39"></a>            pos--;</span>
-<span id="cb6-40"><a href="#cb6-40"></a>            <span class="cf">if</span>(pos&lt;<span class="dv">1</span>)puts(<span class="st">&quot;-1&quot;</span>);</span>
-<span id="cb6-41"><a href="#cb6-41"></a>            <span class="cf">else</span> printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,pos);</span>
-<span id="cb6-42"><a href="#cb6-42"></a>        }</span>
-<span id="cb6-43"><a href="#cb6-43"></a>    }</span>
-<span id="cb6-44"><a href="#cb6-44"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb6-45"><a href="#cb6-45"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-comment">//手写二分</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">2e5</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">int</span> n,m,v,x[N],pos,ans;
+<span class="hljs-keyword">char</span> s[<span class="hljs-number">5</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">upper</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> v)</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> mid;
+    <span class="hljs-keyword">while</span>(l&lt;=r)
+    &#123;
+        mid=(l+r)/<span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span>(x[mid]&lt;=v)l=mid+<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span> r=mid<span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> l;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lower</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> v)</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> mid;
+    <span class="hljs-keyword">while</span>(l&lt;=r)
+    &#123;
+        mid=(l+r)/<span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span>(x[mid]&lt;v)l=mid+<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span> r=mid<span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> l;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;x[i]);
+    sort(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;++i)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s%d"</span>,s,&amp;v);
+        <span class="hljs-keyword">char</span> op=s[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'A'</span>)
+        &#123;
+            pos=upper(<span class="hljs-number">1</span>,n,v);
+            <span class="hljs-keyword">if</span>(pos&gt;n)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'B'</span>)
+        &#123;
+            pos=lower(<span class="hljs-number">1</span>,n,v);
+            pos--;
+            <span class="hljs-keyword">if</span>(pos&lt;<span class="hljs-number">1</span>)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'C'</span>)
+        &#123;
+            pos=lower(<span class="hljs-number">1</span>,n,v);
+            <span class="hljs-keyword">if</span>(pos&gt;n)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'D'</span>)
+        &#123;
+            pos=upper(<span class="hljs-number">1</span>,n,v);
+            pos--;
+            <span class="hljs-keyword">if</span>(pos&lt;<span class="hljs-number">1</span>)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<pre><code class="hljs c++"><span class="hljs-comment">//STL</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">2e5</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">int</span> n,m,v,x[N],pos,ans;
+<span class="hljs-keyword">char</span> s[<span class="hljs-number">5</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;x[i]);
+    sort(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;++i)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s%d"</span>,s,&amp;v);
+        <span class="hljs-keyword">char</span> op=s[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'A'</span>)
+        &#123;
+            pos=upper_bound(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>,v)-x;
+            <span class="hljs-keyword">if</span>(pos&gt;n)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'B'</span>)
+        &#123;
+            pos=lower_bound(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>,v)-x;
+            pos--;
+            <span class="hljs-keyword">if</span>(pos&lt;<span class="hljs-number">1</span>)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'C'</span>)
+        &#123;
+            pos=lower_bound(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>,v)-x;
+            <span class="hljs-keyword">if</span>(pos&gt;n)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-string">'D'</span>)
+        &#123;
+            pos=upper_bound(x+<span class="hljs-number">1</span>,x+n+<span class="hljs-number">1</span>,v)-x;
+            pos--;
+            <span class="hljs-keyword">if</span>(pos&lt;<span class="hljs-number">1</span>)<span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,pos);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="c.-耀宗学长的图像处理课本">C. 耀宗学长的图像处理课本<a class="post-anchor" href="#c.-耀宗学长的图像处理课本"></a></h3>
 <blockquote>
 <p>原题题号UVA297，开始出了<span class="math inline">\(dep&gt;5\)</span>的数据，向被卡这道题的参赛选手抱歉。 做法较多，可以根据实际矩形递归建树，也可以只利用树形递归建树，先序遍历这棵树。 遇见字母<span class="math inline">\(p\)</span>就向下递归4个位置，遇到字母<span class="math inline">\(f\)</span>就统计答案。</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="pp">#include </span><span class="im">&lt;cstring&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="at">const</span> <span class="dt">int</span> len = <span class="dv">32</span>;</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="dv">1024</span> + <span class="dv">10</span>;</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="dt">char</span> s[maxn];</span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="dt">int</span> buf[len][len], cnt;</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="dt">void</span> draw(<span class="at">const</span> <span class="dt">char</span> *s, <span class="dt">int</span> &amp;p, <span class="dt">int</span> r, <span class="dt">int</span> c, <span class="dt">int</span> w)</span>
-<span id="cb7-8"><a href="#cb7-8"></a>{</span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="dt">char</span> ch = s[p++];</span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="cf">if</span> (ch == <span class="ch">&#39;p&#39;</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    {</span>
-<span id="cb7-12"><a href="#cb7-12"></a>        draw(s, p, r, c + w / <span class="dv">2</span>, w / <span class="dv">2</span>);</span>
-<span id="cb7-13"><a href="#cb7-13"></a>        draw(s, p, r, c, w / <span class="dv">2</span>);</span>
-<span id="cb7-14"><a href="#cb7-14"></a>        draw(s, p, r + w / <span class="dv">2</span>, c, w / <span class="dv">2</span>);</span>
-<span id="cb7-15"><a href="#cb7-15"></a>        draw(s, p, r + w / <span class="dv">2</span>, c + w / <span class="dv">2</span>, w / <span class="dv">2</span>);</span>
-<span id="cb7-16"><a href="#cb7-16"></a>    }</span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="cf">else</span> <span class="cf">if</span> (ch == <span class="ch">&#39;f&#39;</span>)</span>
-<span id="cb7-18"><a href="#cb7-18"></a>    {</span>
-<span id="cb7-19"><a href="#cb7-19"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = r; i &lt; r + w; i++)</span>
-<span id="cb7-20"><a href="#cb7-20"></a>            <span class="cf">for</span> (<span class="dt">int</span> j = c; j &lt; c + w; j++)</span>
-<span id="cb7-21"><a href="#cb7-21"></a>                <span class="cf">if</span> (buf[i][j] == <span class="dv">0</span>)</span>
-<span id="cb7-22"><a href="#cb7-22"></a>                {</span>
-<span id="cb7-23"><a href="#cb7-23"></a>                    buf[i][j] = <span class="dv">1</span>;</span>
-<span id="cb7-24"><a href="#cb7-24"></a>                    cnt++;</span>
-<span id="cb7-25"><a href="#cb7-25"></a>                }</span>
-<span id="cb7-26"><a href="#cb7-26"></a>    }</span>
-<span id="cb7-27"><a href="#cb7-27"></a>}</span>
-<span id="cb7-28"><a href="#cb7-28"></a></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="dt">int</span> main()</span>
-<span id="cb7-30"><a href="#cb7-30"></a>{</span>
-<span id="cb7-31"><a href="#cb7-31"></a>    <span class="dt">int</span> T;</span>
-<span id="cb7-32"><a href="#cb7-32"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;T);</span>
-<span id="cb7-33"><a href="#cb7-33"></a>    <span class="cf">while</span> (T--)</span>
-<span id="cb7-34"><a href="#cb7-34"></a>    {</span>
-<span id="cb7-35"><a href="#cb7-35"></a>        memset(buf, <span class="dv">0</span>, <span class="kw">sizeof</span>(buf));</span>
-<span id="cb7-36"><a href="#cb7-36"></a>        cnt = <span class="dv">0</span>;</span>
-<span id="cb7-37"><a href="#cb7-37"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">2</span>; i++)</span>
-<span id="cb7-38"><a href="#cb7-38"></a>        {</span>
-<span id="cb7-39"><a href="#cb7-39"></a>            scanf(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span>, s);</span>
-<span id="cb7-40"><a href="#cb7-40"></a>            <span class="dt">int</span> p = <span class="dv">0</span>;</span>
-<span id="cb7-41"><a href="#cb7-41"></a>            draw(s, p, <span class="dv">0</span>, <span class="dv">0</span>, len);</span>
-<span id="cb7-42"><a href="#cb7-42"></a>        }</span>
-<span id="cb7-43"><a href="#cb7-43"></a>        printf(<span class="st">&quot;There are </span><span class="sc">%d</span><span class="st"> black pixels.</span><span class="sc">\n</span><span class="st">&quot;</span>, cnt);</span>
-<span id="cb7-44"><a href="#cb7-44"></a>    }</span>
-<span id="cb7-45"><a href="#cb7-45"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb7-46"><a href="#cb7-46"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> len = <span class="hljs-number">32</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">1024</span> + <span class="hljs-number">10</span>;
+<span class="hljs-keyword">char</span> s[maxn];
+<span class="hljs-keyword">int</span> buf[len][len], cnt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *s, <span class="hljs-keyword">int</span> &amp;p, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> w)</span>
+</span>&#123;
+    <span class="hljs-keyword">char</span> ch = s[p++];
+    <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">'p'</span>)
+    &#123;
+        draw(s, p, r, c + w / <span class="hljs-number">2</span>, w / <span class="hljs-number">2</span>);
+        draw(s, p, r, c, w / <span class="hljs-number">2</span>);
+        draw(s, p, r + w / <span class="hljs-number">2</span>, c, w / <span class="hljs-number">2</span>);
+        draw(s, p, r + w / <span class="hljs-number">2</span>, c + w / <span class="hljs-number">2</span>, w / <span class="hljs-number">2</span>);
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">'f'</span>)
+    &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = r; i &lt; r + w; i++)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = c; j &lt; c + w; j++)
+                <span class="hljs-keyword">if</span> (buf[i][j] == <span class="hljs-number">0</span>)
+                &#123;
+                    buf[i][j] = <span class="hljs-number">1</span>;
+                    cnt++;
+                &#125;
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> T;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;T);
+    <span class="hljs-keyword">while</span> (T--)
+    &#123;
+        <span class="hljs-built_in">memset</span>(buf, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(buf));
+        cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>; i++)
+        &#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, s);
+            <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;
+            draw(s, p, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, len);
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"There are %d black pixels.\n"</span>, cnt);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="k.-取模运算">K. 取模运算<a class="post-anchor" href="#k.-取模运算"></a></h3>
 <blockquote>
 <p>分块，优雅的暴力。<br>
@@ -516,55 +516,55 @@
 针对每次询问，若<span class="math inline">\(p\geq \sqrt{ {10}^{5}}\)</span>，暴力统计，否则直接回答now[][x]的值。<br>
 复杂度为<span class="math inline">\(O(n\sqrt{n})\)</span>。</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">1e5</span>+<span class="dv">10</span>;</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="at">const</span> <span class="dt">int</span> M=sqrt(N)+<span class="dv">5</span>;</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="dt">int</span> n,m,op,x,y,a[N],ans;</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="dt">int</span> now[M][M],tong[N];</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="dt">int</span> main()</span>
-<span id="cb8-8"><a href="#cb8-8"></a>{</span>
-<span id="cb8-9"><a href="#cb8-9"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;m);</span>
-<span id="cb8-10"><a href="#cb8-10"></a>    <span class="dt">int</span> sq=sqrt(N);</span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb8-12"><a href="#cb8-12"></a>    {</span>
-<span id="cb8-13"><a href="#cb8-13"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;a[i]);</span>
-<span id="cb8-14"><a href="#cb8-14"></a>        tong[a[i]]++;</span>
-<span id="cb8-15"><a href="#cb8-15"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=sq;++j)</span>
-<span id="cb8-16"><a href="#cb8-16"></a>        now[j][a[i]%j]++;</span>
-<span id="cb8-17"><a href="#cb8-17"></a>    }</span>
-<span id="cb8-18"><a href="#cb8-18"></a>    <span class="cf">while</span>(m--)</span>
-<span id="cb8-19"><a href="#cb8-19"></a>    {</span>
-<span id="cb8-20"><a href="#cb8-20"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d%d%d</span><span class="st">&quot;</span>,&amp;op,&amp;x,&amp;y);</span>
-<span id="cb8-21"><a href="#cb8-21"></a>        <span class="cf">if</span>(op==<span class="dv">1</span>)</span>
-<span id="cb8-22"><a href="#cb8-22"></a>        {</span>
-<span id="cb8-23"><a href="#cb8-23"></a>            <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=sq;++j)</span>
-<span id="cb8-24"><a href="#cb8-24"></a>            {</span>
-<span id="cb8-25"><a href="#cb8-25"></a>                now[j][a[x]%j]--;</span>
-<span id="cb8-26"><a href="#cb8-26"></a>                now[j][y%j]++;</span>
-<span id="cb8-27"><a href="#cb8-27"></a>            }</span>
-<span id="cb8-28"><a href="#cb8-28"></a>            tong[a[x]]--;</span>
-<span id="cb8-29"><a href="#cb8-29"></a>            tong[y]++;</span>
-<span id="cb8-30"><a href="#cb8-30"></a>            a[x]=y;</span>
-<span id="cb8-31"><a href="#cb8-31"></a>        }</span>
-<span id="cb8-32"><a href="#cb8-32"></a>        <span class="cf">else</span> <span class="cf">if</span>(op==<span class="dv">2</span>)</span>
-<span id="cb8-33"><a href="#cb8-33"></a>        {</span>
-<span id="cb8-34"><a href="#cb8-34"></a>            <span class="cf">if</span>(x&gt;=y)ans=<span class="dv">0</span>;</span>
-<span id="cb8-35"><a href="#cb8-35"></a>            <span class="cf">else</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a>            {</span>
-<span id="cb8-37"><a href="#cb8-37"></a>                <span class="cf">if</span>(y&lt;=sq)ans=now[y][x];</span>
-<span id="cb8-38"><a href="#cb8-38"></a>                <span class="cf">else</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a>                {</span>
-<span id="cb8-40"><a href="#cb8-40"></a>                    ans=<span class="dv">0</span>;</span>
-<span id="cb8-41"><a href="#cb8-41"></a>                    <span class="cf">for</span>(<span class="dt">int</span> i=x;i&lt;N;i+=y)</span>
-<span id="cb8-42"><a href="#cb8-42"></a>                    ans+=tong[i];</span>
-<span id="cb8-43"><a href="#cb8-43"></a>                }</span>
-<span id="cb8-44"><a href="#cb8-44"></a>            }</span>
-<span id="cb8-45"><a href="#cb8-45"></a>            printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>,ans);</span>
-<span id="cb8-46"><a href="#cb8-46"></a>        }</span>
-<span id="cb8-47"><a href="#cb8-47"></a>    }</span>
-<span id="cb8-48"><a href="#cb8-48"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb8-49"><a href="#cb8-49"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">1e5</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> M=<span class="hljs-built_in">sqrt</span>(N)+<span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> n,m,op,x,y,a[N],ans;
+<span class="hljs-keyword">int</span> now[M][M],tong[N];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);
+    <span class="hljs-keyword">int</span> sq=<span class="hljs-built_in">sqrt</span>(N);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
+        tong[a[i]]++;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=sq;++j)
+        now[j][a[i]%j]++;
+    &#125;
+    <span class="hljs-keyword">while</span>(m--)
+    &#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;op,&amp;x,&amp;y);
+        <span class="hljs-keyword">if</span>(op==<span class="hljs-number">1</span>)
+        &#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=sq;++j)
+            &#123;
+                now[j][a[x]%j]--;
+                now[j][y%j]++;
+            &#125;
+            tong[a[x]]--;
+            tong[y]++;
+            a[x]=y;
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-number">2</span>)
+        &#123;
+            <span class="hljs-keyword">if</span>(x&gt;=y)ans=<span class="hljs-number">0</span>;
+            <span class="hljs-keyword">else</span>
+            &#123;
+                <span class="hljs-keyword">if</span>(y&lt;=sq)ans=now[y][x];
+                <span class="hljs-keyword">else</span>
+                &#123;
+                    ans=<span class="hljs-number">0</span>;
+                    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=x;i&lt;N;i+=y)
+                    ans+=tong[i];
+                &#125;
+            &#125;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="f.-菜鸟工程师的分子划分">F. 菜鸟工程师的分子划分<a class="post-anchor" href="#f.-菜鸟工程师的分子划分"></a></h3>
 <blockquote>
 <p>题意：<br>
@@ -575,190 +575,190 @@
 围绕基点将其他点按照极角排序，将直线旋转，统计符合要求的点的个数。<br>
 需要注意的是，如果将所有的黑点以基点为中心做一个中心对称，则符合要求的点的个数就变成了直线一侧的点的个数。</p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="pp">#include</span><span class="im">&lt;algorithm&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="at">const</span> <span class="dt">int</span> maxn = <span class="dv">1000</span> + <span class="dv">5</span>;</span>
-<span id="cb9-8"><a href="#cb9-8"></a></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">struct</span> Point</span>
-<span id="cb9-10"><a href="#cb9-10"></a>{</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="dt">int</span> x, y;</span>
-<span id="cb9-12"><a href="#cb9-12"></a>    <span class="dt">double</span> rad; <span class="co">// with respect to current point</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>    <span class="dt">bool</span> <span class="kw">operator</span>&lt;(<span class="at">const</span> Point &amp;rhs) <span class="at">const</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>    {</span>
-<span id="cb9-15"><a href="#cb9-15"></a>        <span class="cf">return</span> rad &lt; rhs.rad;</span>
-<span id="cb9-16"><a href="#cb9-16"></a>    }</span>
-<span id="cb9-17"><a href="#cb9-17"></a>} op[maxn], p[maxn];</span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="dt">int</span> n, color[maxn];</span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">// from O-A to O-B, is it a left turn?</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="dt">bool</span> Left(Point A, Point B)</span>
-<span id="cb9-22"><a href="#cb9-22"></a>{</span>
-<span id="cb9-23"><a href="#cb9-23"></a>    <span class="cf">return</span> A.x * B.y - A.y * B.x &gt;= <span class="dv">0</span>;</span>
-<span id="cb9-24"><a href="#cb9-24"></a>}</span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="dt">int</span> solve()</span>
-<span id="cb9-27"><a href="#cb9-27"></a>{</span>
-<span id="cb9-28"><a href="#cb9-28"></a>    <span class="cf">if</span>(n &lt;= <span class="dv">2</span>)</span>
-<span id="cb9-29"><a href="#cb9-29"></a>        <span class="cf">return</span> <span class="dv">2</span>;</span>
-<span id="cb9-30"><a href="#cb9-30"></a>    <span class="dt">int</span> ans = <span class="dv">0</span>;</span>
-<span id="cb9-31"><a href="#cb9-31"></a>    <span class="co">// pivot point</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a>    <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++){</span>
-<span id="cb9-33"><a href="#cb9-33"></a>        <span class="dt">int</span> k = <span class="dv">0</span>;</span>
-<span id="cb9-34"><a href="#cb9-34"></a>        <span class="co">// the list of other point, sorted in increasing order of rad</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a>        <span class="cf">for</span>(<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; n; j++)</span>
-<span id="cb9-36"><a href="#cb9-36"></a>            <span class="cf">if</span>(j != i){</span>
-<span id="cb9-37"><a href="#cb9-37"></a>                p[k].x = op[j].x - op[i].x;</span>
-<span id="cb9-38"><a href="#cb9-38"></a>                p[k].y = op[j].y - op[i].y;</span>
-<span id="cb9-39"><a href="#cb9-39"></a>                <span class="cf">if</span>(color[j]){</span>
-<span id="cb9-40"><a href="#cb9-40"></a>                    p[k].x = -p[k].x;</span>
-<span id="cb9-41"><a href="#cb9-41"></a>                    p[k].y = -p[k].y;</span>
-<span id="cb9-42"><a href="#cb9-42"></a>                }</span>
-<span id="cb9-43"><a href="#cb9-43"></a>                p[k].rad = atan2(p[k].y, p[k].x);</span>
-<span id="cb9-44"><a href="#cb9-44"></a>                k++;</span>
-<span id="cb9-45"><a href="#cb9-45"></a>            }</span>
-<span id="cb9-46"><a href="#cb9-46"></a>        sort(p, p+k);</span>
-<span id="cb9-47"><a href="#cb9-47"></a>        <span class="co">// sweeping. cnt is the number of points whose rad is between p[L] and p[R]</span></span>
-<span id="cb9-48"><a href="#cb9-48"></a>        <span class="dt">int</span> L = <span class="dv">0</span>, R = <span class="dv">0</span>, cnt = <span class="dv">2</span>;<span class="co">//consider the position of &quot;cnt--&quot;</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a>        <span class="cf">while</span>(L &lt; k){</span>
-<span id="cb9-50"><a href="#cb9-50"></a>            <span class="cf">if</span>(R == L){</span>
-<span id="cb9-51"><a href="#cb9-51"></a>                R = (R+<span class="dv">1</span>)%k;    <span class="co">// empty interval</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a>                cnt++;</span>
-<span id="cb9-53"><a href="#cb9-53"></a>            }</span>
-<span id="cb9-54"><a href="#cb9-54"></a>            <span class="cf">while</span>(R != L &amp;&amp; Left(p[L], p[R])){</span>
-<span id="cb9-55"><a href="#cb9-55"></a>                R = (R+<span class="dv">1</span>)%k;    <span class="co">// stop when [L,R] spans across &gt; 180 degrees</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a>                cnt++;</span>
-<span id="cb9-57"><a href="#cb9-57"></a>            }</span>
-<span id="cb9-58"><a href="#cb9-58"></a>            cnt--;</span>
-<span id="cb9-59"><a href="#cb9-59"></a>            L++;</span>
-<span id="cb9-60"><a href="#cb9-60"></a>            ans = max(ans, cnt);</span>
-<span id="cb9-61"><a href="#cb9-61"></a>        }</span>
-<span id="cb9-62"><a href="#cb9-62"></a>    }</span>
-<span id="cb9-63"><a href="#cb9-63"></a>    <span class="cf">return</span> ans;</span>
-<span id="cb9-64"><a href="#cb9-64"></a>}</span>
-<span id="cb9-65"><a href="#cb9-65"></a></span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="dt">int</span> main()</span>
-<span id="cb9-67"><a href="#cb9-67"></a>{</span>
-<span id="cb9-68"><a href="#cb9-68"></a>    <span class="cf">while</span>(scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;n)==<span class="dv">1</span>&amp;&amp;n){</span>
-<span id="cb9-69"><a href="#cb9-69"></a>        <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)</span>
-<span id="cb9-70"><a href="#cb9-70"></a>            scanf(<span class="st">&quot;</span><span class="sc">%d%d%d</span><span class="st">&quot;</span>, &amp;op[i].x, &amp;op[i].y, &amp;color[i]);</span>
-<span id="cb9-71"><a href="#cb9-71"></a>        printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>, solve());</span>
-<span id="cb9-72"><a href="#cb9-72"></a>    }</span>
-<span id="cb9-73"><a href="#cb9-73"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb9-74"><a href="#cb9-74"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">1000</span> + <span class="hljs-number">5</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Point</span>
+&#123;</span>
+    <span class="hljs-keyword">int</span> x, y;
+    <span class="hljs-keyword">double</span> rad; <span class="hljs-comment">// with respect to current point</span>
+    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;(<span class="hljs-keyword">const</span> Point &amp;rhs) <span class="hljs-keyword">const</span>
+    &#123;
+        <span class="hljs-keyword">return</span> rad &lt; rhs.rad;
+    &#125;
+&#125; op[maxn], p[maxn];
+<span class="hljs-keyword">int</span> n, color[maxn];
+<span class="hljs-comment">// from O-A to O-B, is it a left turn?</span>
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Left</span><span class="hljs-params">(Point A, Point B)</span>
+</span>&#123;
+    <span class="hljs-keyword">return</span> A.x * B.y - A.y * B.x &gt;= <span class="hljs-number">0</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">2</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">// pivot point</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)&#123;
+        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// the list of other point, sorted in increasing order of rad</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+            <span class="hljs-keyword">if</span>(j != i)&#123;
+                p[k].x = op[j].x - op[i].x;
+                p[k].y = op[j].y - op[i].y;
+                <span class="hljs-keyword">if</span>(color[j])&#123;
+                    p[k].x = -p[k].x;
+                    p[k].y = -p[k].y;
+                &#125;
+                p[k].rad = <span class="hljs-built_in">atan2</span>(p[k].y, p[k].x);
+                k++;
+            &#125;
+        sort(p, p+k);
+        <span class="hljs-comment">// sweeping. cnt is the number of points whose rad is between p[L] and p[R]</span>
+        <span class="hljs-keyword">int</span> L = <span class="hljs-number">0</span>, R = <span class="hljs-number">0</span>, cnt = <span class="hljs-number">2</span>;<span class="hljs-comment">//consider the position of "cnt--"</span>
+        <span class="hljs-keyword">while</span>(L &lt; k)&#123;
+            <span class="hljs-keyword">if</span>(R == L)&#123;
+                R = (R+<span class="hljs-number">1</span>)%k;    <span class="hljs-comment">// empty interval</span>
+                cnt++;
+            &#125;
+            <span class="hljs-keyword">while</span>(R != L &amp;&amp; Left(p[L], p[R]))&#123;
+                R = (R+<span class="hljs-number">1</span>)%k;    <span class="hljs-comment">// stop when [L,R] spans across &gt; 180 degrees</span>
+                cnt++;
+            &#125;
+            cnt--;
+            L++;
+            ans = <span class="hljs-built_in">max</span>(ans, cnt);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n)==<span class="hljs-number">1</span>&amp;&amp;n)&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;op[i].x, &amp;op[i].y, &amp;color[i]);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, solve());
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="l.-七星堆六朝墓群">L. 七星堆六朝墓群<a class="post-anchor" href="#l.-七星堆六朝墓群"></a></h3>
 <blockquote>
 <p>求最大同色子矩阵，可采用悬线法或单调栈。h[j]代表当前相同值的高度，L[j]代表以h[j]的高度能移动到的最左位置，R[j]代表以h[j]的高度能移动到的最右位置，则当前枚举的等高子矩阵的面积为<span class="math inline">\((R[j]-L[j]+1)*h[j]\)</span>。</p>
 </blockquote>
 <p>①单调栈</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">2e3</span>+<span class="dv">10</span>;</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="dt">int</span> n,m,a[N][N],h[N],L[N],R[N];</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="dt">int</span> stk,q[N];</span>
-<span id="cb10-7"><a href="#cb10-7"></a>ll ans;</span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="dt">int</span> main()</span>
-<span id="cb10-9"><a href="#cb10-9"></a>{</span>
-<span id="cb10-10"><a href="#cb10-10"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;m);</span>
-<span id="cb10-11"><a href="#cb10-11"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb10-12"><a href="#cb10-12"></a>    {</span>
-<span id="cb10-13"><a href="#cb10-13"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=m;++j)</span>
-<span id="cb10-14"><a href="#cb10-14"></a>        {</span>
-<span id="cb10-15"><a href="#cb10-15"></a>            scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;a[i][j]);</span>
-<span id="cb10-16"><a href="#cb10-16"></a>        }</span>
-<span id="cb10-17"><a href="#cb10-17"></a>    }</span>
-<span id="cb10-18"><a href="#cb10-18"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb10-19"><a href="#cb10-19"></a>    {</span>
-<span id="cb10-20"><a href="#cb10-20"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=m;++j)</span>
-<span id="cb10-21"><a href="#cb10-21"></a>        {</span>
-<span id="cb10-22"><a href="#cb10-22"></a>            <span class="cf">if</span>(a[i][j]==a[i-<span class="dv">1</span>][j])h[j]++;</span>
-<span id="cb10-23"><a href="#cb10-23"></a>            <span class="cf">else</span> h[j]=<span class="dv">1</span>;</span>
-<span id="cb10-24"><a href="#cb10-24"></a>        }</span>
-<span id="cb10-25"><a href="#cb10-25"></a>        <span class="dt">int</span> l,r;</span>
-<span id="cb10-26"><a href="#cb10-26"></a>        <span class="cf">for</span>(l=<span class="dv">1</span>;l&lt;=n;l=r+<span class="dv">1</span>)</span>
-<span id="cb10-27"><a href="#cb10-27"></a>        {</span>
-<span id="cb10-28"><a href="#cb10-28"></a>            r=l;</span>
-<span id="cb10-29"><a href="#cb10-29"></a>            <span class="cf">while</span>(r&lt;=n&amp;&amp;a[i][l]==a[i][r])r++;</span>
-<span id="cb10-30"><a href="#cb10-30"></a>            r--;</span>
-<span id="cb10-31"><a href="#cb10-31"></a>            stk=<span class="dv">0</span>;</span>
-<span id="cb10-32"><a href="#cb10-32"></a>            <span class="cf">for</span>(<span class="dt">int</span> k=l;k&lt;=r;++k)</span>
-<span id="cb10-33"><a href="#cb10-33"></a>            {</span>
-<span id="cb10-34"><a href="#cb10-34"></a>                <span class="cf">while</span>(stk&amp;&amp;h[q[stk]]&gt;=h[k])stk--;</span>
-<span id="cb10-35"><a href="#cb10-35"></a>                <span class="cf">if</span>(!stk)L[k]=l;</span>
-<span id="cb10-36"><a href="#cb10-36"></a>                <span class="cf">else</span> L[k]=q[stk]+<span class="dv">1</span>;</span>
-<span id="cb10-37"><a href="#cb10-37"></a>                q[++stk]=k;</span>
-<span id="cb10-38"><a href="#cb10-38"></a>             }</span>
-<span id="cb10-39"><a href="#cb10-39"></a>             stk=<span class="dv">0</span>;</span>
-<span id="cb10-40"><a href="#cb10-40"></a>             <span class="cf">for</span>(<span class="dt">int</span> k=r;k&gt;=l;--k)</span>
-<span id="cb10-41"><a href="#cb10-41"></a>             {</span>
-<span id="cb10-42"><a href="#cb10-42"></a>                <span class="cf">while</span>(stk&amp;&amp;h[q[stk]]&gt;=h[k])stk--;</span>
-<span id="cb10-43"><a href="#cb10-43"></a>                <span class="cf">if</span>(!stk)R[k]=r;</span>
-<span id="cb10-44"><a href="#cb10-44"></a>                <span class="cf">else</span> R[k]=q[stk]-<span class="dv">1</span>;</span>
-<span id="cb10-45"><a href="#cb10-45"></a>                q[++stk]=k;</span>
-<span id="cb10-46"><a href="#cb10-46"></a>             }</span>
-<span id="cb10-47"><a href="#cb10-47"></a>             <span class="cf">for</span>(<span class="dt">int</span> k=l;k&lt;=r;++k)</span>
-<span id="cb10-48"><a href="#cb10-48"></a>             {</span>
-<span id="cb10-49"><a href="#cb10-49"></a>                ans=max(ans,<span class="dv">1</span><span class="bu">ll</span>*(R[k]-L[k]+<span class="dv">1</span>)*h[k]*a[i][k]);</span>
-<span id="cb10-50"><a href="#cb10-50"></a>             }</span>
-<span id="cb10-51"><a href="#cb10-51"></a>        }</span>
-<span id="cb10-52"><a href="#cb10-52"></a>    }</span>
-<span id="cb10-53"><a href="#cb10-53"></a>    printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>,ans);</span>
-<span id="cb10-54"><a href="#cb10-54"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb10-55"><a href="#cb10-55"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">2e3</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> n,m,a[N][N],h[N],L[N],R[N];
+<span class="hljs-keyword">int</span> stk,q[N];
+ll ans;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;++j)
+        &#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;++j)
+        &#123;
+            <span class="hljs-keyword">if</span>(a[i][j]==a[i<span class="hljs-number">-1</span>][j])h[j]++;
+            <span class="hljs-keyword">else</span> h[j]=<span class="hljs-number">1</span>;
+        &#125;
+        <span class="hljs-keyword">int</span> l,r;
+        <span class="hljs-keyword">for</span>(l=<span class="hljs-number">1</span>;l&lt;=n;l=r+<span class="hljs-number">1</span>)
+        &#123;
+            r=l;
+            <span class="hljs-keyword">while</span>(r&lt;=n&amp;&amp;a[i][l]==a[i][r])r++;
+            r--;
+            stk=<span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=l;k&lt;=r;++k)
+            &#123;
+                <span class="hljs-keyword">while</span>(stk&amp;&amp;h[q[stk]]&gt;=h[k])stk--;
+                <span class="hljs-keyword">if</span>(!stk)L[k]=l;
+                <span class="hljs-keyword">else</span> L[k]=q[stk]+<span class="hljs-number">1</span>;
+                q[++stk]=k;
+             &#125;
+             stk=<span class="hljs-number">0</span>;
+             <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=r;k&gt;=l;--k)
+             &#123;
+                <span class="hljs-keyword">while</span>(stk&amp;&amp;h[q[stk]]&gt;=h[k])stk--;
+                <span class="hljs-keyword">if</span>(!stk)R[k]=r;
+                <span class="hljs-keyword">else</span> R[k]=q[stk]<span class="hljs-number">-1</span>;
+                q[++stk]=k;
+             &#125;
+             <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=l;k&lt;=r;++k)
+             &#123;
+                ans=<span class="hljs-built_in">max</span>(ans,<span class="hljs-number">1l</span>l*(R[k]-L[k]+<span class="hljs-number">1</span>)*h[k]*a[i][k]);
+             &#125;
+        &#125;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,ans);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <p>②悬线法</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="at">const</span> <span class="dt">int</span> N=<span class="fl">2e3</span>+<span class="dv">10</span>;</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="dt">int</span> m,n,a[N][N];</span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="dt">int</span> l[N],r[N],h[N];</span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="dt">int</span> main()</span>
-<span id="cb11-9"><a href="#cb11-9"></a>{</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="cf">while</span>(~scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>,&amp;n,&amp;m))</span>
-<span id="cb11-11"><a href="#cb11-11"></a>    {</span>
-<span id="cb11-12"><a href="#cb11-12"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb11-13"><a href="#cb11-13"></a>        {</span>
-<span id="cb11-14"><a href="#cb11-14"></a>            <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=m;++j)</span>
-<span id="cb11-15"><a href="#cb11-15"></a>            {</span>
-<span id="cb11-16"><a href="#cb11-16"></a>                scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;a[i][j]);</span>
-<span id="cb11-17"><a href="#cb11-17"></a>            }</span>
-<span id="cb11-18"><a href="#cb11-18"></a>        }</span>
-<span id="cb11-19"><a href="#cb11-19"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=m;j++)</span>
-<span id="cb11-20"><a href="#cb11-20"></a>            l[j]=<span class="dv">0</span>,r[j]=m+<span class="dv">1</span>,h[j]=<span class="dv">0</span>;</span>
-<span id="cb11-21"><a href="#cb11-21"></a>        ll ans=<span class="dv">0</span>;</span>
-<span id="cb11-22"><a href="#cb11-22"></a>        <span class="dt">int</span> la,ra;</span>
-<span id="cb11-23"><a href="#cb11-23"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;++i)</span>
-<span id="cb11-24"><a href="#cb11-24"></a>        {</span>
-<span id="cb11-25"><a href="#cb11-25"></a>            la=<span class="dv">0</span>;ra=m+<span class="dv">1</span>;</span>
-<span id="cb11-26"><a href="#cb11-26"></a>            <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=m;++j)</span>
-<span id="cb11-27"><a href="#cb11-27"></a>            {</span>
-<span id="cb11-28"><a href="#cb11-28"></a>                <span class="cf">if</span>(a[i][j]==a[i-<span class="dv">1</span>][j])</span>
-<span id="cb11-29"><a href="#cb11-29"></a>                    h[j]++;</span>
-<span id="cb11-30"><a href="#cb11-30"></a>                <span class="cf">else</span> </span>
-<span id="cb11-31"><a href="#cb11-31"></a>                    h[j]=<span class="dv">1</span>,l[j]=<span class="dv">0</span>,r[j]=m+<span class="dv">1</span>;</span>
-<span id="cb11-32"><a href="#cb11-32"></a>                <span class="cf">if</span>(a[i][j]==a[i][j-<span class="dv">1</span>])</span>
-<span id="cb11-33"><a href="#cb11-33"></a>                    l[j]=max(l[j],la+<span class="dv">1</span>);</span>
-<span id="cb11-34"><a href="#cb11-34"></a>                <span class="cf">else</span> </span>
-<span id="cb11-35"><a href="#cb11-35"></a>                    l[j]=j,la=j-<span class="dv">1</span>;</span>
-<span id="cb11-36"><a href="#cb11-36"></a>            }</span>
-<span id="cb11-37"><a href="#cb11-37"></a>            <span class="cf">for</span>(<span class="dt">int</span> j=m;j&gt;=<span class="dv">1</span>;--j)</span>
-<span id="cb11-38"><a href="#cb11-38"></a>            {</span>
-<span id="cb11-39"><a href="#cb11-39"></a>                <span class="cf">if</span>(a[i][j]==a[i][j+<span class="dv">1</span>])</span>
-<span id="cb11-40"><a href="#cb11-40"></a>                    r[j]=min(r[j],ra-<span class="dv">1</span>);</span>
-<span id="cb11-41"><a href="#cb11-41"></a>                <span class="cf">else</span></span>
-<span id="cb11-42"><a href="#cb11-42"></a>                    r[j]=j,ra=j+<span class="dv">1</span>;</span>
-<span id="cb11-43"><a href="#cb11-43"></a>                ans=max(ans,<span class="dv">1</span><span class="bu">ll</span>*h[j]*(r[j]-l[j]+<span class="dv">1</span>)*a[i][j]);</span>
-<span id="cb11-44"><a href="#cb11-44"></a>            }</span>
-<span id="cb11-45"><a href="#cb11-45"></a>        }</span>
-<span id="cb11-46"><a href="#cb11-46"></a>        printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>,ans);</span>
-<span id="cb11-47"><a href="#cb11-47"></a>    }</span>
-<span id="cb11-48"><a href="#cb11-48"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb11-49"><a href="#cb11-49"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">2e3</span>+<span class="hljs-number">10</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> m,n,a[N][N];
+<span class="hljs-keyword">int</span> l[N],r[N],h[N];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m))
+    &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+        &#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;++j)
+            &#123;
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++)
+            l[j]=<span class="hljs-number">0</span>,r[j]=m+<span class="hljs-number">1</span>,h[j]=<span class="hljs-number">0</span>;
+        ll ans=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> la,ra;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+        &#123;
+            la=<span class="hljs-number">0</span>;ra=m+<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;++j)
+            &#123;
+                <span class="hljs-keyword">if</span>(a[i][j]==a[i<span class="hljs-number">-1</span>][j])
+                    h[j]++;
+                <span class="hljs-keyword">else</span> 
+                    h[j]=<span class="hljs-number">1</span>,l[j]=<span class="hljs-number">0</span>,r[j]=m+<span class="hljs-number">1</span>;
+                <span class="hljs-keyword">if</span>(a[i][j]==a[i][j<span class="hljs-number">-1</span>])
+                    l[j]=<span class="hljs-built_in">max</span>(l[j],la+<span class="hljs-number">1</span>);
+                <span class="hljs-keyword">else</span> 
+                    l[j]=j,la=j<span class="hljs-number">-1</span>;
+            &#125;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=m;j&gt;=<span class="hljs-number">1</span>;--j)
+            &#123;
+                <span class="hljs-keyword">if</span>(a[i][j]==a[i][j+<span class="hljs-number">1</span>])
+                    r[j]=<span class="hljs-built_in">min</span>(r[j],ra<span class="hljs-number">-1</span>);
+                <span class="hljs-keyword">else</span>
+                    r[j]=j,ra=j+<span class="hljs-number">1</span>;
+                ans=<span class="hljs-built_in">max</span>(ans,<span class="hljs-number">1l</span>l*h[j]*(r[j]-l[j]+<span class="hljs-number">1</span>)*a[i][j]);
+            &#125;
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,ans);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="b.-立方和">B. 立方和<a class="post-anchor" href="#b.-立方和"></a></h3>
 <blockquote>
 <p>线段树经典题目，hdu4578的弱化版本。 首先考虑加与乘。<br>
@@ -767,272 +767,272 @@
 例如，我要把区间<span class="math inline">\([L,R]\)</span>内每个数的值从<span class="math inline">\(x_i\)</span>变为<span class="math inline">\(x_i+p\)</span>的话,那么区间内每个数的变化量为<span class="math inline">\((x_i+p)^2-x_i^2=2x_ip+p^2\)</span>,区间平方和<span class="math inline">\(mk[2]\)</span>的变化量为<span class="math inline">\(2*mk[1]*p+(R-L+1)*p^2\)</span>.那么只需要通过加一个数就可以维护区间平方和了。<br>
 需要注意的是，由于这里使用的<span class="math inline">\(mk[1]\)</span>应当是这段区间发生区间加以前的，因而在更新是应该先更新<span class="math inline">\(mk[2]\)</span>再更新<span class="math inline">\(mk[1]\)</span>。</p>
 </blockquote>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="at">const</span> <span class="dt">int</span> mod = <span class="fl">1e4</span> + <span class="dv">7</span>;</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="at">const</span> <span class="dt">int</span> N = <span class="fl">1e5</span> + <span class="dv">10</span>;</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">struct</span> node</span>
-<span id="cb12-7"><a href="#cb12-7"></a>{</span>
-<span id="cb12-8"><a href="#cb12-8"></a>    <span class="dt">int</span> l, r;</span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="dt">int</span> p[<span class="dv">4</span>];</span>
-<span id="cb12-10"><a href="#cb12-10"></a>    <span class="dt">int</span> addlazy, multlazy;</span>
-<span id="cb12-11"><a href="#cb12-11"></a>} tree[N &lt;&lt; <span class="dv">2</span>];</span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="dt">int</span> a[N];</span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="dt">int</span> mk[<span class="dv">4</span>];</span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="dt">void</span> up(<span class="dt">int</span> pos, <span class="dt">int</span> op)</span>
-<span id="cb12-15"><a href="#cb12-15"></a>{</span>
-<span id="cb12-16"><a href="#cb12-16"></a>    <span class="dt">int</span> len = tree[pos].r - tree[pos].l + <span class="dv">1</span>;</span>
-<span id="cb12-17"><a href="#cb12-17"></a>    <span class="cf">if</span> (op == <span class="dv">3</span>)</span>
-<span id="cb12-18"><a href="#cb12-18"></a>    {</span>
-<span id="cb12-19"><a href="#cb12-19"></a>        tree[pos].p[<span class="dv">3</span>] += <span class="dv">1</span><span class="bu">ll</span> * mk[<span class="dv">3</span>] * len % mod + <span class="dv">3</span><span class="bu">ll</span> * mk[<span class="dv">2</span>] * tree[pos].p[<span class="dv">1</span>] % mod + <span class="dv">3</span><span class="bu">ll</span> * mk[<span class="dv">1</span>] * tree[pos].p[<span class="dv">2</span>] % mod;</span>
-<span id="cb12-20"><a href="#cb12-20"></a>        tree[pos].p[<span class="dv">3</span>] %= mod;</span>
-<span id="cb12-21"><a href="#cb12-21"></a>    }</span>
-<span id="cb12-22"><a href="#cb12-22"></a>    <span class="cf">if</span> (op == <span class="dv">2</span>)</span>
-<span id="cb12-23"><a href="#cb12-23"></a>    {</span>
-<span id="cb12-24"><a href="#cb12-24"></a>        tree[pos].p[<span class="dv">2</span>] += <span class="dv">1</span><span class="bu">ll</span> * mk[<span class="dv">2</span>] * len % mod + <span class="dv">2</span><span class="bu">ll</span> * mk[<span class="dv">1</span>] * tree[pos].p[<span class="dv">1</span>] % mod;</span>
-<span id="cb12-25"><a href="#cb12-25"></a>        tree[pos].p[<span class="dv">2</span>] %= mod;</span>
-<span id="cb12-26"><a href="#cb12-26"></a>    }</span>
-<span id="cb12-27"><a href="#cb12-27"></a>    <span class="cf">if</span> (op == <span class="dv">1</span>)</span>
-<span id="cb12-28"><a href="#cb12-28"></a>    {</span>
-<span id="cb12-29"><a href="#cb12-29"></a>        tree[pos].p[<span class="dv">1</span>] += <span class="dv">1</span><span class="bu">ll</span> * mk[<span class="dv">1</span>] * len % mod;</span>
-<span id="cb12-30"><a href="#cb12-30"></a>        tree[pos].p[<span class="dv">1</span>] %= mod;</span>
-<span id="cb12-31"><a href="#cb12-31"></a>    }</span>
-<span id="cb12-32"><a href="#cb12-32"></a>}</span>
-<span id="cb12-33"><a href="#cb12-33"></a><span class="dt">void</span> pushdown(<span class="dt">int</span> pos)</span>
-<span id="cb12-34"><a href="#cb12-34"></a>{</span>
-<span id="cb12-35"><a href="#cb12-35"></a>    <span class="cf">if</span> (tree[pos].multlazy != <span class="dv">1</span>)</span>
-<span id="cb12-36"><a href="#cb12-36"></a>    {</span>
-<span id="cb12-37"><a href="#cb12-37"></a>        <span class="dt">int</span> w = tree[pos].multlazy;</span>
-<span id="cb12-38"><a href="#cb12-38"></a>        mk[<span class="dv">0</span>] = <span class="dv">1</span>;</span>
-<span id="cb12-39"><a href="#cb12-39"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-40"><a href="#cb12-40"></a>            mk[i] = <span class="dv">1</span><span class="bu">ll</span> * w * mk[i - <span class="dv">1</span>] % mod;</span>
-<span id="cb12-41"><a href="#cb12-41"></a></span>
-<span id="cb12-42"><a href="#cb12-42"></a>        tree[pos * <span class="dv">2</span>].multlazy = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span>].multlazy * mk[<span class="dv">1</span>] % mod;</span>
-<span id="cb12-43"><a href="#cb12-43"></a>        tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].multlazy = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].multlazy * mk[<span class="dv">1</span>] % mod;</span>
-<span id="cb12-44"><a href="#cb12-44"></a></span>
-<span id="cb12-45"><a href="#cb12-45"></a>        tree[pos * <span class="dv">2</span>].addlazy = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span>].addlazy * mk[<span class="dv">1</span>] % mod;</span>
-<span id="cb12-46"><a href="#cb12-46"></a>        tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].addlazy = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].addlazy * mk[<span class="dv">1</span>] % mod;</span>
-<span id="cb12-47"><a href="#cb12-47"></a></span>
-<span id="cb12-48"><a href="#cb12-48"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-49"><a href="#cb12-49"></a>        {</span>
-<span id="cb12-50"><a href="#cb12-50"></a>            tree[pos * <span class="dv">2</span>].p[i] = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span>].p[i] * mk[i] % mod;</span>
-<span id="cb12-51"><a href="#cb12-51"></a>            tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].p[i] = <span class="dv">1</span><span class="bu">ll</span> * tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].p[i] * mk[i] % mod;</span>
-<span id="cb12-52"><a href="#cb12-52"></a>        }</span>
-<span id="cb12-53"><a href="#cb12-53"></a>        tree[pos].multlazy = <span class="dv">1</span>;</span>
-<span id="cb12-54"><a href="#cb12-54"></a>    }</span>
-<span id="cb12-55"><a href="#cb12-55"></a>    <span class="cf">if</span> (tree[pos].addlazy != <span class="dv">0</span>)</span>
-<span id="cb12-56"><a href="#cb12-56"></a>    {</span>
-<span id="cb12-57"><a href="#cb12-57"></a>        <span class="dt">int</span> w = tree[pos].addlazy;</span>
-<span id="cb12-58"><a href="#cb12-58"></a></span>
-<span id="cb12-59"><a href="#cb12-59"></a>        mk[<span class="dv">0</span>] = <span class="dv">1</span>;</span>
-<span id="cb12-60"><a href="#cb12-60"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-61"><a href="#cb12-61"></a>            mk[i] = <span class="dv">1</span><span class="bu">ll</span> * w * mk[i - <span class="dv">1</span>] % mod;</span>
-<span id="cb12-62"><a href="#cb12-62"></a></span>
-<span id="cb12-63"><a href="#cb12-63"></a>        tree[pos * <span class="dv">2</span>].addlazy += w, tree[pos * <span class="dv">2</span>].addlazy %= mod;</span>
-<span id="cb12-64"><a href="#cb12-64"></a>        tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].addlazy += w, tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].addlazy %= mod;</span>
-<span id="cb12-65"><a href="#cb12-65"></a>        up(pos * <span class="dv">2</span>, <span class="dv">3</span>);</span>
-<span id="cb12-66"><a href="#cb12-66"></a>        up(pos * <span class="dv">2</span> + <span class="dv">1</span>, <span class="dv">3</span>);</span>
-<span id="cb12-67"><a href="#cb12-67"></a>        up(pos * <span class="dv">2</span>, <span class="dv">2</span>);</span>
-<span id="cb12-68"><a href="#cb12-68"></a>        up(pos * <span class="dv">2</span> + <span class="dv">1</span>, <span class="dv">2</span>);</span>
-<span id="cb12-69"><a href="#cb12-69"></a>        up(pos * <span class="dv">2</span>, <span class="dv">1</span>);</span>
-<span id="cb12-70"><a href="#cb12-70"></a>        up(pos * <span class="dv">2</span> + <span class="dv">1</span>, <span class="dv">1</span>);</span>
-<span id="cb12-71"><a href="#cb12-71"></a>        tree[pos].addlazy = <span class="dv">0</span>;</span>
-<span id="cb12-72"><a href="#cb12-72"></a>    }</span>
-<span id="cb12-73"><a href="#cb12-73"></a>}</span>
-<span id="cb12-74"><a href="#cb12-74"></a><span class="dt">void</span> pushup(<span class="dt">int</span> pos)</span>
-<span id="cb12-75"><a href="#cb12-75"></a>{</span>
-<span id="cb12-76"><a href="#cb12-76"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-77"><a href="#cb12-77"></a>        tree[pos].p[i] = (tree[pos * <span class="dv">2</span> + <span class="dv">1</span>].p[i] + tree[pos * <span class="dv">2</span>].p[i]) % mod;</span>
-<span id="cb12-78"><a href="#cb12-78"></a>}</span>
-<span id="cb12-79"><a href="#cb12-79"></a><span class="dt">void</span> build(<span class="dt">int</span> pos, <span class="dt">int</span> l, <span class="dt">int</span> r)</span>
-<span id="cb12-80"><a href="#cb12-80"></a>{</span>
-<span id="cb12-81"><a href="#cb12-81"></a>    tree[pos].l = l;</span>
-<span id="cb12-82"><a href="#cb12-82"></a>    tree[pos].r = r;</span>
-<span id="cb12-83"><a href="#cb12-83"></a>    tree[pos].multlazy = <span class="dv">1</span>;</span>
-<span id="cb12-84"><a href="#cb12-84"></a>    <span class="cf">if</span> (l == r)</span>
-<span id="cb12-85"><a href="#cb12-85"></a>    {</span>
-<span id="cb12-86"><a href="#cb12-86"></a>        tree[pos].p[<span class="dv">1</span>] = a[l] % mod;</span>
-<span id="cb12-87"><a href="#cb12-87"></a>        tree[pos].p[<span class="dv">2</span>] = a[l] * a[l] % mod;</span>
-<span id="cb12-88"><a href="#cb12-88"></a>        tree[pos].p[<span class="dv">3</span>] = <span class="dv">1</span><span class="bu">ll</span> * a[l] * a[l] * a[l] % mod;</span>
-<span id="cb12-89"><a href="#cb12-89"></a>        <span class="cf">return</span>;</span>
-<span id="cb12-90"><a href="#cb12-90"></a>    }</span>
-<span id="cb12-91"><a href="#cb12-91"></a>    <span class="dt">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="dv">1</span>;</span>
-<span id="cb12-92"><a href="#cb12-92"></a>    build(pos * <span class="dv">2</span>, l, mid);</span>
-<span id="cb12-93"><a href="#cb12-93"></a>    build(pos * <span class="dv">2</span> + <span class="dv">1</span>, mid + <span class="dv">1</span>, r);</span>
-<span id="cb12-94"><a href="#cb12-94"></a>    pushup(pos);</span>
-<span id="cb12-95"><a href="#cb12-95"></a>}</span>
-<span id="cb12-96"><a href="#cb12-96"></a><span class="dt">void</span> update(<span class="dt">int</span> pos, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> w, <span class="dt">int</span> op)</span>
-<span id="cb12-97"><a href="#cb12-97"></a>{</span>
-<span id="cb12-98"><a href="#cb12-98"></a>    <span class="cf">if</span> (l &lt;= tree[pos].l &amp;&amp; tree[pos].r &lt;= r)</span>
-<span id="cb12-99"><a href="#cb12-99"></a>    {</span>
-<span id="cb12-100"><a href="#cb12-100"></a>        mk[<span class="dv">0</span>] = <span class="dv">1</span>;</span>
-<span id="cb12-101"><a href="#cb12-101"></a>        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-102"><a href="#cb12-102"></a>            mk[i] = <span class="dv">1</span><span class="bu">ll</span> * w * mk[i - <span class="dv">1</span>] % mod;</span>
-<span id="cb12-103"><a href="#cb12-103"></a>        <span class="cf">if</span> (op == <span class="dv">1</span>)</span>
-<span id="cb12-104"><a href="#cb12-104"></a>        {</span>
-<span id="cb12-105"><a href="#cb12-105"></a>            tree[pos].addlazy += w;</span>
-<span id="cb12-106"><a href="#cb12-106"></a>            tree[pos].addlazy %= mod;</span>
-<span id="cb12-107"><a href="#cb12-107"></a>            up(pos, <span class="dv">3</span>);</span>
-<span id="cb12-108"><a href="#cb12-108"></a>            up(pos, <span class="dv">2</span>);</span>
-<span id="cb12-109"><a href="#cb12-109"></a>            up(pos, <span class="dv">1</span>);</span>
-<span id="cb12-110"><a href="#cb12-110"></a>        }</span>
-<span id="cb12-111"><a href="#cb12-111"></a>        <span class="cf">else</span></span>
-<span id="cb12-112"><a href="#cb12-112"></a>        {</span>
-<span id="cb12-113"><a href="#cb12-113"></a>            tree[pos].multlazy = <span class="dv">1</span><span class="bu">ll</span> * w * tree[pos].multlazy % mod;</span>
-<span id="cb12-114"><a href="#cb12-114"></a>            tree[pos].addlazy = <span class="dv">1</span><span class="bu">ll</span> * w * tree[pos].addlazy % mod;</span>
-<span id="cb12-115"><a href="#cb12-115"></a>            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)</span>
-<span id="cb12-116"><a href="#cb12-116"></a>                tree[pos].p[i] = <span class="dv">1</span><span class="bu">ll</span> * tree[pos].p[i] * mk[i] % mod;</span>
-<span id="cb12-117"><a href="#cb12-117"></a>        }</span>
-<span id="cb12-118"><a href="#cb12-118"></a>        <span class="cf">return</span>;</span>
-<span id="cb12-119"><a href="#cb12-119"></a>    }</span>
-<span id="cb12-120"><a href="#cb12-120"></a>    pushdown(pos);</span>
-<span id="cb12-121"><a href="#cb12-121"></a>    <span class="dt">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="dv">1</span>;</span>
-<span id="cb12-122"><a href="#cb12-122"></a>    <span class="cf">if</span> (l &lt;= mid)</span>
-<span id="cb12-123"><a href="#cb12-123"></a>        update(pos * <span class="dv">2</span>, l, r, w, op);</span>
-<span id="cb12-124"><a href="#cb12-124"></a>    <span class="cf">if</span> (r &gt; mid)</span>
-<span id="cb12-125"><a href="#cb12-125"></a>        update(pos * <span class="dv">2</span> + <span class="dv">1</span>, l, r, w, op);</span>
-<span id="cb12-126"><a href="#cb12-126"></a>    pushup(pos);</span>
-<span id="cb12-127"><a href="#cb12-127"></a>}</span>
-<span id="cb12-128"><a href="#cb12-128"></a><span class="dt">int</span> quary(<span class="dt">int</span> pos, <span class="dt">int</span> l, <span class="dt">int</span> r)</span>
-<span id="cb12-129"><a href="#cb12-129"></a>{</span>
-<span id="cb12-130"><a href="#cb12-130"></a>    <span class="cf">if</span> (l &lt;= tree[pos].l &amp;&amp; tree[pos].r &lt;= r)</span>
-<span id="cb12-131"><a href="#cb12-131"></a>    {</span>
-<span id="cb12-132"><a href="#cb12-132"></a>        <span class="cf">return</span> tree[pos].p[<span class="dv">3</span>] % mod;</span>
-<span id="cb12-133"><a href="#cb12-133"></a>    }</span>
-<span id="cb12-134"><a href="#cb12-134"></a>    pushdown(pos);</span>
-<span id="cb12-135"><a href="#cb12-135"></a>    <span class="dt">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="dv">1</span>;</span>
-<span id="cb12-136"><a href="#cb12-136"></a>    <span class="dt">int</span> res = <span class="dv">0</span>;</span>
-<span id="cb12-137"><a href="#cb12-137"></a>    <span class="cf">if</span> (l &lt;= mid)</span>
-<span id="cb12-138"><a href="#cb12-138"></a>        res += quary(pos * <span class="dv">2</span>, l, r);</span>
-<span id="cb12-139"><a href="#cb12-139"></a>    res %= mod;</span>
-<span id="cb12-140"><a href="#cb12-140"></a>    <span class="cf">if</span> (r &gt; mid)</span>
-<span id="cb12-141"><a href="#cb12-141"></a>        res += quary(pos * <span class="dv">2</span> + <span class="dv">1</span>, l, r);</span>
-<span id="cb12-142"><a href="#cb12-142"></a>    <span class="cf">return</span> res % mod;</span>
-<span id="cb12-143"><a href="#cb12-143"></a>}</span>
-<span id="cb12-144"><a href="#cb12-144"></a><span class="dt">int</span> n, m;</span>
-<span id="cb12-145"><a href="#cb12-145"></a><span class="dt">int</span> main()</span>
-<span id="cb12-146"><a href="#cb12-146"></a>{</span>
-<span id="cb12-147"><a href="#cb12-147"></a><span class="pp">#ifdef ONLINE_JUDGE</span></span>
-<span id="cb12-148"><a href="#cb12-148"></a><span class="pp">#else</span></span>
-<span id="cb12-149"><a href="#cb12-149"></a>    freopen(<span class="st">&quot;r.txt&quot;</span>, <span class="st">&quot;r&quot;</span>, stdin);</span>
-<span id="cb12-150"><a href="#cb12-150"></a><span class="pp">#endif</span></span>
-<span id="cb12-151"><a href="#cb12-151"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>, &amp;n, &amp;m);</span>
-<span id="cb12-152"><a href="#cb12-152"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)</span>
-<span id="cb12-153"><a href="#cb12-153"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;a[i]);</span>
-<span id="cb12-154"><a href="#cb12-154"></a>    build(<span class="dv">1</span>, <span class="dv">1</span>, n);</span>
-<span id="cb12-155"><a href="#cb12-155"></a>    <span class="co">//cout&lt;&lt;tree[1].p[1]&lt;&lt;endl;</span></span>
-<span id="cb12-156"><a href="#cb12-156"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)</span>
-<span id="cb12-157"><a href="#cb12-157"></a>    {</span>
-<span id="cb12-158"><a href="#cb12-158"></a>        <span class="dt">int</span> ff, x, y, w;</span>
-<span id="cb12-159"><a href="#cb12-159"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d%d%d</span><span class="st">&quot;</span>, &amp;ff, &amp;x, &amp;y);</span>
-<span id="cb12-160"><a href="#cb12-160"></a>        <span class="cf">if</span> (ff == <span class="dv">1</span>)</span>
-<span id="cb12-161"><a href="#cb12-161"></a>        {</span>
-<span id="cb12-162"><a href="#cb12-162"></a>            scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;w);</span>
-<span id="cb12-163"><a href="#cb12-163"></a>            update(<span class="dv">1</span>, x, y, w, <span class="dv">1</span>);</span>
-<span id="cb12-164"><a href="#cb12-164"></a>        }</span>
-<span id="cb12-165"><a href="#cb12-165"></a>        <span class="cf">else</span> <span class="cf">if</span> (ff == <span class="dv">2</span>)</span>
-<span id="cb12-166"><a href="#cb12-166"></a>        {</span>
-<span id="cb12-167"><a href="#cb12-167"></a>            scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>, &amp;w);</span>
-<span id="cb12-168"><a href="#cb12-168"></a>            update(<span class="dv">1</span>, x, y, w, <span class="dv">2</span>);</span>
-<span id="cb12-169"><a href="#cb12-169"></a>        }</span>
-<span id="cb12-170"><a href="#cb12-170"></a>        <span class="cf">else</span></span>
-<span id="cb12-171"><a href="#cb12-171"></a>        {</span>
-<span id="cb12-172"><a href="#cb12-172"></a>            printf(<span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span>, quary(<span class="dv">1</span>, x, y));</span>
-<span id="cb12-173"><a href="#cb12-173"></a>        }</span>
-<span id="cb12-174"><a href="#cb12-174"></a>    }</span>
-<span id="cb12-175"><a href="#cb12-175"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod = <span class="hljs-number">1e4</span> + <span class="hljs-number">7</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>
+&#123;</span>
+    <span class="hljs-keyword">int</span> l, r;
+    <span class="hljs-keyword">int</span> p[<span class="hljs-number">4</span>];
+    <span class="hljs-keyword">int</span> addlazy, multlazy;
+&#125; tree[N &lt;&lt; <span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> a[N];
+<span class="hljs-keyword">int</span> mk[<span class="hljs-number">4</span>];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos, <span class="hljs-keyword">int</span> op)</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> len = tree[pos].r - tree[pos].l + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (op == <span class="hljs-number">3</span>)
+    &#123;
+        tree[pos].p[<span class="hljs-number">3</span>] += <span class="hljs-number">1l</span>l * mk[<span class="hljs-number">3</span>] * len % mod + <span class="hljs-number">3l</span>l * mk[<span class="hljs-number">2</span>] * tree[pos].p[<span class="hljs-number">1</span>] % mod + <span class="hljs-number">3l</span>l * mk[<span class="hljs-number">1</span>] * tree[pos].p[<span class="hljs-number">2</span>] % mod;
+        tree[pos].p[<span class="hljs-number">3</span>] %= mod;
+    &#125;
+    <span class="hljs-keyword">if</span> (op == <span class="hljs-number">2</span>)
+    &#123;
+        tree[pos].p[<span class="hljs-number">2</span>] += <span class="hljs-number">1l</span>l * mk[<span class="hljs-number">2</span>] * len % mod + <span class="hljs-number">2l</span>l * mk[<span class="hljs-number">1</span>] * tree[pos].p[<span class="hljs-number">1</span>] % mod;
+        tree[pos].p[<span class="hljs-number">2</span>] %= mod;
+    &#125;
+    <span class="hljs-keyword">if</span> (op == <span class="hljs-number">1</span>)
+    &#123;
+        tree[pos].p[<span class="hljs-number">1</span>] += <span class="hljs-number">1l</span>l * mk[<span class="hljs-number">1</span>] * len % mod;
+        tree[pos].p[<span class="hljs-number">1</span>] %= mod;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (tree[pos].multlazy != <span class="hljs-number">1</span>)
+    &#123;
+        <span class="hljs-keyword">int</span> w = tree[pos].multlazy;
+        mk[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+            mk[i] = <span class="hljs-number">1l</span>l * w * mk[i - <span class="hljs-number">1</span>] % mod;
+
+        tree[pos * <span class="hljs-number">2</span>].multlazy = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span>].multlazy * mk[<span class="hljs-number">1</span>] % mod;
+        tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].multlazy = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].multlazy * mk[<span class="hljs-number">1</span>] % mod;
+
+        tree[pos * <span class="hljs-number">2</span>].addlazy = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span>].addlazy * mk[<span class="hljs-number">1</span>] % mod;
+        tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].addlazy = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].addlazy * mk[<span class="hljs-number">1</span>] % mod;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+        &#123;
+            tree[pos * <span class="hljs-number">2</span>].p[i] = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span>].p[i] * mk[i] % mod;
+            tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].p[i] = <span class="hljs-number">1l</span>l * tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].p[i] * mk[i] % mod;
+        &#125;
+        tree[pos].multlazy = <span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">if</span> (tree[pos].addlazy != <span class="hljs-number">0</span>)
+    &#123;
+        <span class="hljs-keyword">int</span> w = tree[pos].addlazy;
+
+        mk[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+            mk[i] = <span class="hljs-number">1l</span>l * w * mk[i - <span class="hljs-number">1</span>] % mod;
+
+        tree[pos * <span class="hljs-number">2</span>].addlazy += w, tree[pos * <span class="hljs-number">2</span>].addlazy %= mod;
+        tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].addlazy += w, tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].addlazy %= mod;
+        up(pos * <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+        up(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, <span class="hljs-number">3</span>);
+        up(pos * <span class="hljs-number">2</span>, <span class="hljs-number">2</span>);
+        up(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+        up(pos * <span class="hljs-number">2</span>, <span class="hljs-number">1</span>);
+        up(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+        tree[pos].addlazy = <span class="hljs-number">0</span>;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pushup</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos)</span>
+</span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+        tree[pos].p[i] = (tree[pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>].p[i] + tree[pos * <span class="hljs-number">2</span>].p[i]) % mod;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    tree[pos].l = l;
+    tree[pos].r = r;
+    tree[pos].multlazy = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (l == r)
+    &#123;
+        tree[pos].p[<span class="hljs-number">1</span>] = a[l] % mod;
+        tree[pos].p[<span class="hljs-number">2</span>] = a[l] * a[l] % mod;
+        tree[pos].p[<span class="hljs-number">3</span>] = <span class="hljs-number">1l</span>l * a[l] * a[l] * a[l] % mod;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="hljs-number">1</span>;
+    build(pos * <span class="hljs-number">2</span>, l, mid);
+    build(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);
+    pushup(pos);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> w, <span class="hljs-keyword">int</span> op)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (l &lt;= tree[pos].l &amp;&amp; tree[pos].r &lt;= r)
+    &#123;
+        mk[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+            mk[i] = <span class="hljs-number">1l</span>l * w * mk[i - <span class="hljs-number">1</span>] % mod;
+        <span class="hljs-keyword">if</span> (op == <span class="hljs-number">1</span>)
+        &#123;
+            tree[pos].addlazy += w;
+            tree[pos].addlazy %= mod;
+            up(pos, <span class="hljs-number">3</span>);
+            up(pos, <span class="hljs-number">2</span>);
+            up(pos, <span class="hljs-number">1</span>);
+        &#125;
+        <span class="hljs-keyword">else</span>
+        &#123;
+            tree[pos].multlazy = <span class="hljs-number">1l</span>l * w * tree[pos].multlazy % mod;
+            tree[pos].addlazy = <span class="hljs-number">1l</span>l * w * tree[pos].addlazy % mod;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++)
+                tree[pos].p[i] = <span class="hljs-number">1l</span>l * tree[pos].p[i] * mk[i] % mod;
+        &#125;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    pushdown(pos);
+    <span class="hljs-keyword">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (l &lt;= mid)
+        update(pos * <span class="hljs-number">2</span>, l, r, w, op);
+    <span class="hljs-keyword">if</span> (r &gt; mid)
+        update(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, l, r, w, op);
+    pushup(pos);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">quary</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (l &lt;= tree[pos].l &amp;&amp; tree[pos].r &lt;= r)
+    &#123;
+        <span class="hljs-keyword">return</span> tree[pos].p[<span class="hljs-number">3</span>] % mod;
+    &#125;
+    pushdown(pos);
+    <span class="hljs-keyword">int</span> mid = (tree[pos].l + tree[pos].r) &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (l &lt;= mid)
+        res += quary(pos * <span class="hljs-number">2</span>, l, r);
+    res %= mod;
+    <span class="hljs-keyword">if</span> (r &gt; mid)
+        res += quary(pos * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, l, r);
+    <span class="hljs-keyword">return</span> res % mod;
+&#125;
+<span class="hljs-keyword">int</span> n, m;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> ONLINE_JUDGE</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span>
+    freopen(<span class="hljs-string">"r.txt"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;n, &amp;m);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;a[i]);
+    build(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);
+    <span class="hljs-comment">//cout&lt;&lt;tree[1].p[1]&lt;&lt;endl;</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++)
+    &#123;
+        <span class="hljs-keyword">int</span> ff, x, y, w;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;ff, &amp;x, &amp;y);
+        <span class="hljs-keyword">if</span> (ff == <span class="hljs-number">1</span>)
+        &#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;w);
+            update(<span class="hljs-number">1</span>, x, y, w, <span class="hljs-number">1</span>);
+        &#125;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ff == <span class="hljs-number">2</span>)
+        &#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;w);
+            update(<span class="hljs-number">1</span>, x, y, w, <span class="hljs-number">2</span>);
+        &#125;
+        <span class="hljs-keyword">else</span>
+        &#123;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, quary(<span class="hljs-number">1</span>, x, y));
+        &#125;
+    &#125;
+&#125;</code></pre>
 <h3 id="g.-牙签自动机">G. 牙签自动机<a class="post-anchor" href="#g.-牙签自动机"></a></h3>
 <blockquote>
 <p>①暴力<br>
 把一根木棍分为4等分，然后在1/4与3/4的位置做标记，表示这里有一根木棍。然后每次判断标记点的边上能不能放一根木棍。奇数轮，只能横着摆；偶数轮，只能竖着摆。比如在判断<span class="math inline">\([i,j]\)</span>点的左侧能不能摆棒子的时候，判断<span class="math inline">\([i-1,j-1],[i-1,j+1],[i-2,j]\)</span>是否被标记（多判一个点的原因是，注意第三轮，两根横棒中间没有生成竖棒），如果都没有，那么可以在<span class="math inline">\([i-1,j-2]\)</span>~<span class="math inline">\([i-1,j+2]\)</span>间摆一根棒子，并标记<span class="math inline">\([i-1,j-1],[i-1,j+1]\)</span>.<br>
 例如，开始的一根摆在了<span class="math inline">\([1998,2000]\)</span>~<span class="math inline">\([2002,2000]\)</span>，然后标记<span class="math inline">\([1999,2000],[2001,2000]\)</span>,判断<span class="math inline">\([1998,1999],[1998,2001],[1997,2000]\)</span>都没有被标记，那么可以在左边放竖棒，并标记<span class="math inline">\([1998,1999],[1998,2001]\)</span>. 程序中使用了队列来确定这到底是第几轮。</p>
 </blockquote>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="dt">int</span> ans[<span class="dv">1050</span>],mp[<span class="dv">4000</span>][<span class="dv">4000</span>];</span>
-<span id="cb13-5"><a href="#cb13-5"></a>queue&lt;pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt; &gt; q;</span>
-<span id="cb13-6"><a href="#cb13-6"></a></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="kw">inline</span> <span class="dt">int</span> read(){</span>
-<span id="cb13-8"><a href="#cb13-8"></a>    <span class="dt">int</span> x=<span class="dv">0</span>,f=<span class="dv">1</span>;</span>
-<span id="cb13-9"><a href="#cb13-9"></a>    <span class="dt">char</span> ch=getchar();</span>
-<span id="cb13-10"><a href="#cb13-10"></a>    <span class="cf">while</span>(ch&lt;<span class="ch">&#39;0&#39;</span>||ch&gt;<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb13-11"><a href="#cb13-11"></a>        <span class="cf">if</span>(ch==<span class="ch">&#39;-&#39;</span>) f=-<span class="dv">1</span>;</span>
-<span id="cb13-12"><a href="#cb13-12"></a>        ch=getchar();</span>
-<span id="cb13-13"><a href="#cb13-13"></a>    }</span>
-<span id="cb13-14"><a href="#cb13-14"></a>    <span class="cf">while</span>(ch&gt;=<span class="ch">&#39;0&#39;</span>&amp;&amp;ch&lt;=<span class="ch">&#39;9&#39;</span>){</span>
-<span id="cb13-15"><a href="#cb13-15"></a>        x=(x&lt;&lt;<span class="dv">1</span>)+(x&lt;&lt;<span class="dv">3</span>)+(ch^<span class="dv">48</span>);</span>
-<span id="cb13-16"><a href="#cb13-16"></a>        ch=getchar();</span>
-<span id="cb13-17"><a href="#cb13-17"></a>    }</span>
-<span id="cb13-18"><a href="#cb13-18"></a>    <span class="cf">return</span> x;</span>
-<span id="cb13-19"><a href="#cb13-19"></a>}</span>
-<span id="cb13-20"><a href="#cb13-20"></a></span>
-<span id="cb13-21"><a href="#cb13-21"></a><span class="kw">inline</span> <span class="dt">void</span> init()</span>
-<span id="cb13-22"><a href="#cb13-22"></a>{</span>
-<span id="cb13-23"><a href="#cb13-23"></a>    <span class="dt">int</span> p=<span class="dv">0</span>,num=<span class="dv">1</span>,tot=<span class="dv">1</span>;</span>
-<span id="cb13-24"><a href="#cb13-24"></a>    ans[<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-25"><a href="#cb13-25"></a>    mp[<span class="dv">1999</span>][<span class="dv">2000</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-26"><a href="#cb13-26"></a>    mp[<span class="dv">2001</span>][<span class="dv">2000</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-27"><a href="#cb13-27"></a>    q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(<span class="dv">1999</span>,<span class="dv">2000</span>));</span>
-<span id="cb13-28"><a href="#cb13-28"></a>    q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(<span class="dv">2001</span>,<span class="dv">2000</span>));</span>
-<span id="cb13-29"><a href="#cb13-29"></a>    q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(<span class="dv">0</span>,<span class="dv">0</span>));</span>
-<span id="cb13-30"><a href="#cb13-30"></a>    <span class="cf">while</span>(num&lt;<span class="dv">1030</span>)</span>
-<span id="cb13-31"><a href="#cb13-31"></a>    {</span>
-<span id="cb13-32"><a href="#cb13-32"></a>        ++num;</span>
-<span id="cb13-33"><a href="#cb13-33"></a>        <span class="cf">while</span>(<span class="dv">1</span>)</span>
-<span id="cb13-34"><a href="#cb13-34"></a>        {</span>
-<span id="cb13-35"><a href="#cb13-35"></a>            <span class="dt">int</span> le=q.front().first,ri=q.front().second;</span>
-<span id="cb13-36"><a href="#cb13-36"></a>            q.pop();</span>
-<span id="cb13-37"><a href="#cb13-37"></a>            <span class="cf">if</span>(le==<span class="dv">0</span>&amp;&amp;ri==<span class="dv">0</span>) <span class="cf">break</span>;</span>
-<span id="cb13-38"><a href="#cb13-38"></a>            <span class="cf">if</span>(!p&amp;&amp;!mp[le-<span class="dv">1</span>][ri-<span class="dv">1</span>]&amp;&amp;!mp[le-<span class="dv">1</span>][ri+<span class="dv">1</span>]&amp;&amp;!mp[le-<span class="dv">2</span>][ri])</span>
-<span id="cb13-39"><a href="#cb13-39"></a>            {</span>
-<span id="cb13-40"><a href="#cb13-40"></a>                ++tot; </span>
-<span id="cb13-41"><a href="#cb13-41"></a>                mp[le-<span class="dv">1</span>][ri-<span class="dv">1</span>]=mp[le-<span class="dv">1</span>][ri+<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-42"><a href="#cb13-42"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le-<span class="dv">1</span>,ri-<span class="dv">1</span>));</span>
-<span id="cb13-43"><a href="#cb13-43"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le-<span class="dv">1</span>,ri+<span class="dv">1</span>));</span>
-<span id="cb13-44"><a href="#cb13-44"></a>                <span class="cf">continue</span>;</span>
-<span id="cb13-45"><a href="#cb13-45"></a>            }</span>
-<span id="cb13-46"><a href="#cb13-46"></a>            <span class="cf">if</span>(!p&amp;&amp;!mp[le+<span class="dv">1</span>][ri-<span class="dv">1</span>]&amp;&amp;!mp[le+<span class="dv">1</span>][ri+<span class="dv">1</span>]&amp;&amp;!mp[le+<span class="dv">2</span>][ri])</span>
-<span id="cb13-47"><a href="#cb13-47"></a>            {</span>
-<span id="cb13-48"><a href="#cb13-48"></a>                ++tot;</span>
-<span id="cb13-49"><a href="#cb13-49"></a>                mp[le+<span class="dv">1</span>][ri-<span class="dv">1</span>]=mp[le+<span class="dv">1</span>][ri+<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-50"><a href="#cb13-50"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le+<span class="dv">1</span>,ri-<span class="dv">1</span>));</span>
-<span id="cb13-51"><a href="#cb13-51"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le+<span class="dv">1</span>,ri+<span class="dv">1</span>));</span>
-<span id="cb13-52"><a href="#cb13-52"></a>                <span class="cf">continue</span>;</span>
-<span id="cb13-53"><a href="#cb13-53"></a>            }</span>
-<span id="cb13-54"><a href="#cb13-54"></a>            <span class="cf">if</span>(p&amp;&amp;!mp[le-<span class="dv">1</span>][ri-<span class="dv">1</span>]&amp;&amp;!mp[le+<span class="dv">1</span>][ri-<span class="dv">1</span>]&amp;&amp;!mp[le][ri-<span class="dv">2</span>])</span>
-<span id="cb13-55"><a href="#cb13-55"></a>            {</span>
-<span id="cb13-56"><a href="#cb13-56"></a>                ++tot; </span>
-<span id="cb13-57"><a href="#cb13-57"></a>                mp[le-<span class="dv">1</span>][ri-<span class="dv">1</span>]=mp[le+<span class="dv">1</span>][ri-<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-58"><a href="#cb13-58"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le-<span class="dv">1</span>,ri-<span class="dv">1</span>));</span>
-<span id="cb13-59"><a href="#cb13-59"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le+<span class="dv">1</span>,ri-<span class="dv">1</span>));</span>
-<span id="cb13-60"><a href="#cb13-60"></a>                <span class="cf">continue</span>;</span>
-<span id="cb13-61"><a href="#cb13-61"></a>            }</span>
-<span id="cb13-62"><a href="#cb13-62"></a>            <span class="cf">if</span>(p&amp;&amp;!mp[le-<span class="dv">1</span>][ri+<span class="dv">1</span>]&amp;&amp;!mp[le+<span class="dv">1</span>][ri+<span class="dv">1</span>]&amp;&amp;!mp[le][ri+<span class="dv">2</span>])</span>
-<span id="cb13-63"><a href="#cb13-63"></a>            {</span>
-<span id="cb13-64"><a href="#cb13-64"></a>                ++tot;</span>
-<span id="cb13-65"><a href="#cb13-65"></a>                mp[le-<span class="dv">1</span>][ri+<span class="dv">1</span>]=mp[le+<span class="dv">1</span>][ri+<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb13-66"><a href="#cb13-66"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le-<span class="dv">1</span>,ri+<span class="dv">1</span>));</span>
-<span id="cb13-67"><a href="#cb13-67"></a>                q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(le+<span class="dv">1</span>,ri+<span class="dv">1</span>));</span>
-<span id="cb13-68"><a href="#cb13-68"></a>                <span class="cf">continue</span>;</span>
-<span id="cb13-69"><a href="#cb13-69"></a>            }</span>
-<span id="cb13-70"><a href="#cb13-70"></a>        }</span>
-<span id="cb13-71"><a href="#cb13-71"></a>        ans[num]=tot;</span>
-<span id="cb13-72"><a href="#cb13-72"></a>        q.push(make_pair&lt;<span class="dt">int</span>,<span class="dt">int</span>&gt;(<span class="dv">0</span>,<span class="dv">0</span>));</span>
-<span id="cb13-73"><a href="#cb13-73"></a>        p^=<span class="dv">1</span>;</span>
-<span id="cb13-74"><a href="#cb13-74"></a>    }</span>
-<span id="cb13-75"><a href="#cb13-75"></a>}</span>
-<span id="cb13-76"><a href="#cb13-76"></a></span>
-<span id="cb13-77"><a href="#cb13-77"></a><span class="dt">int</span> main(){</span>
-<span id="cb13-78"><a href="#cb13-78"></a>    init();</span>
-<span id="cb13-79"><a href="#cb13-79"></a>    <span class="dt">int</span> n=read();</span>
-<span id="cb13-80"><a href="#cb13-80"></a>    <span class="cf">while</span>(n--)</span>
-<span id="cb13-81"><a href="#cb13-81"></a>    {</span>
-<span id="cb13-82"><a href="#cb13-82"></a>        <span class="dt">int</span> now=read();</span>
-<span id="cb13-83"><a href="#cb13-83"></a>        printf(<span class="st">&quot;</span><span class="sc">%d%c</span><span class="st">&quot;</span>,ans[now],n?<span class="ch">&#39; &#39;</span>:<span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span>);</span>
-<span id="cb13-84"><a href="#cb13-84"></a>    }</span>
-<span id="cb13-85"><a href="#cb13-85"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> ans[<span class="hljs-number">1050</span>],mp[<span class="hljs-number">4000</span>][<span class="hljs-number">4000</span>];
+<span class="hljs-built_in">queue</span>&lt;pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; &gt; q;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>)&#123;
+        <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'-'</span>) f=<span class="hljs-number">-1</span>;
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>)&#123;
+        x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>);
+        ch=getchar();
+    &#125;
+    <span class="hljs-keyword">return</span> x;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> p=<span class="hljs-number">0</span>,num=<span class="hljs-number">1</span>,tot=<span class="hljs-number">1</span>;
+    ans[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;
+    mp[<span class="hljs-number">1999</span>][<span class="hljs-number">2000</span>]=<span class="hljs-number">1</span>;
+    mp[<span class="hljs-number">2001</span>][<span class="hljs-number">2000</span>]=<span class="hljs-number">1</span>;
+    q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">1999</span>,<span class="hljs-number">2000</span>));
+    q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">2001</span>,<span class="hljs-number">2000</span>));
+    q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>));
+    <span class="hljs-keyword">while</span>(num&lt;<span class="hljs-number">1030</span>)
+    &#123;
+        ++num;
+        <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+        &#123;
+            <span class="hljs-keyword">int</span> le=q.front().first,ri=q.front().second;
+            q.pop();
+            <span class="hljs-keyword">if</span>(le==<span class="hljs-number">0</span>&amp;&amp;ri==<span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">if</span>(!p&amp;&amp;!mp[le<span class="hljs-number">-1</span>][ri<span class="hljs-number">-1</span>]&amp;&amp;!mp[le<span class="hljs-number">-1</span>][ri+<span class="hljs-number">1</span>]&amp;&amp;!mp[le<span class="hljs-number">-2</span>][ri])
+            &#123;
+                ++tot; 
+                mp[le<span class="hljs-number">-1</span>][ri<span class="hljs-number">-1</span>]=mp[le<span class="hljs-number">-1</span>][ri+<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le<span class="hljs-number">-1</span>,ri<span class="hljs-number">-1</span>));
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le<span class="hljs-number">-1</span>,ri+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            <span class="hljs-keyword">if</span>(!p&amp;&amp;!mp[le+<span class="hljs-number">1</span>][ri<span class="hljs-number">-1</span>]&amp;&amp;!mp[le+<span class="hljs-number">1</span>][ri+<span class="hljs-number">1</span>]&amp;&amp;!mp[le+<span class="hljs-number">2</span>][ri])
+            &#123;
+                ++tot;
+                mp[le+<span class="hljs-number">1</span>][ri<span class="hljs-number">-1</span>]=mp[le+<span class="hljs-number">1</span>][ri+<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le+<span class="hljs-number">1</span>,ri<span class="hljs-number">-1</span>));
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le+<span class="hljs-number">1</span>,ri+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&amp;&amp;!mp[le<span class="hljs-number">-1</span>][ri<span class="hljs-number">-1</span>]&amp;&amp;!mp[le+<span class="hljs-number">1</span>][ri<span class="hljs-number">-1</span>]&amp;&amp;!mp[le][ri<span class="hljs-number">-2</span>])
+            &#123;
+                ++tot; 
+                mp[le<span class="hljs-number">-1</span>][ri<span class="hljs-number">-1</span>]=mp[le+<span class="hljs-number">1</span>][ri<span class="hljs-number">-1</span>]=<span class="hljs-number">1</span>;
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le<span class="hljs-number">-1</span>,ri<span class="hljs-number">-1</span>));
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le+<span class="hljs-number">1</span>,ri<span class="hljs-number">-1</span>));
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&amp;&amp;!mp[le<span class="hljs-number">-1</span>][ri+<span class="hljs-number">1</span>]&amp;&amp;!mp[le+<span class="hljs-number">1</span>][ri+<span class="hljs-number">1</span>]&amp;&amp;!mp[le][ri+<span class="hljs-number">2</span>])
+            &#123;
+                ++tot;
+                mp[le<span class="hljs-number">-1</span>][ri+<span class="hljs-number">1</span>]=mp[le+<span class="hljs-number">1</span>][ri+<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le<span class="hljs-number">-1</span>,ri+<span class="hljs-number">1</span>));
+                q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(le+<span class="hljs-number">1</span>,ri+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+        &#125;
+        ans[num]=tot;
+        q.push(make_pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>));
+        p^=<span class="hljs-number">1</span>;
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+    init();
+    <span class="hljs-keyword">int</span> n=<span class="hljs-built_in">read</span>();
+    <span class="hljs-keyword">while</span>(n--)
+    &#123;
+        <span class="hljs-keyword">int</span> now=<span class="hljs-built_in">read</span>();
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d%c"</span>,ans[now],n?<span class="hljs-string">' '</span>:<span class="hljs-string">'\n'</span>);
+    &#125;
+&#125;</code></pre>
 <blockquote>
 <p>②本地模拟直接交打表后的值<br>
 将打表后的值放入mp[1030]，每次直接查询mp[i].代码仅11MB</p>
@@ -1045,70 +1045,70 @@ n=2^k &amp; sto[n] = 2^{(2k+1)}/3\\
 n\neq 2^k &amp; sto[n] = 2^{k} + sto[n - 2^{k}] * 2 + sto[n - 2^{k}+1] -1
 \end{matrix}\right.\]</span></p>
 </blockquote>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
-<span id="cb14-7"><a href="#cb14-7"></a></span>
-<span id="cb14-8"><a href="#cb14-8"></a>ll sto[<span class="dv">1025</span>], base[<span class="dv">35</span>] = {<span class="dv">1</span><span class="bu">ll</span>};</span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="kw">inline</span> ll read()</span>
-<span id="cb14-11"><a href="#cb14-11"></a>{</span>
-<span id="cb14-12"><a href="#cb14-12"></a>    ll X = <span class="dv">0</span>, w = <span class="dv">0</span>;</span>
-<span id="cb14-13"><a href="#cb14-13"></a>    <span class="dt">char</span> ch = <span class="dv">0</span>;</span>
-<span id="cb14-14"><a href="#cb14-14"></a>    <span class="cf">while</span> (!isdigit(ch))</span>
-<span id="cb14-15"><a href="#cb14-15"></a>    {</span>
-<span id="cb14-16"><a href="#cb14-16"></a>        w |= ch == <span class="ch">&#39;-&#39;</span>;</span>
-<span id="cb14-17"><a href="#cb14-17"></a>        ch = getchar();</span>
-<span id="cb14-18"><a href="#cb14-18"></a>    }</span>
-<span id="cb14-19"><a href="#cb14-19"></a>    <span class="cf">while</span> (isdigit(ch))</span>
-<span id="cb14-20"><a href="#cb14-20"></a>        X = (X &lt;&lt; <span class="dv">3</span>) + (X &lt;&lt; <span class="dv">1</span>) + (ch ^ <span class="dv">48</span>), ch = getchar();</span>
-<span id="cb14-21"><a href="#cb14-21"></a>    <span class="cf">return</span> w ? -X : X;</span>
-<span id="cb14-22"><a href="#cb14-22"></a>}</span>
-<span id="cb14-23"><a href="#cb14-23"></a></span>
-<span id="cb14-24"><a href="#cb14-24"></a><span class="kw">inline</span> <span class="dt">void</span> write(<span class="dt">int</span> x)</span>
-<span id="cb14-25"><a href="#cb14-25"></a>{</span>
-<span id="cb14-26"><a href="#cb14-26"></a>    <span class="cf">if</span> (x &lt; <span class="dv">0</span>)</span>
-<span id="cb14-27"><a href="#cb14-27"></a>        putchar(<span class="ch">&#39;-&#39;</span>), x = -x;</span>
-<span id="cb14-28"><a href="#cb14-28"></a>    <span class="cf">if</span> (x &gt; <span class="dv">9</span>)</span>
-<span id="cb14-29"><a href="#cb14-29"></a>        write(x / <span class="dv">10</span>);</span>
-<span id="cb14-30"><a href="#cb14-30"></a>    putchar(x % <span class="dv">10</span> + <span class="ch">&#39;0&#39;</span>);</span>
-<span id="cb14-31"><a href="#cb14-31"></a>}</span>
-<span id="cb14-32"><a href="#cb14-32"></a></span>
-<span id="cb14-33"><a href="#cb14-33"></a><span class="kw">inline</span> <span class="dt">void</span> writesp(<span class="dt">int</span> x)</span>
-<span id="cb14-34"><a href="#cb14-34"></a>{</span>
-<span id="cb14-35"><a href="#cb14-35"></a>    write(x);</span>
-<span id="cb14-36"><a href="#cb14-36"></a>    putchar(<span class="ch">&#39; &#39;</span>);</span>
-<span id="cb14-37"><a href="#cb14-37"></a>}</span>
-<span id="cb14-38"><a href="#cb14-38"></a></span>
-<span id="cb14-39"><a href="#cb14-39"></a><span class="dt">int</span> main()</span>
-<span id="cb14-40"><a href="#cb14-40"></a>{</span>
-<span id="cb14-41"><a href="#cb14-41"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">30</span>; i++)</span>
-<span id="cb14-42"><a href="#cb14-42"></a>        base[i] = base[i - <span class="dv">1</span>] &lt;&lt; <span class="dv">1</span><span class="bu">ll</span>;</span>
-<span id="cb14-43"><a href="#cb14-43"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= <span class="dv">1024</span>; i++)</span>
-<span id="cb14-44"><a href="#cb14-44"></a>    {</span>
-<span id="cb14-45"><a href="#cb14-45"></a>        <span class="dt">int</span> k = lower_bound(base, base + <span class="dv">15</span>, i) - base;</span>
-<span id="cb14-46"><a href="#cb14-46"></a>        <span class="cf">if</span> (base[k] == i)</span>
-<span id="cb14-47"><a href="#cb14-47"></a>            sto[i] = (base[<span class="dv">2</span> * k + <span class="dv">1</span>] + <span class="dv">1</span>) / <span class="dv">3</span>;</span>
-<span id="cb14-48"><a href="#cb14-48"></a>        <span class="cf">else</span></span>
-<span id="cb14-49"><a href="#cb14-49"></a>        {</span>
-<span id="cb14-50"><a href="#cb14-50"></a>            k--;</span>
-<span id="cb14-51"><a href="#cb14-51"></a>            <span class="dt">int</span> m = i - base[k];</span>
-<span id="cb14-52"><a href="#cb14-52"></a>            sto[i] = sto[base[k]] + <span class="dv">2</span><span class="bu">ll</span> * sto[m] + sto[m + <span class="dv">1</span>] - <span class="dv">1</span><span class="bu">ll</span>;</span>
-<span id="cb14-53"><a href="#cb14-53"></a>        }</span>
-<span id="cb14-54"><a href="#cb14-54"></a>    }</span>
-<span id="cb14-55"><a href="#cb14-55"></a>    sto[<span class="dv">0</span>] = <span class="dv">0</span>;</span>
-<span id="cb14-56"><a href="#cb14-56"></a>    <span class="dt">int</span> T = read();</span>
-<span id="cb14-57"><a href="#cb14-57"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; T; i++)</span>
-<span id="cb14-58"><a href="#cb14-58"></a>    {</span>
-<span id="cb14-59"><a href="#cb14-59"></a>        <span class="cf">if</span> (i)</span>
-<span id="cb14-60"><a href="#cb14-60"></a>            putchar(<span class="ch">&#39; &#39;</span>);</span>
-<span id="cb14-61"><a href="#cb14-61"></a>        write(sto[read()]);</span>
-<span id="cb14-62"><a href="#cb14-62"></a>    }</span>
-<span id="cb14-63"><a href="#cb14-63"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb14-64"><a href="#cb14-64"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+
+ll sto[<span class="hljs-number">1025</span>], base[<span class="hljs-number">35</span>] = &#123;<span class="hljs-number">1l</span>l&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span>
+</span>&#123;
+    ll X = <span class="hljs-number">0</span>, w = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">char</span> ch = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">isdigit</span>(ch))
+    &#123;
+        w |= ch == <span class="hljs-string">'-'</span>;
+        ch = getchar();
+    &#125;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">isdigit</span>(ch))
+        X = (X &lt;&lt; <span class="hljs-number">3</span>) + (X &lt;&lt; <span class="hljs-number">1</span>) + (ch ^ <span class="hljs-number">48</span>), ch = getchar();
+    <span class="hljs-keyword">return</span> w ? -X : X;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>)
+        <span class="hljs-built_in">putchar</span>(<span class="hljs-string">'-'</span>), x = -x;
+    <span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">9</span>)
+        <span class="hljs-built_in">write</span>(x / <span class="hljs-number">10</span>);
+    <span class="hljs-built_in">putchar</span>(x % <span class="hljs-number">10</span> + <span class="hljs-string">'0'</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writesp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span>
+</span>&#123;
+    <span class="hljs-built_in">write</span>(x);
+    <span class="hljs-built_in">putchar</span>(<span class="hljs-string">' '</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">30</span>; i++)
+        base[i] = base[i - <span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-number">1l</span>l;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1024</span>; i++)
+    &#123;
+        <span class="hljs-keyword">int</span> k = lower_bound(base, base + <span class="hljs-number">15</span>, i) - base;
+        <span class="hljs-keyword">if</span> (base[k] == i)
+            sto[i] = (base[<span class="hljs-number">2</span> * k + <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>) / <span class="hljs-number">3</span>;
+        <span class="hljs-keyword">else</span>
+        &#123;
+            k--;
+            <span class="hljs-keyword">int</span> m = i - base[k];
+            sto[i] = sto[base[k]] + <span class="hljs-number">2l</span>l * sto[m] + sto[m + <span class="hljs-number">1</span>] - <span class="hljs-number">1l</span>l;
+        &#125;
+    &#125;
+    sto[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> T = <span class="hljs-built_in">read</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; T; i++)
+    &#123;
+        <span class="hljs-keyword">if</span> (i)
+            <span class="hljs-built_in">putchar</span>(<span class="hljs-string">' '</span>);
+        <span class="hljs-built_in">write</span>(sto[<span class="hljs-built_in">read</span>()]);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 <h3 id="e.-膜法项链-easy-version">E. 膜法项链 Easy Version<a class="post-anchor" href="#e.-膜法项链-easy-version"></a></h3>
 <blockquote>
 <p><span class="math inline">\(n\leq2000\)</span><br>
@@ -1128,62 +1128,62 @@ n\neq 2^k &amp; sto[n] = 2^{k} + sto[n - 2^{k}] * 2 + sto[n - 2^{k}+1] -1
 <blockquote>
 <p>时间复杂度<span class="math inline">\(O(n)\)</span></p>
 </blockquote>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="dt">int</span> n;<span class="dt">long</span> <span class="dt">long</span> w;</span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="dt">long</span> <span class="dt">long</span> d[<span class="dv">2000100</span>];</span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="dt">long</span> <span class="dt">long</span> a[<span class="dv">2000100</span>];</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="dt">long</span> <span class="dt">long</span> st[<span class="dv">2000200</span>];</span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="dt">int</span>  num[<span class="dv">2000200</span>];</span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="dt">int</span> se=<span class="dv">0</span>;</span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="dt">int</span> main(){</span>
-<span id="cb15-10"><a href="#cb15-10"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d%lld</span><span class="st">&quot;</span>,&amp;n,&amp;w);</span>
-<span id="cb15-11"><a href="#cb15-11"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++){</span>
-<span id="cb15-12"><a href="#cb15-12"></a>        scanf(<span class="st">&quot;</span><span class="sc">%lld</span><span class="st">&quot;</span>,&amp;a[i]);</span>
-<span id="cb15-13"><a href="#cb15-13"></a>        a[i+n]=a[i];</span>
-<span id="cb15-14"><a href="#cb15-14"></a>    }</span>
-<span id="cb15-15"><a href="#cb15-15"></a>    a[<span class="dv">2</span>*n]=-<span class="dv">1</span>;</span>
-<span id="cb15-16"><a href="#cb15-16"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;=<span class="dv">2</span>*n;i++){</span>
-<span id="cb15-17"><a href="#cb15-17"></a>        <span class="cf">if</span>(se==<span class="dv">0</span>||st[se-<span class="dv">1</span>]&lt;=a[i]){</span>
-<span id="cb15-18"><a href="#cb15-18"></a>            st[se]=a[i];</span>
-<span id="cb15-19"><a href="#cb15-19"></a>            num[se]=i;</span>
-<span id="cb15-20"><a href="#cb15-20"></a>            se++;</span>
-<span id="cb15-21"><a href="#cb15-21"></a>        }</span>
-<span id="cb15-22"><a href="#cb15-22"></a>        <span class="cf">else</span>{</span>
-<span id="cb15-23"><a href="#cb15-23"></a>            <span class="cf">while</span>(se&amp;&amp;st[se-<span class="dv">1</span>]&gt;a[i]){</span>
-<span id="cb15-24"><a href="#cb15-24"></a>                <span class="cf">if</span>(i&gt;n){</span>
-<span id="cb15-25"><a href="#cb15-25"></a>                    <span class="dt">int</span> d2begin=max(num[se-<span class="dv">1</span>],n);</span>
-<span id="cb15-26"><a href="#cb15-26"></a>                    <span class="dt">int</span> d2len=i-d2begin;</span>
-<span id="cb15-27"><a href="#cb15-27"></a>                    <span class="dt">int</span> dbegin;<span class="dt">int</span> dlen;</span>
-<span id="cb15-28"><a href="#cb15-28"></a>                    <span class="cf">if</span>(se==<span class="dv">1</span>){</span>
-<span id="cb15-29"><a href="#cb15-29"></a>                        dbegin=<span class="dv">0</span>;</span>
-<span id="cb15-30"><a href="#cb15-30"></a>                    }</span>
-<span id="cb15-31"><a href="#cb15-31"></a>                    <span class="cf">else</span>{</span>
-<span id="cb15-32"><a href="#cb15-32"></a>                        dbegin=num[se-<span class="dv">2</span>];</span>
-<span id="cb15-33"><a href="#cb15-33"></a>                    }</span>
-<span id="cb15-34"><a href="#cb15-34"></a>                    dlen=num[se-<span class="dv">1</span>]-dbegin;</span>
-<span id="cb15-35"><a href="#cb15-35"></a>                    d[d2begin-num[se-<span class="dv">1</span>]]+=st[se-<span class="dv">1</span>];d[d2begin-num[se-<span class="dv">1</span>]+d2len]-=st[se-<span class="dv">1</span>];</span>
-<span id="cb15-36"><a href="#cb15-36"></a>                    d[d2begin-num[se-<span class="dv">1</span>]+dlen]-=st[se-<span class="dv">1</span>];d[d2begin-num[se-<span class="dv">1</span>]+dlen+d2len]+=st[se-<span class="dv">1</span>];</span>
-<span id="cb15-37"><a href="#cb15-37"></a>                }</span>
-<span id="cb15-38"><a href="#cb15-38"></a>                se--;</span>
-<span id="cb15-39"><a href="#cb15-39"></a>            }</span>
-<span id="cb15-40"><a href="#cb15-40"></a>            st[se]=a[i];</span>
-<span id="cb15-41"><a href="#cb15-41"></a>            num[se]=i;</span>
-<span id="cb15-42"><a href="#cb15-42"></a>            se++;</span>
-<span id="cb15-43"><a href="#cb15-43"></a>        }</span>
-<span id="cb15-44"><a href="#cb15-44"></a>    }</span>
-<span id="cb15-45"><a href="#cb15-45"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=<span class="dv">2</span>*n;i++){</span>
-<span id="cb15-46"><a href="#cb15-46"></a>        d[i]=d[i-<span class="dv">1</span>]+d[i];</span>
-<span id="cb15-47"><a href="#cb15-47"></a>    }</span>
-<span id="cb15-48"><a href="#cb15-48"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=<span class="dv">2</span>*n;i++){</span>
-<span id="cb15-49"><a href="#cb15-49"></a>        d[i]=d[i-<span class="dv">1</span>]+d[i];</span>
-<span id="cb15-50"><a href="#cb15-50"></a>    }</span>
-<span id="cb15-51"><a href="#cb15-51"></a>    <span class="dt">long</span> <span class="dt">long</span> ans=<span class="bn">0x3f3f3f3f3f3f3f3f</span>;</span>
-<span id="cb15-52"><a href="#cb15-52"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++){</span>
-<span id="cb15-53"><a href="#cb15-53"></a>        ans=min(ans,i*w+d[i]);</span>
-<span id="cb15-54"><a href="#cb15-54"></a>    }</span>
-<span id="cb15-55"><a href="#cb15-55"></a>    printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>,ans);</span>
-<span id="cb15-56"><a href="#cb15-56"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n;<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> w;
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> d[<span class="hljs-number">2000100</span>];
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> a[<span class="hljs-number">2000100</span>];
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> st[<span class="hljs-number">2000200</span>];
+<span class="hljs-keyword">int</span>  num[<span class="hljs-number">2000200</span>];
+<span class="hljs-keyword">int</span> se=<span class="hljs-number">0</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%lld"</span>,&amp;n,&amp;w);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;a[i]);
+        a[i+n]=a[i];
+    &#125;
+    a[<span class="hljs-number">2</span>*n]=<span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">2</span>*n;i++)&#123;
+        <span class="hljs-keyword">if</span>(se==<span class="hljs-number">0</span>||st[se<span class="hljs-number">-1</span>]&lt;=a[i])&#123;
+            st[se]=a[i];
+            num[se]=i;
+            se++;
+        &#125;
+        <span class="hljs-keyword">else</span>&#123;
+            <span class="hljs-keyword">while</span>(se&amp;&amp;st[se<span class="hljs-number">-1</span>]&gt;a[i])&#123;
+                <span class="hljs-keyword">if</span>(i&gt;n)&#123;
+                    <span class="hljs-keyword">int</span> d2begin=<span class="hljs-built_in">max</span>(num[se<span class="hljs-number">-1</span>],n);
+                    <span class="hljs-keyword">int</span> d2len=i-d2begin;
+                    <span class="hljs-keyword">int</span> dbegin;<span class="hljs-keyword">int</span> dlen;
+                    <span class="hljs-keyword">if</span>(se==<span class="hljs-number">1</span>)&#123;
+                        dbegin=<span class="hljs-number">0</span>;
+                    &#125;
+                    <span class="hljs-keyword">else</span>&#123;
+                        dbegin=num[se<span class="hljs-number">-2</span>];
+                    &#125;
+                    dlen=num[se<span class="hljs-number">-1</span>]-dbegin;
+                    d[d2begin-num[se<span class="hljs-number">-1</span>]]+=st[se<span class="hljs-number">-1</span>];d[d2begin-num[se<span class="hljs-number">-1</span>]+d2len]-=st[se<span class="hljs-number">-1</span>];
+                    d[d2begin-num[se<span class="hljs-number">-1</span>]+dlen]-=st[se<span class="hljs-number">-1</span>];d[d2begin-num[se<span class="hljs-number">-1</span>]+dlen+d2len]+=st[se<span class="hljs-number">-1</span>];
+                &#125;
+                se--;
+            &#125;
+            st[se]=a[i];
+            num[se]=i;
+            se++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">2</span>*n;i++)&#123;
+        d[i]=d[i<span class="hljs-number">-1</span>]+d[i];
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">2</span>*n;i++)&#123;
+        d[i]=d[i<span class="hljs-number">-1</span>]+d[i];
+    &#125;
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ans=<span class="hljs-number">0x3f3f3f3f3f3f3f3f</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;
+        ans=<span class="hljs-built_in">min</span>(ans,i*w+d[i]);
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,ans);
+&#125;</code></pre>
 <h3 id="j.-更强的未来道具fg-c193-easy-version">J. 更强的未来道具FG-C193 Easy Version<a class="post-anchor" href="#j.-更强的未来道具fg-c193-easy-version"></a></h3>
 <p>以每个为止判断每个对称轴会对称到哪一个位置。最后查看所有位置是否相同。<br>
 复杂度<span class="math inline">\(O(n^2)\)</span><br>
@@ -1192,112 +1192,112 @@ n\neq 2^k &amp; sto[n] = 2^{k} + sto[n - 2^{k}] * 2 + sto[n - 2^{k}+1] -1
 <blockquote>
 <p>像manacher一样两字符中间补一个字符。然后对manacher判断的位置进行判断，不过把判断两字符是否相同改为将带权并查集合并。 复杂度<span class="math inline">\(O(n)\)</span></p>
 </blockquote>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="dt">int</span> a[<span class="dv">200040</span>];</span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="dt">int</span> abc[<span class="dv">220000</span>];</span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="dt">int</span> abcpos[<span class="dv">220000</span>];</span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="dt">int</span> fa[<span class="dv">200040</span>];</span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="dt">int</span> ans[<span class="dv">200040</span>];</span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="dt">int</span> unans[<span class="dv">200020</span>];</span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="dt">int</span> aans[<span class="dv">100020</span>];</span>
-<span id="cb16-10"><a href="#cb16-10"></a></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="dt">int</span> find(<span class="dt">int</span> i){</span>
-<span id="cb16-12"><a href="#cb16-12"></a>    <span class="cf">if</span>(fa[i]!=i){</span>
-<span id="cb16-13"><a href="#cb16-13"></a>        fa[i]=find(fa[i]);</span>
-<span id="cb16-14"><a href="#cb16-14"></a>        ans[i]=ans[fa[i]];</span>
-<span id="cb16-15"><a href="#cb16-15"></a>        <span class="cf">return</span> fa[i];</span>
-<span id="cb16-16"><a href="#cb16-16"></a>    }</span>
-<span id="cb16-17"><a href="#cb16-17"></a>    <span class="cf">return</span> fa[i];</span>
-<span id="cb16-18"><a href="#cb16-18"></a>}</span>
-<span id="cb16-19"><a href="#cb16-19"></a><span class="dt">int</span> main(){</span>
-<span id="cb16-20"><a href="#cb16-20"></a>    <span class="dt">int</span> n;</span>
-<span id="cb16-21"><a href="#cb16-21"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;n);</span>
-<span id="cb16-22"><a href="#cb16-22"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">2</span>*n;i++){</span>
-<span id="cb16-23"><a href="#cb16-23"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;a[i]);</span>
-<span id="cb16-24"><a href="#cb16-24"></a>        a[i]*=<span class="dv">2</span>;</span>
-<span id="cb16-25"><a href="#cb16-25"></a>    }</span>
-<span id="cb16-26"><a href="#cb16-26"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;=<span class="dv">2</span>*n;i++){</span>
-<span id="cb16-27"><a href="#cb16-27"></a>    fa[i]=i;</span>
-<span id="cb16-28"><a href="#cb16-28"></a>    }</span>
-<span id="cb16-29"><a href="#cb16-29"></a>    <span class="dt">int</span> m;</span>
-<span id="cb16-30"><a href="#cb16-30"></a>    scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;m);</span>
-<span id="cb16-31"><a href="#cb16-31"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=m;i++){</span>
-<span id="cb16-32"><a href="#cb16-32"></a>        <span class="dt">int</span> tmp;</span>
-<span id="cb16-33"><a href="#cb16-33"></a>        scanf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,&amp;tmp);</span>
-<span id="cb16-34"><a href="#cb16-34"></a>        <span class="dt">char</span> tchar;</span>
-<span id="cb16-35"><a href="#cb16-35"></a>        scanf(<span class="st">&quot; </span><span class="sc">%c</span><span class="st">&quot;</span>,&amp;tchar);</span>
-<span id="cb16-36"><a href="#cb16-36"></a>        <span class="cf">if</span>(aans[tmp]&amp;&amp;aans[tmp]!=tchar){</span>
-<span id="cb16-37"><a href="#cb16-37"></a>            printf(<span class="st">&quot;-1</span><span class="sc">\n</span><span class="st">&quot;</span>);<span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb16-38"><a href="#cb16-38"></a>        }  </span>
-<span id="cb16-39"><a href="#cb16-39"></a>        aans[tmp]=tchar;</span>
-<span id="cb16-40"><a href="#cb16-40"></a>        <span class="cf">if</span>(abc[tchar]!=<span class="dv">0</span>){</span>
-<span id="cb16-41"><a href="#cb16-41"></a>        find(<span class="dv">2</span>*tmp);</span>
-<span id="cb16-42"><a href="#cb16-42"></a>        find(abcpos[tchar]);</span>
-<span id="cb16-43"><a href="#cb16-43"></a>            fa[find(<span class="dv">2</span>*tmp)]=find(abcpos[tchar]);</span>
-<span id="cb16-44"><a href="#cb16-44"></a>        }</span>
-<span id="cb16-45"><a href="#cb16-45"></a>        ans[<span class="dv">2</span>*tmp]=tchar;</span>
-<span id="cb16-46"><a href="#cb16-46"></a>        abc[tchar]++;abcpos[tchar]=tmp*<span class="dv">2</span>;</span>
-<span id="cb16-47"><a href="#cb16-47"></a>    }</span>
-<span id="cb16-48"><a href="#cb16-48"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++){</span>
-<span id="cb16-49"><a href="#cb16-49"></a>        fa[i*<span class="dv">2</span>-<span class="dv">1</span>]=<span class="dv">1</span>;</span>
-<span id="cb16-50"><a href="#cb16-50"></a>        ans[i*<span class="dv">2</span>-<span class="dv">1</span>]=<span class="dv">257</span>;</span>
-<span id="cb16-51"><a href="#cb16-51"></a>    }</span>
-<span id="cb16-52"><a href="#cb16-52"></a>    <span class="dt">int</span> nowmax=<span class="dv">0</span>;</span>
-<span id="cb16-53"><a href="#cb16-53"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">2</span>*n;i++){</span>
-<span id="cb16-54"><a href="#cb16-54"></a>        <span class="cf">while</span>(nowmax&lt;=a[i]+i-<span class="dv">1</span>){</span>
-<span id="cb16-55"><a href="#cb16-55"></a>            <span class="cf">if</span>(nowmax&lt;<span class="dv">2</span>*n&amp;&amp;(i-nowmax+i)&gt;=<span class="dv">0</span>){</span>
-<span id="cb16-56"><a href="#cb16-56"></a>                <span class="cf">if</span>(find(i-nowmax+i)!=find(nowmax)){</span>
-<span id="cb16-57"><a href="#cb16-57"></a>                    <span class="cf">if</span>(ans[find(i-nowmax+i)]&amp;&amp;ans[find(nowmax)]&amp;&amp;ans[find(i-nowmax+i)]!=ans[find(nowmax)]){</span>
-<span id="cb16-58"><a href="#cb16-58"></a>                    printf(<span class="st">&quot;-1</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb16-59"><a href="#cb16-59"></a>                    }</span>
-<span id="cb16-60"><a href="#cb16-60"></a>                    <span class="cf">else</span>{</span>
-<span id="cb16-61"><a href="#cb16-61"></a>                <span class="cf">if</span>(ans[find(nowmax)]==<span class="dv">0</span>) {</span>
-<span id="cb16-62"><a href="#cb16-62"></a>                    fa[find(nowmax)]=find(i-nowmax+i);find(nowmax);</span>
-<span id="cb16-63"><a href="#cb16-63"></a>                }</span>
-<span id="cb16-64"><a href="#cb16-64"></a>                <span class="cf">else</span>{</span>
-<span id="cb16-65"><a href="#cb16-65"></a>                fa[find(i-nowmax+i)]=find(nowmax);  </span>
-<span id="cb16-66"><a href="#cb16-66"></a>                find(i-nowmax+i);</span>
-<span id="cb16-67"><a href="#cb16-67"></a>                }</span>
-<span id="cb16-68"><a href="#cb16-68"></a>                    }</span>
-<span id="cb16-69"><a href="#cb16-69"></a>                }</span>
-<span id="cb16-70"><a href="#cb16-70"></a>            }</span>
-<span id="cb16-71"><a href="#cb16-71"></a>            nowmax++;</span>
-<span id="cb16-72"><a href="#cb16-72"></a>        }</span>
-<span id="cb16-73"><a href="#cb16-73"></a>    }</span>
-<span id="cb16-74"><a href="#cb16-74"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">2</span>*n;i++){</span>
-<span id="cb16-75"><a href="#cb16-75"></a>        <span class="cf">if</span>(i+a[i]&lt;<span class="dv">2</span>*n&amp;&amp;i-a[i]&gt;=<span class="dv">0</span>&amp;&amp;(i-a[i])%<span class="dv">2</span>==<span class="dv">0</span>){</span>
-<span id="cb16-76"><a href="#cb16-76"></a>            <span class="cf">if</span>(find(i-a[i])==find(i+a[i])){</span>
-<span id="cb16-77"><a href="#cb16-77"></a>                    printf(<span class="st">&quot;-1</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb16-78"><a href="#cb16-78"></a>            }</span>
-<span id="cb16-79"><a href="#cb16-79"></a>        }</span>
-<span id="cb16-80"><a href="#cb16-80"></a>        <span class="cf">if</span>(i+a[i]+<span class="dv">1</span>&lt;<span class="dv">2</span>*n&amp;&amp;i-a[i]-<span class="dv">1</span>&gt;=<span class="dv">0</span>&amp;&amp;(i-a[i])%<span class="dv">2</span>!=<span class="dv">0</span>){</span>
-<span id="cb16-81"><a href="#cb16-81"></a>            <span class="cf">if</span>(find(i-a[i]-<span class="dv">1</span>)==find(i+a[i]+<span class="dv">1</span>)){</span>
-<span id="cb16-82"><a href="#cb16-82"></a>                    printf(<span class="st">&quot;-1</span><span class="sc">\n</span><span class="st">&quot;</span>); <span class="cf">return</span> <span class="dv">0</span>;</span>
-<span id="cb16-83"><a href="#cb16-83"></a>            }</span>
-<span id="cb16-84"><a href="#cb16-84"></a>        }</span>
-<span id="cb16-85"><a href="#cb16-85"></a>    }</span>
-<span id="cb16-86"><a href="#cb16-86"></a>    <span class="dt">int</span> unknow=<span class="dv">0</span>;</span>
-<span id="cb16-87"><a href="#cb16-87"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++){</span>
-<span id="cb16-88"><a href="#cb16-88"></a>        <span class="cf">if</span>(ans[find(<span class="dv">2</span>*i)]==<span class="dv">0</span>){</span>
-<span id="cb16-89"><a href="#cb16-89"></a>            unans[unknow]=i;</span>
-<span id="cb16-90"><a href="#cb16-90"></a>            unknow++;</span>
-<span id="cb16-91"><a href="#cb16-91"></a>        }</span>
-<span id="cb16-92"><a href="#cb16-92"></a>    }</span>
-<span id="cb16-93"><a href="#cb16-93"></a>    <span class="cf">if</span>(unknow){</span>
-<span id="cb16-94"><a href="#cb16-94"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;unknow;i++){</span>
-<span id="cb16-95"><a href="#cb16-95"></a>            <span class="cf">if</span>(i!=<span class="dv">0</span>) printf(<span class="st">&quot; &quot;</span>);</span>
-<span id="cb16-96"><a href="#cb16-96"></a>            printf(<span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span>,unans[i]);</span>
-<span id="cb16-97"><a href="#cb16-97"></a>        }</span>
-<span id="cb16-98"><a href="#cb16-98"></a>        printf(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>);</span>
-<span id="cb16-99"><a href="#cb16-99"></a>    }</span>
-<span id="cb16-100"><a href="#cb16-100"></a>    <span class="cf">else</span>{</span>
-<span id="cb16-101"><a href="#cb16-101"></a>        <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++){</span>
-<span id="cb16-102"><a href="#cb16-102"></a>            printf(<span class="st">&quot;</span><span class="sc">%c</span><span class="st">&quot;</span>,ans[find(<span class="dv">2</span>*i)]);</span>
-<span id="cb16-103"><a href="#cb16-103"></a>        }</span>
-<span id="cb16-104"><a href="#cb16-104"></a>        printf(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>);</span>
-<span id="cb16-105"><a href="#cb16-105"></a>    }</span>
-<span id="cb16-106"><a href="#cb16-106"></a>}</span></code></pre></div>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">200040</span>];
+<span class="hljs-keyword">int</span> abc[<span class="hljs-number">220000</span>];
+<span class="hljs-keyword">int</span> abcpos[<span class="hljs-number">220000</span>];
+<span class="hljs-keyword">int</span> fa[<span class="hljs-number">200040</span>];
+<span class="hljs-keyword">int</span> ans[<span class="hljs-number">200040</span>];
+<span class="hljs-keyword">int</span> unans[<span class="hljs-number">200020</span>];
+<span class="hljs-keyword">int</span> aans[<span class="hljs-number">100020</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>&#123;
+    <span class="hljs-keyword">if</span>(fa[i]!=i)&#123;
+        fa[i]=<span class="hljs-built_in">find</span>(fa[i]);
+        ans[i]=ans[fa[i]];
+        <span class="hljs-keyword">return</span> fa[i];
+    &#125;
+    <span class="hljs-keyword">return</span> fa[i];
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">2</span>*n;i++)&#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
+        a[i]*=<span class="hljs-number">2</span>;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">2</span>*n;i++)&#123;
+    fa[i]=i;
+    &#125;
+    <span class="hljs-keyword">int</span> m;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;m);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;
+        <span class="hljs-keyword">int</span> tmp;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;tmp);
+        <span class="hljs-keyword">char</span> tchar;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">" %c"</span>,&amp;tchar);
+        <span class="hljs-keyword">if</span>(aans[tmp]&amp;&amp;aans[tmp]!=tchar)&#123;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"-1\n"</span>);<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        &#125;  
+        aans[tmp]=tchar;
+        <span class="hljs-keyword">if</span>(abc[tchar]!=<span class="hljs-number">0</span>)&#123;
+        <span class="hljs-built_in">find</span>(<span class="hljs-number">2</span>*tmp);
+        <span class="hljs-built_in">find</span>(abcpos[tchar]);
+            fa[<span class="hljs-built_in">find</span>(<span class="hljs-number">2</span>*tmp)]=<span class="hljs-built_in">find</span>(abcpos[tchar]);
+        &#125;
+        ans[<span class="hljs-number">2</span>*tmp]=tchar;
+        abc[tchar]++;abcpos[tchar]=tmp*<span class="hljs-number">2</span>;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;
+        fa[i*<span class="hljs-number">2</span><span class="hljs-number">-1</span>]=<span class="hljs-number">1</span>;
+        ans[i*<span class="hljs-number">2</span><span class="hljs-number">-1</span>]=<span class="hljs-number">257</span>;
+    &#125;
+    <span class="hljs-keyword">int</span> nowmax=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">2</span>*n;i++)&#123;
+        <span class="hljs-keyword">while</span>(nowmax&lt;=a[i]+i<span class="hljs-number">-1</span>)&#123;
+            <span class="hljs-keyword">if</span>(nowmax&lt;<span class="hljs-number">2</span>*n&amp;&amp;(i-nowmax+i)&gt;=<span class="hljs-number">0</span>)&#123;
+                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">find</span>(i-nowmax+i)!=<span class="hljs-built_in">find</span>(nowmax))&#123;
+                    <span class="hljs-keyword">if</span>(ans[<span class="hljs-built_in">find</span>(i-nowmax+i)]&amp;&amp;ans[<span class="hljs-built_in">find</span>(nowmax)]&amp;&amp;ans[<span class="hljs-built_in">find</span>(i-nowmax+i)]!=ans[<span class="hljs-built_in">find</span>(nowmax)])&#123;
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"-1\n"</span>); <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+                    &#125;
+                    <span class="hljs-keyword">else</span>&#123;
+                <span class="hljs-keyword">if</span>(ans[<span class="hljs-built_in">find</span>(nowmax)]==<span class="hljs-number">0</span>) &#123;
+                    fa[<span class="hljs-built_in">find</span>(nowmax)]=<span class="hljs-built_in">find</span>(i-nowmax+i);<span class="hljs-built_in">find</span>(nowmax);
+                &#125;
+                <span class="hljs-keyword">else</span>&#123;
+                fa[<span class="hljs-built_in">find</span>(i-nowmax+i)]=<span class="hljs-built_in">find</span>(nowmax);  
+                <span class="hljs-built_in">find</span>(i-nowmax+i);
+                &#125;
+                    &#125;
+                &#125;
+            &#125;
+            nowmax++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">2</span>*n;i++)&#123;
+        <span class="hljs-keyword">if</span>(i+a[i]&lt;<span class="hljs-number">2</span>*n&amp;&amp;i-a[i]&gt;=<span class="hljs-number">0</span>&amp;&amp;(i-a[i])%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>)&#123;
+            <span class="hljs-keyword">if</span>(<span class="hljs-built_in">find</span>(i-a[i])==<span class="hljs-built_in">find</span>(i+a[i]))&#123;
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"-1\n"</span>); <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(i+a[i]+<span class="hljs-number">1</span>&lt;<span class="hljs-number">2</span>*n&amp;&amp;i-a[i]<span class="hljs-number">-1</span>&gt;=<span class="hljs-number">0</span>&amp;&amp;(i-a[i])%<span class="hljs-number">2</span>!=<span class="hljs-number">0</span>)&#123;
+            <span class="hljs-keyword">if</span>(<span class="hljs-built_in">find</span>(i-a[i]<span class="hljs-number">-1</span>)==<span class="hljs-built_in">find</span>(i+a[i]+<span class="hljs-number">1</span>))&#123;
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"-1\n"</span>); <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">int</span> unknow=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;
+        <span class="hljs-keyword">if</span>(ans[<span class="hljs-built_in">find</span>(<span class="hljs-number">2</span>*i)]==<span class="hljs-number">0</span>)&#123;
+            unans[unknow]=i;
+            unknow++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">if</span>(unknow)&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;unknow;i++)&#123;
+            <span class="hljs-keyword">if</span>(i!=<span class="hljs-number">0</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">" "</span>);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,unans[i]);
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    &#125;
+    <span class="hljs-keyword">else</span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>,ans[<span class="hljs-built_in">find</span>(<span class="hljs-number">2</span>*i)]);
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    &#125;
+&#125;</code></pre>
 
 
   
@@ -1382,7 +1382,7 @@ n\neq 2^k &amp; sto[n] = 2^{k} + sto[n - 2^{k}] * 2 + sto[n - 2^{k}+1] -1
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/11\",\"site_id\":\"\",\"access_token\":\"21.434ad27effea7b2f85bd99ab37c48765.2592000.1578677609.2685265557-18003697\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {
