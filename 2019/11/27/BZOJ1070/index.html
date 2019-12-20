@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bzoj1070-scoi2007-修车"><span class="toc-text">BZOJ1070 [SCOI2007] 修车</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hint"><span class="toc-text">HINT</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BZOJ1070-SCOI2007-修车"><span class="toc-text">BZOJ1070 [SCOI2007] 修车</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HINT"><span class="toc-text">HINT</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -192,10 +192,6 @@
             <span>
                 
                   
-                    <a href="/tags/网络流">网络流</a>
-                  
-                
-                  
                     <a href="/tags/费用流">费用流</a>
                   
                 
@@ -206,28 +202,19 @@
       <div>
       </div>
     </div>
-    <h1 id="bzoj1070-scoi2007-修车">BZOJ1070 [SCOI2007] 修车<a class="post-anchor" href="#bzoj1070-scoi2007-修车"></a></h1>
-<hr>
-<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>　　同一时刻有N位车主带着他们的爱车来到了汽车维修中心。维修中心共有M位技术人员，不同的技术人员对不同的车进行维修所用的时间是不同的。现在需要安排这M位技术人员所维修的车及顺序，使得顾客平均等待的时间最小。<br>
-说明：顾客的等待时间是指从他把车送至维修中心到维修完毕所用的时间。</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>　　第一行有两个m,n，表示技术人员数与顾客数。 接下来n行，每行m个整数。<br>
-第i+1行第j个数表示第j位技术人员维修第i辆车需要用的时间T。</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>　　最小平均等待时间，答案精确到小数点后2位。</p>
-<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<pre><code class="hljs c++"><span class="hljs-number">2</span> <span class="hljs-number">2</span>
+    <h1 id="BZOJ1070-SCOI2007-修车">BZOJ1070 [SCOI2007] 修车<a class="post-anchor" href="#BZOJ1070-SCOI2007-修车"></a></h1><hr>
+<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><p>　　同一时刻有N位车主带着他们的爱车来到了汽车维修中心。维修中心共有M位技术人员，不同的技术人员对不同的车进行维修所用的时间是不同的。现在需要安排这M位技术人员所维修的车及顺序，使得顾客平均等待的时间最小。<br>说明：顾客的等待时间是指从他把车送至维修中心到维修完毕所用的时间。</p>
+<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>　　第一行有两个m,n，表示技术人员数与顾客数。 接下来n行，每行m个整数。<br>第i+1行第j个数表示第j位技术人员维修第i辆车需要用的时间T。</p>
+<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>　　最小平均等待时间，答案精确到小数点后2位。</p>
+<h2 id="Sample-Input">Sample Input<a class="post-anchor" href="#Sample-Input"></a></h2><pre><code class="hljs c++"><span class="hljs-number">2</span> <span class="hljs-number">2</span>
 <span class="hljs-number">3</span> <span class="hljs-number">2</span>
 <span class="hljs-number">1</span> <span class="hljs-number">4</span></code></pre>
-<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<pre><code class="hljs c++"><span class="hljs-number">1.50</span></code></pre>
-<h2 id="hint">HINT<a class="post-anchor" href="#hint"></a></h2>
-<p>数据范围: (2&lt;=M&lt;=9,1&lt;=N&lt;=60),(1&lt;=T&lt;=1000)</p>
+
+<h2 id="Sample-Output">Sample Output<a class="post-anchor" href="#Sample-Output"></a></h2><pre><code class="hljs c++"><span class="hljs-number">1.50</span></code></pre>
+
+<h2 id="HINT">HINT<a class="post-anchor" href="#HINT"></a></h2><p>数据范围: (2&lt;=M&lt;=9,1&lt;=N&lt;=60),(1&lt;=T&lt;=1000)</p>
 <blockquote>
-<p>思路：<br>
-  对同一个技术人员，如果车i倒数第x个被修理，那么该车对总时间的贡献就是ti<em>x。每个技术人员都可以把任何一辆车倒数第1个修，第2个修...第n个修，那么他们对总时间分别有不同的贡献。<br>
-  因而建图：s到所有车连flow=1,cost=0的边，车向每个技工的倒数第x个位置连flow=1,cost=ti</em>x的边，每个技工的每个位置向t连flow=1,cost=0的边。</p>
+<p>思路：<br>&emsp;&emsp;对同一个技术人员，如果车i倒数第x个被修理，那么该车对总时间的贡献就是ti<em>x。每个技术人员都可以把任何一辆车倒数第1个修，第2个修…第n个修，那么他们对总时间分别有不同的贡献。<br>&emsp;&emsp;因而建图：s到所有车连flow=1,cost=0的边，车向每个技工的倒数第x个位置连flow=1,cost=ti</em>x的边，每个技工的每个位置向t连flow=1,cost=0的边。</p>
 </blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;

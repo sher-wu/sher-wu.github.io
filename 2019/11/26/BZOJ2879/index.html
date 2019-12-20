@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bzoj2879-noi2012-美食节"><span class="toc-text">BZOJ2879 [NOI2012] 美食节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样例说明"><span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据规模及约定"><span class="toc-text">数据规模及约定</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BZOJ2879-NOI2012-美食节"><span class="toc-text">BZOJ2879 [NOI2012] 美食节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample-Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样例说明"><span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据规模及约定"><span class="toc-text">数据规模及约定</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -192,10 +192,6 @@
             <span>
                 
                   
-                    <a href="/tags/网络流">网络流</a>
-                  
-                
-                  
                     <a href="/tags/费用流">费用流</a>
                   
                 
@@ -206,40 +202,25 @@
       <div>
       </div>
     </div>
-    <h1 id="bzoj2879-noi2012-美食节">BZOJ2879 [NOI2012] 美食节<a class="post-anchor" href="#bzoj2879-noi2012-美食节"></a></h1>
-<hr>
-<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>CZ市为了欢迎全国各地的同学，特地举办了一场盛大的美食节。作为一个喜欢尝鲜的美食客，小M自然不愿意错过这场盛宴。他很快就尝遍了美食节所有的美食。然而，尝鲜的欲望是难以满足的。尽管所有的菜品都很可口，厨师做菜的速度也很快，小M仍然觉得自己桌上没有已经摆在别人餐桌上的美食是一件无法忍受的事情。于是小M开始研究起了做菜顺序的问题，即安排一个做菜的顺序使得同学们的等待时间最短。小M发现，美食节共有n种不同的菜品。每次点餐，每个同学可以选择其中的一个菜品。总共有m个厨师来制作这些菜品。当所有的同学点餐结束后，菜品的制作任务就会分配给每个厨师。然后每个厨师就会同时开始做菜。厨师们会按照要求的顺序进行制作，并且每次只能制作一人份。此外，小M还发现了另一件有意思的事情: 虽然这m个厨师都会制作全部的n种菜品，但对于同一菜品，不同厨师的制作时间未必相同。他将菜品用1, 2, …, n依次编号，厨师用1, 2, …, m依次编号，将第j个厨师制作第i种菜品的时间记为 ti,j 。小M认为：每个同学的等待时间为所有厨师开始做菜起，到自己那份菜品完成为止的时间总长度。换句话说，如果一个同学点的菜是某个厨师做的第k道菜，则他的等待时间就是这个厨师制作前k道菜的时间之和。而总等待时间为所有同学的等待时间之和。现在，小M找到了所有同学的点菜信息: 有 pi 个同学点了第i种菜品（i=1, 2, …, n）。他想知道的是最小的总等待时间是多少。</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>输入文件的第1行包含两个正整数n和m，表示菜品的种数和厨师的数量。 第2行包含n个正整数，其中第i个数为pi，表示点第i种菜品的人数。 接下来有n行，每行包含m个非负整数，这n行中的第i行的第j个数为ti,j，表示第j个厨师制作第i种菜品所需的时间。 输入文件中每行相邻的两个数之间均由一个空格隔开，行末均没有多余空格。</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>输出仅一行包含一个整数，为总等待时间的最小值。</p>
-<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<p>3 2</p>
+    <h1 id="BZOJ2879-NOI2012-美食节">BZOJ2879 [NOI2012] 美食节<a class="post-anchor" href="#BZOJ2879-NOI2012-美食节"></a></h1><hr>
+<h2 id="Description">Description<a class="post-anchor" href="#Description"></a></h2><p>CZ市为了欢迎全国各地的同学，特地举办了一场盛大的美食节。作为一个喜欢尝鲜的美食客，小M自然不愿意错过这场盛宴。他很快就尝遍了美食节所有的美食。然而，尝鲜的欲望是难以满足的。尽管所有的菜品都很可口，厨师做菜的速度也很快，小M仍然觉得自己桌上没有已经摆在别人餐桌上的美食是一件无法忍受的事情。于是小M开始研究起了做菜顺序的问题，即安排一个做菜的顺序使得同学们的等待时间最短。小M发现，美食节共有n种不同的菜品。每次点餐，每个同学可以选择其中的一个菜品。总共有m个厨师来制作这些菜品。当所有的同学点餐结束后，菜品的制作任务就会分配给每个厨师。然后每个厨师就会同时开始做菜。厨师们会按照要求的顺序进行制作，并且每次只能制作一人份。此外，小M还发现了另一件有意思的事情: 虽然这m个厨师都会制作全部的n种菜品，但对于同一菜品，不同厨师的制作时间未必相同。他将菜品用1, 2, …, n依次编号，厨师用1, 2, …, m依次编号，将第j个厨师制作第i种菜品的时间记为 ti,j 。小M认为：每个同学的等待时间为所有厨师开始做菜起，到自己那份菜品完成为止的时间总长度。换句话说，如果一个同学点的菜是某个厨师做的第k道菜，则他的等待时间就是这个厨师制作前k道菜的时间之和。而总等待时间为所有同学的等待时间之和。现在，小M找到了所有同学的点菜信息: 有 pi 个同学点了第i种菜品（i=1, 2, …, n）。他想知道的是最小的总等待时间是多少。</p>
+<h2 id="Input">Input<a class="post-anchor" href="#Input"></a></h2><p>输入文件的第1行包含两个正整数n和m，表示菜品的种数和厨师的数量。 第2行包含n个正整数，其中第i个数为pi，表示点第i种菜品的人数。 接下来有n行，每行包含m个非负整数，这n行中的第i行的第j个数为ti,j，表示第j个厨师制作第i种菜品所需的时间。 输入文件中每行相邻的两个数之间均由一个空格隔开，行末均没有多余空格。</p>
+<h2 id="Output">Output<a class="post-anchor" href="#Output"></a></h2><p>输出仅一行包含一个整数，为总等待时间的最小值。</p>
+<h2 id="Sample-Input">Sample Input<a class="post-anchor" href="#Sample-Input"></a></h2><p>3 2</p>
 <p>3 1 1</p>
 <p>5 7</p>
 <p>3 6</p>
 <p>8 9</p>
-<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<p>47</p>
-<h2 id="样例说明">样例说明<a class="post-anchor" href="#样例说明"></a></h2>
-<blockquote>
-<p>厨师1先制作1份菜品2，再制作2份菜品1。点这3道菜的3个同学的等待时间分别为3，3+5=8，3+5+5=13。<br>
-厨师2先制作1份菜品1，再制作1份菜品3。点这2道菜的2个同学的等待时间分别为7，7+9=16。<br>
-总等待时间为3+8+13+7+16=47。<br>
-虽然菜品1和菜品3由厨师1制作更快，如果这些菜品都由厨师1制作，总等待时间反而更长。如果按上述的做法，将1份菜品1和1份菜品3调整到厨师2制作，这样厨师2不会闲着，总等待时间更短。<br>
-可以证明，没有更优的点餐方案。</p>
+<h2 id="Sample-Output">Sample Output<a class="post-anchor" href="#Sample-Output"></a></h2><p>47</p>
+<h2 id="样例说明">样例说明<a class="post-anchor" href="#样例说明"></a></h2><blockquote>
+<p>厨师1先制作1份菜品2，再制作2份菜品1。点这3道菜的3个同学的等待时间分别为3，3+5=8，3+5+5=13。<br>厨师2先制作1份菜品1，再制作1份菜品3。点这2道菜的2个同学的等待时间分别为7，7+9=16。<br>总等待时间为3+8+13+7+16=47。<br>虽然菜品1和菜品3由厨师1制作更快，如果这些菜品都由厨师1制作，总等待时间反而更长。如果按上述的做法，将1份菜品1和1份菜品3调整到厨师2制作，这样厨师2不会闲着，总等待时间更短。<br>可以证明，没有更优的点餐方案。</p>
 </blockquote>
-<h2 id="数据规模及约定">数据规模及约定<a class="post-anchor" href="#数据规模及约定"></a></h2>
-<p>对于100%的数据，n &lt;= 40, m &lt;= 100, p &lt;= 800, ti,j &lt;= 1000（其中p = ∑pi，即点菜同学的总人数）。</p>
+<h2 id="数据规模及约定">数据规模及约定<a class="post-anchor" href="#数据规模及约定"></a></h2><p>对于100%的数据，n &lt;= 40, m &lt;= 100, p &lt;= 800, ti,j &lt;= 1000（其中p = ∑pi，即点菜同学的总人数）。</p>
 <blockquote>
-<p>题意：<br>
-  n种菜m个厨师，第j个厨师做第i个菜要t[i][j]秒，每个菜点了ai份，顾客等待时间为从开始到他这份菜做完的时间，问等待总时间是多少。</p>
+<p>题意：<br>&emsp;&emsp;n种菜m个厨师，第j个厨师做第i个菜要t[i][j]秒，每个菜点了ai份，顾客等待时间为从开始到他这份菜做完的时间，问等待总时间是多少。</p>
 </blockquote>
 <blockquote>
-<p>思路：<br>
-  与「BZOJ1070」[SCOI2007]修车类似，只是数据规模增大了。<br>
-  因而，需要用到动态加点的思想。就是说，在我考虑下一个让谁做哪种的菜的时候，它只会是某一位厨师的倒数的第x道菜，因为如果让他把这道菜放在倒数第x+1道菜来做的话，肯定没有放在倒数第x道菜更优。因而，只有当一位厨师做了倒数第x道菜后（该厨师的倒数第x位置有了流量后），才允许他做倒数第x+1道菜（在菜与该厨师的倒数第x+1位置之间连边）。其他和BZOJ1070相似。</p>
+<p>思路：<br>&emsp;&emsp;与「BZOJ1070」[SCOI2007]修车类似，只是数据规模增大了。<br>&emsp;&emsp;因而，需要用到动态加点的思想。就是说，在我考虑下一个让谁做哪种的菜的时候，它只会是某一位厨师的倒数的第x道菜，因为如果让他把这道菜放在倒数第x+1道菜来做的话，肯定没有放在倒数第x道菜更优。因而，只有当一位厨师做了倒数第x道菜后（该厨师的倒数第x位置有了流量后），才允许他做倒数第x+1道菜（在菜与该厨师的倒数第x+1位置之间连边）。其他和BZOJ1070相似。</p>
 </blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
