@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      BZOJ1070 - Welcome to sher-wu&#39;s home !
+      2015北京区域赛D - Welcome to sher-wu&#39;s home !
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bzoj1070-scoi2007-修车"><span class="toc-text">BZOJ1070 [SCOI2007] 修车</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hint"><span class="toc-text">HINT</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#北京区域赛d-kejin-game"><span class="toc-text">2015北京区域赛D Kejin Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -164,11 +164,11 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">BZOJ1070</div>
+      <div class="title">2015北京区域赛D</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2019/11/27</span>
+          <span>2019/12/20</span>
         </span>
 
         
@@ -192,7 +192,7 @@
             <span>
                 
                   
-                    <a href="/tags/费用流">费用流</a>
+                    <a href="/tags/网络流">网络流</a>
                   
                 
             </span>
@@ -202,144 +202,164 @@
       <div>
       </div>
     </div>
-    <h1 id="bzoj1070-scoi2007-修车">BZOJ1070 [SCOI2007] 修车<a class="post-anchor" href="#bzoj1070-scoi2007-修车"></a></h1>
-<hr>
+    <h1 id="北京区域赛d-kejin-game">2015北京区域赛D Kejin Game<a class="post-anchor" href="#北京区域赛d-kejin-game"></a></h1>
 <h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>　　同一时刻有N位车主带着他们的爱车来到了汽车维修中心。维修中心共有M位技术人员，不同的技术人员对不同的车进行维修所用的时间是不同的。现在需要安排这M位技术人员所维修的车及顺序，使得顾客平均等待的时间最小。<br>
-说明：顾客的等待时间是指从他把车送至维修中心到维修完毕所用的时间。</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>　　第一行有两个m,n，表示技术人员数与顾客数。 接下来n行，每行m个整数。<br>
-第i+1行第j个数表示第j位技术人员维修第i辆车需要用的时间T。</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>　　最小平均等待时间，答案精确到小数点后2位。</p>
-<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
-<pre><code class="hljs c++"><span class="hljs-number">2</span> <span class="hljs-number">2</span>
-<span class="hljs-number">3</span> <span class="hljs-number">2</span>
-<span class="hljs-number">1</span> <span class="hljs-number">4</span></code></pre>
-<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
-<pre><code class="hljs c++"><span class="hljs-number">1.50</span></code></pre>
-<h2 id="hint">HINT<a class="post-anchor" href="#hint"></a></h2>
-<p>数据范围: (2&lt;=M&lt;=9,1&lt;=N&lt;=60),(1&lt;=T&lt;=1000)</p>
 <blockquote>
-<p>思路：<br>
-  对同一个技术人员，如果车i倒数第x个被修理，那么该车对总时间的贡献就是ti<em>x。每个技术人员都可以把任何一辆车倒数第1个修，第2个修...第n个修，那么他们对总时间分别有不同的贡献。<br>
-  因而建图：s到所有车连flow=1,cost=0的边，车向每个技工的倒数第x个位置连flow=1,cost=ti</em>x的边，每个技工的每个位置向t连flow=1,cost=0的边。</p>
+<p>  你有一个有向技能图。点表示技能。若x到y有一条有向边，则表示学会<span class="math inline">\(y\)</span>前必须先学会<span class="math inline">\(x\)</span>。你可以氪<span class="math inline">\(c_i\)</span>元以消除这条有向边，即你普通地学<span class="math inline">\(y\)</span>时可以未学会<span class="math inline">\(x\)</span>。你学会一个技能有两种方法：1、普通地学完它的所有前置技能，并氪<span class="math inline">\(a_{x}\)</span>元；2、暴力地直接氪<span class="math inline">\(b_{x}\)</span>元。问你学会技能<span class="math inline">\(s\)</span>时，最少氪金多少元。<br>
+  <span class="math inline">\(1\leq n\leq 500,1\leq m\leq 10000,1\leq x_1,x_2\leq 1000000\)</span></p>
+</blockquote>
+<h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
+<pre><code class="hljs c++"><span class="hljs-number">2</span>
+<span class="hljs-number">5</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span>
+<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">5</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span>
+<span class="hljs-number">2</span> <span class="hljs-number">4</span> <span class="hljs-number">8</span>
+<span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">10</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">15</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span> <span class="hljs-number">9</span> <span class="hljs-number">11</span>
+<span class="hljs-number">100</span> <span class="hljs-number">100</span> <span class="hljs-number">100</span> <span class="hljs-number">200</span> <span class="hljs-number">200</span>
+<span class="hljs-number">5</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span>
+<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">5</span>
+<span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span>
+<span class="hljs-number">2</span> <span class="hljs-number">4</span> <span class="hljs-number">8</span>
+<span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">10</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">15</span>
+<span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span> <span class="hljs-number">9</span> <span class="hljs-number">11</span>
+<span class="hljs-number">5</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span> <span class="hljs-number">50</span> <span class="hljs-number">50</span></code></pre>
+<h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
+<pre><code class="hljs c++"><span class="hljs-number">31</span>
+<span class="hljs-number">26</span></code></pre>
+<blockquote>
+<p>思路：   考虑到对于一个技能，需要分别算是“学会所有前置技能”还是“学部分氪部分”还是“暴力学”更划算，应用了网络流。<br>
+  将一个技能拆分为两个点，标为<span class="math inline">\(i\)</span>和<span class="math inline">\(i&#39;\)</span>。从S连边到<span class="math inline">\(i\)</span>，流量为<span class="math inline">\(a_i\)</span>；从<span class="math inline">\(i\)</span>连边到<span class="math inline">\(i&#39;\)</span>，流量为<span class="math inline">\(b_i\)</span>；从<span class="math inline">\(x&#39;\)</span>连边到<span class="math inline">\(y\)</span>，流量为<span class="math inline">\(c_i\)</span>；最后从<span class="math inline">\(s\)</span>连边到T，流量为INF。<br>
+  这样，通过在点<span class="math inline">\(i\)</span>处的流量限制，我们已经可以解决到底怎么选这个问题了。那么跑一下源汇的最小割，就是所要求的最小花<span class="math inline">\((ke)\)</span>费<span class="math inline">\((jin)\)</span>了。</p>
 </blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">2020</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
-<span class="hljs-keyword">int</span> le,ri,sp[<span class="hljs-number">12</span>][<span class="hljs-number">70</span>];
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">MCMF</span>&#123;</span>
-    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span>&#123;</span>
-        <span class="hljs-keyword">int</span> from,to,cap,cost;
-        Edge()&#123;&#125;
-        Edge(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap,<span class="hljs-keyword">int</span> cost):from(from),to(to),cap(cap),cost(cost)&#123;&#125;
-    &#125;;
-    <span class="hljs-keyword">int</span> n,m,s,t;
-    <span class="hljs-built_in">vector</span>&lt;Edge&gt; edges;
-    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[maxn];
-    <span class="hljs-keyword">int</span> inq[maxn];<span class="hljs-comment">//inqueue</span>
-    <span class="hljs-keyword">int</span> d[maxn];<span class="hljs-comment">//dis</span>
-    <span class="hljs-keyword">int</span> p[maxn];<span class="hljs-comment">//pre</span>
-    <span class="hljs-keyword">int</span> a[maxn];<span class="hljs-comment">//flow</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
-    </span>&#123;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=n;++i) G[i].<span class="hljs-built_in">clear</span>();
-        edges.<span class="hljs-built_in">clear</span>();
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap,<span class="hljs-keyword">int</span> cost)</span>
-    </span>&#123;
-        edges.push_back(Edge(from,to,cap,cost));
-        edges.push_back(Edge(to,from,<span class="hljs-number">0</span>,-cost));
-        m=edges.<span class="hljs-built_in">size</span>();
-        G[from].push_back(m<span class="hljs-number">-2</span>);
-        G[to].push_back(m<span class="hljs-number">-1</span>);
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">BF</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; flow,<span class="hljs-keyword">int</span>&amp; cost)</span>
-    </span>&#123;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) d[i]=INF,inq[i]=<span class="hljs-number">0</span>;
-        d[s]=<span class="hljs-number">0</span>,inq[s]=<span class="hljs-number">1</span>,p[s]=<span class="hljs-number">0</span>,a[s]=INF;
-        <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; Q;
-        Q.push(s);
-        <span class="hljs-keyword">while</span>(!Q.empty())
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span>&#123;</span>
+    <span class="hljs-keyword">int</span> from,to,cap;
+    Edge(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap):from(from),to(to),cap(cap)&#123;&#125;
+&#125;;
+<span class="hljs-keyword">int</span> n,m,s,t,totflow;
+<span class="hljs-built_in">vector</span>&lt;Edge&gt; edges;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[maxn];
+<span class="hljs-keyword">bool</span> vis[maxn];
+<span class="hljs-keyword">int</span> d[maxn];
+<span class="hljs-keyword">int</span> cur[maxn];
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to,<span class="hljs-keyword">int</span> cap)</span>
+</span>&#123;
+    edges.push_back(Edge(from,to,cap));
+    edges.push_back(Edge(to,from,<span class="hljs-number">0</span>));
+    <span class="hljs-keyword">int</span> p=edges.<span class="hljs-built_in">size</span>();
+    G[from].push_back(p<span class="hljs-number">-2</span>);
+    G[to].push_back(p<span class="hljs-number">-1</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">BFS</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">memset</span>(vis,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> vis);
+    <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; Q;
+    Q.push(s);
+    d[s]=<span class="hljs-number">0</span>;
+    vis[s]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(!Q.empty())
+    &#123;
+        <span class="hljs-keyword">int</span> x=Q.front();
+        Q.pop();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;(<span class="hljs-keyword">int</span>)G[x].<span class="hljs-built_in">size</span>();++i)
         &#123;
-            <span class="hljs-keyword">int</span> u=Q.front();Q.pop();
-            inq[u]=<span class="hljs-number">0</span>;
-            <span class="hljs-comment">//cout&lt;&lt;u&lt;&lt;' '&lt;&lt;G[u].size()&lt;&lt;' '&lt;&lt;d[u]&lt;&lt;'\n';</span>
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;G[u].<span class="hljs-built_in">size</span>();++i)
+            Edge&amp; e=edges[G[x][i]];
+            <span class="hljs-keyword">if</span>(!vis[e.to]&amp;&amp;e.cap)
             &#123;
-                Edge&amp; e=edges[G[u][i]];
-                <span class="hljs-keyword">if</span>(e.cap&amp;&amp;d[e.to]&gt;d[u]+e.cost)
-                &#123;
-                    d[e.to]=d[u]+e.cost;
-                    p[e.to]=G[u][i];
-                    a[e.to]=<span class="hljs-built_in">min</span>(a[u],e.cap);
-                    <span class="hljs-keyword">if</span>(!inq[e.to])
-                    &#123;
-                        Q.push(e.to);
-                        inq[e.to]=<span class="hljs-number">1</span>;
-                    &#125;
-                &#125;
+                vis[e.to]=<span class="hljs-number">1</span>;
+                d[e.to]=d[x]+<span class="hljs-number">1</span>;
+                Q.push(e.to);
             &#125;
         &#125;
-        <span class="hljs-keyword">if</span>(d[t]==INF) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-        flow+=a[t];
-        cost+=d[t]*a[t];
-        <span class="hljs-keyword">int</span> u=t;
-        <span class="hljs-keyword">while</span>(u!=s)
+    &#125;
+    <span class="hljs-keyword">return</span> vis[t];
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> a)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span>(x==t||a==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> a;
+    <span class="hljs-keyword">int</span> flow=<span class="hljs-number">0</span>,f=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>&amp; i=cur[x];i&lt;(<span class="hljs-keyword">int</span>)G[x].<span class="hljs-built_in">size</span>();++i)
+    &#123;
+        Edge&amp; e=edges[G[x][i]];
+        <span class="hljs-keyword">if</span>(d[x]+<span class="hljs-number">1</span>==d[e.to]&amp;&amp;(f=DFS(e.to,<span class="hljs-built_in">min</span>(a,e.cap)))&gt;<span class="hljs-number">0</span>)
         &#123;
-            edges[p[u]].cap-=a[t];
-            edges[p[u]^<span class="hljs-number">1</span>].cap+=a[t];
-            u=edges[p[u]].from;
+            e.cap-=f;
+            edges[G[x][i]^<span class="hljs-number">1</span>].cap+=f;
+            flow+=f;
+            a-=f;
+            <span class="hljs-keyword">if</span>(a==<span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
         &#125;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
     &#125;
-    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Mincost</span><span class="hljs-params">()</span>
-    </span>&#123;
-        <span class="hljs-keyword">int</span> flow=<span class="hljs-number">0</span>,cost=<span class="hljs-number">0</span>;
-        <span class="hljs-comment">//cout&lt;&lt;m&lt;&lt;endl;</span>
-        <span class="hljs-keyword">while</span>(BF(flow,cost));
-        <span class="hljs-comment">//for(int i=1;i&lt;=10;++i) cout&lt;&lt;i&lt;&lt;' '&lt;&lt;p[i]&lt;&lt;endl;</span>
-        <span class="hljs-keyword">return</span> cost;
+    <span class="hljs-keyword">return</span> flow;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Maxflow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> t)</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> flow=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(BFS())
+    &#123;
+        <span class="hljs-built_in">memset</span>(cur,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(cur));
+        flow+=DFS(s,INF);
     &#125;
-&#125;NF;
+    <span class="hljs-keyword">return</span> flow;
+&#125;
 
 <span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;
     <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
     <span class="hljs-keyword">char</span> ch=getchar();
     <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>)&#123;
-        <span class="hljs-comment">//if(ch=='-') f=-1;</span>
         ch=getchar();
     &#125;
     <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>)&#123;
         x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>);
         ch=getchar();
     &#125;
-    <span class="hljs-keyword">return</span> x;
+    <span class="hljs-keyword">return</span> x*f;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+</span>&#123;
+    edges.<span class="hljs-built_in">clear</span>();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=n;++i) G[i].<span class="hljs-built_in">clear</span>();
 &#125;
 
 <span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readin</span><span class="hljs-params">()</span>
 </span>&#123;
-    <span class="hljs-keyword">int</span> temp;
-    le=<span class="hljs-built_in">read</span>(),ri=<span class="hljs-built_in">read</span>();
-    NF.s=<span class="hljs-number">0</span>;
-    NF.n=NF.t=ri*(le+<span class="hljs-number">1</span>)+<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=ri;++i) NF.AddEdge(<span class="hljs-number">0</span>,i,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=ri;++i) <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=le;++j)
+    <span class="hljs-keyword">int</span> temp,aa,bb,cc,le,ri;
+    le=<span class="hljs-built_in">read</span>(),ri=<span class="hljs-built_in">read</span>(),temp=<span class="hljs-built_in">read</span>();
+    s=<span class="hljs-number">0</span>;
+    n=t=<span class="hljs-number">2</span>*le+<span class="hljs-number">1</span>;
+    init();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=ri;++i)
     &#123;
-        sp[j][i]=<span class="hljs-built_in">read</span>();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=ri;++k) NF.AddEdge(i,j*ri+k,<span class="hljs-number">1</span>,k*sp[j][i]);
+        aa=<span class="hljs-built_in">read</span>();bb=<span class="hljs-built_in">read</span>();cc=<span class="hljs-built_in">read</span>();
+        AddEdge(aa+le,bb,cc);
     &#125;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=ri+<span class="hljs-number">1</span>;i&lt;NF.t;++i) NF.AddEdge(i,NF.t,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=le;++i) aa=<span class="hljs-built_in">read</span>(),AddEdge(<span class="hljs-number">0</span>,i,aa);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=le;++i) aa=<span class="hljs-built_in">read</span>(),AddEdge(i,i+le,aa);
+    AddEdge(temp+le,t,INF);
 &#125;
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
 </span>&#123;
-    NF.init();
-    readin();
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf"</span>,<span class="hljs-number">1.0</span>*NF.Mincost()/ri);
+    <span class="hljs-keyword">int</span> t;
+    t=<span class="hljs-built_in">read</span>();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=t;++i)
+    &#123;
+        readin();
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,Maxflow(s,t));
+    &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 
@@ -368,12 +388,12 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2019/11/28/UVA11637/">UVA11637</a>
+          <a href="/2099/12/31/Donot%20Forget!/">Donot Forget!</a>
         
     </div>
     <div class="item right">
         
-          <a href="/2019/11/26/BZOJ2879/">BZOJ2879</a>
+          <a href="/2019/12/19/CF1264E/">CF1264E</a>
         
     </div>
   </div>
@@ -385,7 +405,7 @@
       本文作者：<a href="/">sher-wu</a>
     </div>
     <div class="link">
-      永久链接：<a href="/2019/11/27/BZOJ1070/">http://sher-wu.github.io/2019/11/27/BZOJ1070/</a>
+      永久链接：<a href="/2019/12/20/2015%E5%8C%97%E4%BA%AC%E5%8C%BA%E5%9F%9F%E8%B5%9BD/">http://sher-wu.github.io/2019/12/20/2015%E5%8C%97%E4%BA%AC%E5%8C%BA%E5%9F%9F%E8%B5%9BD/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/">sher-wu</a>的博客，转载请注明出处！
