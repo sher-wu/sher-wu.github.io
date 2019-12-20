@@ -12,7 +12,7 @@
 </script> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="null" />
     <meta name="description" content="" />
     
     <title>
@@ -205,8 +205,8 @@
     <h1 id="北京区域赛d-kejin-game">2015北京区域赛D Kejin Game<a class="post-anchor" href="#北京区域赛d-kejin-game"></a></h1>
 <h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
 <blockquote>
-<p>  你有一个有向技能图。点表示技能。若x到y有一条有向边，则表示学会<span class="math inline">\(y\)</span>前必须先学会<span class="math inline">\(x\)</span>。你可以氪<span class="math inline">\(c_i\)</span>元以消除这条有向边，即你普通地学<span class="math inline">\(y\)</span>时可以未学会<span class="math inline">\(x\)</span>。你学会一个技能有两种方法：1、普通地学完它的所有前置技能，并氪<span class="math inline">\(a_{x}\)</span>元；2、暴力地直接氪<span class="math inline">\(b_{x}\)</span>元。问你学会技能<span class="math inline">\(s\)</span>时，最少氪金多少元。<br>
-  <span class="math inline">\(1\leq n\leq 500,1\leq m\leq 10000,1\leq x_1,x_2\leq 1000000\)</span></p>
+<p>  你有一个有向技能图。点表示技能。若<span class="math inline">\(x\)</span>到<span class="math inline">\(y\)</span>有一条有向边，则表示学会<span class="math inline">\(y\)</span>前必须先学会<span class="math inline">\(x\)</span>。你可以氪<span class="math inline">\(c_i\)</span>元以消除这条有向边，即你普通地学<span class="math inline">\(y\)</span>时可以未学会<span class="math inline">\(x\)</span>。你学会一个技能有两种方法：1、普通地学完它的所有前置技能，并氪<span class="math inline">\(a_{x}\)</span>元；2、暴力地直接氪<span class="math inline">\(b_{x}\)</span>元。问你学会技能<span class="math inline">\(s\)</span>时，最少氪金多少元。<br>
+  <span class="math inline">\(1 \leq n \leq 500,1 \leq m \leq 10000,1 \leq x_1,x_2 \leq 1000000\)</span></p>
 </blockquote>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
 <pre><code class="hljs c++"><span class="hljs-number">2</span>
@@ -427,7 +427,22 @@
         </footer>
       </div>
     </div>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
   
 </html>
 <script type="text/javascript">
