@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#北京区域赛d-kejin-game"><span class="toc-text">2015北京区域赛D Kejin Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#北京区域赛d-kejin-game"><span class="toc-text">2015北京区域赛D Kejin Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solution"><span class="toc-text">Solution</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -229,11 +229,10 @@
 <h2 id="sample-output">Sample Output<a class="post-anchor" href="#sample-output"></a></h2>
 <pre><code class="hljs c++"><span class="hljs-number">31</span>
 <span class="hljs-number">26</span></code></pre>
-<blockquote>
-<p>思路：   考虑到对于一个技能，需要分别算是“学会所有前置技能”还是“学部分氪部分”还是“暴力学”更划算，应用了网络流。<br>
+<h2 id="solution">Solution<a class="post-anchor" href="#solution"></a></h2>
+<p>  考虑到对于一个技能，需要分别算是“学会所有前置技能”还是“学部分氪部分”还是“暴力学”更划算，应用了网络流。<br>
   将一个技能拆分为两个点，标为<span class="math inline">\(i\)</span>和<span class="math inline">\(i&#39;\)</span>。从S连边到<span class="math inline">\(i\)</span>，流量为<span class="math inline">\(a_i\)</span>；从<span class="math inline">\(i\)</span>连边到<span class="math inline">\(i&#39;\)</span>，流量为<span class="math inline">\(b_i\)</span>；从<span class="math inline">\(x&#39;\)</span>连边到<span class="math inline">\(y\)</span>，流量为<span class="math inline">\(c_i\)</span>；最后从<span class="math inline">\(s\)</span>连边到T，流量为INF。<br>
   这样，通过在点<span class="math inline">\(i\)</span>处的流量限制，我们已经可以解决到底怎么选这个问题了。那么跑一下源汇的最小割，就是所要求的最小花<span class="math inline">\((ke)\)</span>费<span class="math inline">\((jin)\)</span>了。</p>
-</blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">2020</span>;
