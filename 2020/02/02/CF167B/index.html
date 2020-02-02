@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      CF1041E - Welcome to sher-wu&#39;s home !
+      CF167B - Welcome to sher-wu&#39;s home !
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf-round-509-div.2-e.-tree-reconstruction"><span class="toc-text">CF Round #509 (Div.2) E. Tree Reconstruction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#examples"><span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input-1"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-1"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-2"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-2"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-3"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-3"><span class="toc-text">output</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#note"><span class="toc-text">Note</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf167b-wizards-and-huge-prize"><span class="toc-text">CF167B Wizards and Huge Prize</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -164,11 +164,11 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">CF1041E</div>
+      <div class="title">CF167B</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2019/11/14</span>
+          <span>2020/02/02</span>
         </span>
 
         
@@ -192,11 +192,7 @@
             <span>
                 
                   
-                    <a href="/tags/贪心">贪心</a>
-                  
-                
-                  
-                    <a href="/tags/构造">构造</a>
+                    <a href="/tags/多维DP">多维DP</a>
                   
                 
             </span>
@@ -206,113 +202,97 @@
       <div>
       </div>
     </div>
-    <h1 id="cf-round-509-div.2-e.-tree-reconstruction">CF Round #509 (Div.2) E. Tree Reconstruction<a class="post-anchor" href="#cf-round-509-div.2-e.-tree-reconstruction"></a></h1>
-<hr>
-<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>1 second per test<br>
-Monocarp has drawn a tree (an undirected connected acyclic graph) and then has given each vertex an index. All indices are distinct numbers from 1 to n. For every edge e of this tree, Monocarp has written two numbers: the maximum indices of the vertices of the two components formed if the edge e (and only this edge) is erased from the tree.</p>
-<p>Monocarp has given you a list of n−1 pairs of numbers. He wants you to provide an example of a tree that will produce the said list if this tree exists. If such tree does not exist, say so.</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>The first line contains one integer n (2≤n≤1000) — the number of vertices in the tree.</p>
-<p>Each of the next n−1 lines contains two integers ai and bi each (<span class="math inline">\(1&lt;=ai&lt;bi&lt;=n\)</span>) — the maximal indices of vertices in the components formed if the i-th edge is removed.</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>If there is no such tree that can produce the given list of pairs, print "NO" (without quotes).</p>
-<p>Otherwise print "YES" (without quotes) in the first line and the edges of the tree in the next n−1 lines. Each of the last n−1 lines should contain two integers xi and yi (1≤xi,yi≤n) — vertices connected by an edge.</p>
-<p><strong>Note: The numeration of edges doesn't matter for this task. Your solution will be considered correct if your tree produces the same pairs as given in the input file (possibly reordered). That means that you can print the edges of the tree you reconstructed in any order.</strong></p>
-<h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
-<h3 id="input-1">input<a class="post-anchor" href="#input-1"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">4</span>
-<span class="hljs-number">3</span> <span class="hljs-number">4</span>
-<span class="hljs-number">1</span> <span class="hljs-number">4</span>
-<span class="hljs-number">3</span> <span class="hljs-number">4</span></code></pre>
-<h3 id="output-1">output<a class="post-anchor" href="#output-1"></a></h3>
-<pre><code class="hljs c++">YES
-<span class="hljs-number">1</span> <span class="hljs-number">3</span>
-<span class="hljs-number">3</span> <span class="hljs-number">2</span>
-<span class="hljs-number">2</span> <span class="hljs-number">4</span></code></pre>
-<h3 id="input-2">input<a class="post-anchor" href="#input-2"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">3</span></code></pre>
-<h3 id="output-2">output<a class="post-anchor" href="#output-2"></a></h3>
-<pre><code class="hljs c++">NO</code></pre>
-<h3 id="input-3">input<a class="post-anchor" href="#input-3"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">2</span>
-<span class="hljs-number">2</span> <span class="hljs-number">3</span></code></pre>
-<h3 id="output-3">output<a class="post-anchor" href="#output-3"></a></h3>
-<pre><code class="hljs c++">NO</code></pre>
-<h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
-<p>Possible tree from the first example. Dotted lines show edges you need to remove to get appropriate pairs.</p>
-<figure>
-<a href="http://codeforces.com/predownloaded/f1/81/f1814da1ac9aa4b5d09f17190f399b97a018ac08.png" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="http://codeforces.com/predownloaded/f1/81/f1814da1ac9aa4b5d09f17190f399b97a018ac08.png" alt></a><figcaption>Example</figcaption>
-</figure>
+    <h1 id="cf167b-wizards-and-huge-prize">CF167B Wizards and Huge Prize<a class="post-anchor" href="#cf167b-wizards-and-huge-prize"></a></h1>
 <blockquote>
 <p>题意：<br>
-是说，要构建一个树，使得它砍掉每一条边时，左右的最大权值是给定的值。 例如样例1，4-2-3-1，砍第一二条边左右最大都是4&amp;3，砍第三条是4&amp;1，符合题意，然后输出每一条边的左右节点。</p>
+  你要去 <span class="math inline">\(n(n\leq200)\)</span> 个地点比赛，顺序自定。获胜奖品有的是一个奖杯，有的是一个容量为 <span class="math inline">\(b_i\)</span> 的装奖杯的书包。开始时你有一个容量为 <span class="math inline">\(k\)</span> 的书包。每场比赛的获胜概率为 <span class="math inline">\(p_i\)</span> 。问你至少赢 <span class="math inline">\(l\)</span> 场且所有奖杯都被装入书包的概率为多少。</p>
 </blockquote>
 <blockquote>
 <p>思路：<br>
-最最最基本的，它的某一边最大一定是n，否则直接No。 如果n，x只出现了一次，那直接n，x相连即可。 如果出现了两次，那么要在n与x中间加一个比x小的数i。 如果三次。。。 那么就直接是贪心，从最小的x开始，i也从1开始递增，根据n，x出现的次数多少决定在n，x中间加多少个数（次数-1）。</p>
+  其实是有一个相对简单的方法的。就是由于顺序自定，那肯定优先去奖品为书包的地方比赛。先排序把送书包的放在前面，然后 <span class="math inline">\(dp[i][j][k]\)</span> 表示前 <span class="math inline">\(i\)</span> 天赢了 <span class="math inline">\(j\)</span> 把，剩余空间为 <span class="math inline">\(k\)</span> 就ok了。再者 <span class="math inline">\(n\leq200\)</span>，故 <span class="math inline">\(k\)</span> 只要计算 <span class="math inline">\(200\)</span> 以内就好。   但是开始没想到这个三维DP的做法，而是用了二维DP。<del>思路比较巧妙虽然WA了6发。</del> <span class="math inline">\(dp[i][j]\)</span> 代表送包的比赛赢了 <span class="math inline">\(i\)</span> 把，空余位置 <span class="math inline">\(j\)</span> 个。 <span class="math inline">\(win[i]\)</span> 代表不送包的比赛赢了 <span class="math inline">\(i\)</span> 局的概率。   最关键的是两者怎么实现综合考虑。送包的比赛赢了 <span class="math inline">\(i\)</span> 局以后，不送包的比赛至少需要赢 <span class="math inline">\(max(0,l-i)\)</span> 局，但又最多赢 <span class="math inline">\(j\)</span> 局。同时，<span class="math inline">\(win\)</span> 的前缀和到底要用哪一段也要考虑清楚。</p>
 </blockquote>
-<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-
-<span class="hljs-keyword">int</span> n,a[<span class="hljs-number">1010</span>],b[<span class="hljs-number">1010</span>],c[<span class="hljs-number">1010</span>],now,add[<span class="hljs-number">1010</span>],nown=<span class="hljs-number">1</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
-    <span class="hljs-built_in">cin</span>&gt;&gt;n;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)&#123;
-        <span class="hljs-keyword">int</span> x,y;
-        <span class="hljs-built_in">cin</span>&gt;&gt;x&gt;&gt;y;
-        <span class="hljs-keyword">if</span>(x==n) a[y]++;<span class="hljs-comment">//（x,n）中x的出现次数</span>
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(y==n) a[x]++; 
-        <span class="hljs-keyword">else</span>
-        &#123;
-            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">int</span> ch=<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">220</span>;
+<span class="hljs-keyword">double</span> dp[maxn][<span class="hljs-number">40220</span>], win[<span class="hljs-number">40220</span>], pre[<span class="hljs-number">40220</span>], ans;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>
+&#123;</span>
+    <span class="hljs-keyword">double</span> pct;
+    <span class="hljs-keyword">int</span> cap;
+    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt;(<span class="hljs-keyword">const</span> Node &amp;x)
     &#123;
-        <span class="hljs-keyword">if</span>(a[i])<span class="hljs-comment">//没有就跳过</span>
+        <span class="hljs-keyword">return</span> cap &lt; x.cap;
+    &#125;
+&#125;p[maxn];
+<span class="hljs-keyword">int</span> n, l, k, nc, tot;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>) &#123;<span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'-'</span>)f=<span class="hljs-number">-1</span>;ch=getchar();&#125;
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=getchar();&#125;
+    <span class="hljs-keyword">return</span> x*f;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readin</span><span class="hljs-params">()</span>
+</span>&#123;
+    n = <span class="hljs-built_in">read</span>(), l = <span class="hljs-built_in">read</span>(), k = <span class="hljs-built_in">read</span>();
+    tot += k;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)
+        p[i].pct = <span class="hljs-number">1.0</span> * <span class="hljs-built_in">read</span>() / <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)
+        p[i].cap = <span class="hljs-built_in">read</span>(), tot += p[i].cap == <span class="hljs-number">-1</span> ? <span class="hljs-number">0</span> : p[i].cap;
+    sort(p + <span class="hljs-number">1</span>, p + <span class="hljs-number">1</span> + n);
+    nc = n;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)
+        <span class="hljs-keyword">if</span> (p[i].cap != <span class="hljs-number">-1</span>)
         &#123;
-            <span class="hljs-keyword">int</span> t=n;
-            <span class="hljs-keyword">while</span>(a[i]&gt;<span class="hljs-number">1</span>&amp;&amp;nown&lt;=i)<span class="hljs-comment">//是1，直接建边</span>
-            &#123;
-                <span class="hljs-keyword">if</span>(add[nown]==<span class="hljs-number">0</span>)&#123;
-                    b[++now]=t;
-                    c[now]=nown;
-                    add[nown]=<span class="hljs-number">1</span>;
-                    t=nown;
-                    a[i]--;
+            nc = i - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">break</span>;
+        &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span>
+</span>&#123;
+    dp[<span class="hljs-number">0</span>][k] = <span class="hljs-number">1</span>;
+    win[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= nc; ++i)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt; <span class="hljs-number">0</span>; --j)
+        &#123;
+            <span class="hljs-keyword">double</span> tent = <span class="hljs-number">1.0</span> * win[j - <span class="hljs-number">1</span>] * p[i].pct;
+            win[j] += tent;
+            win[j - <span class="hljs-number">1</span>] -= tent;
+        &#125;
+    pre[<span class="hljs-number">0</span>] = win[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= tot; ++i)
+        pre[i] = pre[i - <span class="hljs-number">1</span>] + win[i];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = nc + <span class="hljs-number">1</span>; i &lt;= n; ++i)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt; nc; --j)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> q = tot; q &gt;= p[i].cap; --q)
+                <span class="hljs-keyword">if</span> (dp[j - <span class="hljs-number">1</span> - nc][q - p[i].cap])
+                &#123;
+                    <span class="hljs-keyword">double</span> tent = <span class="hljs-number">1.0</span> * dp[j - <span class="hljs-number">1</span> - nc][q - p[i].cap] * p[i].pct;
+                    dp[j - nc][q] += tent;
+                    dp[j - <span class="hljs-number">1</span> - nc][q - p[i].cap] -= tent;
                 &#125;
-                nown++;
-            &#125;
-            <span class="hljs-keyword">if</span>(nown&gt;i)<span class="hljs-comment">//不是1，先往小的连，到1以后，再建边</span>
-            &#123;
-                ch=<span class="hljs-number">0</span>;
-                <span class="hljs-keyword">break</span>;
-            &#125;
-            b[++now]=t;
-            c[now]=i;
-            add[i]=<span class="hljs-number">1</span>;
-            a[i]--;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">if</span>(ch==<span class="hljs-number">0</span>)<span class="hljs-comment">//（x,n）的次数少于剩余的小于x的数的总数了，No</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= n - nc; ++i) <span class="hljs-comment">//最关键的地方</span>
     &#123;
-        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
+        <span class="hljs-keyword">int</span> tent = i &gt;= l ? <span class="hljs-number">0</span> : l - i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = tent; j &lt;= tot; ++j)
+            <span class="hljs-keyword">if</span> (tent)
+                ans += <span class="hljs-number">1.0</span> * dp[i][j] * (pre[j] - pre[tent - <span class="hljs-number">1</span>]);
+            <span class="hljs-keyword">else</span>
+                ans += <span class="hljs-number">1.0</span> * dp[i][j] * pre[j];
     &#125;
-    <span class="hljs-keyword">else</span>
-    &#123;
-        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"YES"</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
-        &#123;
-            <span class="hljs-built_in">cout</span>&lt;&lt;b[i]&lt;&lt;<span class="hljs-string">' '</span>&lt;&lt;c[i]&lt;&lt;<span class="hljs-built_in">endl</span>;
-        &#125;
-    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    readin();
+    <span class="hljs-built_in">run</span>();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.12lf\n"</span>, ans);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 
@@ -341,12 +321,12 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2019/11/15/PTA-L3-20/">PTA-L3-20</a>
+          <a href="/2020/02/02/p4/">p4</a>
         
     </div>
     <div class="item right">
         
-          <a href="/2019/11/13/PTA-L1-64/">PTA-L1-64</a>
+          <a href="/2020/02/01/CF346B/">CF346B</a>
         
     </div>
   </div>
@@ -358,7 +338,7 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
       本文作者：<a href="/">sher-wu</a>
     </div>
     <div class="link">
-      永久链接：<a href="/2019/11/14/CF1041E/">http://sher-wu.github.io/2019/11/14/CF1041E/</a>
+      永久链接：<a href="/2020/02/02/CF167B/">http://sher-wu.github.io/2020/02/02/CF167B/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/">sher-wu</a>的博客，转载请注明出处！

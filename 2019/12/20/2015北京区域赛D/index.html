@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#北京区域赛d-kejin-game"><span class="toc-text">2015北京区域赛D Kejin Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solution"><span class="toc-text">Solution</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#d-kejin-game"><span class="toc-text">D Kejin Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solution"><span class="toc-text">Solution</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -202,10 +202,10 @@
       <div>
       </div>
     </div>
-    <h1 id="北京区域赛d-kejin-game">2015北京区域赛D Kejin Game<a class="post-anchor" href="#北京区域赛d-kejin-game"></a></h1>
+    <h1 id="d-kejin-game">D Kejin Game<a class="post-anchor" href="#d-kejin-game"></a></h1>
 <h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
 <blockquote>
-<p>  你有一个有向技能图。点表示技能。若<span class="math inline">\(x\)</span>到<span class="math inline">\(y\)</span>有一条有向边，则表示学会<span class="math inline">\(y\)</span>前必须先学会<span class="math inline">\(x\)</span>。你可以氪<span class="math inline">\(c_i\)</span>元以消除这条有向边，即你普通地学<span class="math inline">\(y\)</span>时可以未学会<span class="math inline">\(x\)</span>。你学会一个技能有两种方法：1、普通地学完它的所有前置技能，并氪<span class="math inline">\(a_{x}\)</span>元；2、暴力地直接氪<span class="math inline">\(b_{x}\)</span>元。问你学会技能<span class="math inline">\(s\)</span>时，最少氪金多少元。<br>
+<p>  题号：UVA7264   你有一个有向技能图。点表示技能。若<span class="math inline">\(x\)</span>到<span class="math inline">\(y\)</span>有一条有向边，则表示<span class="math inline">\(x\)</span>是<span class="math inline">\(y\)</span>的前置技能。你可以氪<span class="math inline">\(c_i\)</span>元以消除这条有向边，即你普通地学<span class="math inline">\(y\)</span>时可以未学会<span class="math inline">\(x\)</span>。你学会一个技能有两种方法：1、普通地学完它的所有前置技能，并氪<span class="math inline">\(a_{x}\)</span>元；2、暴力地直接氪<span class="math inline">\(b_{x}\)</span>元。问你学会技能<span class="math inline">\(s&#39;\)</span>时，最少氪金多少元。<br>
   <span class="math inline">\(1 \leq n \leq 500,1 \leq m \leq 10000,1 \leq x_1,x_2 \leq 1000000\)</span></p>
 </blockquote>
 <h2 id="sample-input">Sample Input<a class="post-anchor" href="#sample-input"></a></h2>
@@ -230,9 +230,11 @@
 <pre><code class="hljs c++"><span class="hljs-number">31</span>
 <span class="hljs-number">26</span></code></pre>
 <h2 id="solution">Solution<a class="post-anchor" href="#solution"></a></h2>
+<blockquote>
 <p>  考虑到对于一个技能，需要分别算是“学会所有前置技能”还是“学部分氪部分”还是“暴力学”更划算，应用了网络流。<br>
   将一个技能拆分为两个点，标为<span class="math inline">\(i\)</span>和<span class="math inline">\(i&#39;\)</span>。从S连边到<span class="math inline">\(i\)</span>，流量为<span class="math inline">\(a_i\)</span>；从<span class="math inline">\(i\)</span>连边到<span class="math inline">\(i&#39;\)</span>，流量为<span class="math inline">\(b_i\)</span>；从<span class="math inline">\(x&#39;\)</span>连边到<span class="math inline">\(y\)</span>，流量为<span class="math inline">\(c_i\)</span>；最后从<span class="math inline">\(s\)</span>连边到T，流量为INF。<br>
   这样，通过在点<span class="math inline">\(i\)</span>处的流量限制，我们已经可以解决到底怎么选这个问题了。那么跑一下源汇的最小割，就是所要求的最小花<span class="math inline">\((ke)\)</span>费<span class="math inline">\((jin)\)</span>了。</p>
+</blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">2020</span>;

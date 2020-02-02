@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      CF1041E - Welcome to sher-wu&#39;s home !
+      CF346B - Welcome to sher-wu&#39;s home !
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -26,7 +26,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf-round-509-div.2-e.-tree-reconstruction"><span class="toc-text">CF Round #509 (Div.2) E. Tree Reconstruction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#input"><span class="toc-text">Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#examples"><span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input-1"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-1"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-2"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-2"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-3"><span class="toc-text">input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output-3"><span class="toc-text">output</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#note"><span class="toc-text">Note</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cf346b-lucky-common-subsequence"><span class="toc-text">CF346B Lucky Common Subsequence</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -164,11 +164,11 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">CF1041E</div>
+      <div class="title">CF346B</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2019/11/14</span>
+          <span>2020/02/01</span>
         </span>
 
         
@@ -192,11 +192,11 @@
             <span>
                 
                   
-                    <a href="/tags/贪心">贪心</a>
+                    <a href="/tags/多维DP">多维DP</a>
                   
                 
                   
-                    <a href="/tags/构造">构造</a>
+                    <a href="/tags/KMP">KMP</a>
                   
                 
             </span>
@@ -206,113 +206,100 @@
       <div>
       </div>
     </div>
-    <h1 id="cf-round-509-div.2-e.-tree-reconstruction">CF Round #509 (Div.2) E. Tree Reconstruction<a class="post-anchor" href="#cf-round-509-div.2-e.-tree-reconstruction"></a></h1>
-<hr>
-<h2 id="description">Description<a class="post-anchor" href="#description"></a></h2>
-<p>1 second per test<br>
-Monocarp has drawn a tree (an undirected connected acyclic graph) and then has given each vertex an index. All indices are distinct numbers from 1 to n. For every edge e of this tree, Monocarp has written two numbers: the maximum indices of the vertices of the two components formed if the edge e (and only this edge) is erased from the tree.</p>
-<p>Monocarp has given you a list of n−1 pairs of numbers. He wants you to provide an example of a tree that will produce the said list if this tree exists. If such tree does not exist, say so.</p>
-<h2 id="input">Input<a class="post-anchor" href="#input"></a></h2>
-<p>The first line contains one integer n (2≤n≤1000) — the number of vertices in the tree.</p>
-<p>Each of the next n−1 lines contains two integers ai and bi each (<span class="math inline">\(1&lt;=ai&lt;bi&lt;=n\)</span>) — the maximal indices of vertices in the components formed if the i-th edge is removed.</p>
-<h2 id="output">Output<a class="post-anchor" href="#output"></a></h2>
-<p>If there is no such tree that can produce the given list of pairs, print "NO" (without quotes).</p>
-<p>Otherwise print "YES" (without quotes) in the first line and the edges of the tree in the next n−1 lines. Each of the last n−1 lines should contain two integers xi and yi (1≤xi,yi≤n) — vertices connected by an edge.</p>
-<p><strong>Note: The numeration of edges doesn't matter for this task. Your solution will be considered correct if your tree produces the same pairs as given in the input file (possibly reordered). That means that you can print the edges of the tree you reconstructed in any order.</strong></p>
-<h2 id="examples">Examples<a class="post-anchor" href="#examples"></a></h2>
-<h3 id="input-1">input<a class="post-anchor" href="#input-1"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">4</span>
-<span class="hljs-number">3</span> <span class="hljs-number">4</span>
-<span class="hljs-number">1</span> <span class="hljs-number">4</span>
-<span class="hljs-number">3</span> <span class="hljs-number">4</span></code></pre>
-<h3 id="output-1">output<a class="post-anchor" href="#output-1"></a></h3>
-<pre><code class="hljs c++">YES
-<span class="hljs-number">1</span> <span class="hljs-number">3</span>
-<span class="hljs-number">3</span> <span class="hljs-number">2</span>
-<span class="hljs-number">2</span> <span class="hljs-number">4</span></code></pre>
-<h3 id="input-2">input<a class="post-anchor" href="#input-2"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">3</span></code></pre>
-<h3 id="output-2">output<a class="post-anchor" href="#output-2"></a></h3>
-<pre><code class="hljs c++">NO</code></pre>
-<h3 id="input-3">input<a class="post-anchor" href="#input-3"></a></h3>
-<pre><code class="hljs c++"><span class="hljs-number">3</span>
-<span class="hljs-number">1</span> <span class="hljs-number">2</span>
-<span class="hljs-number">2</span> <span class="hljs-number">3</span></code></pre>
-<h3 id="output-3">output<a class="post-anchor" href="#output-3"></a></h3>
-<pre><code class="hljs c++">NO</code></pre>
-<h2 id="note">Note<a class="post-anchor" href="#note"></a></h2>
-<p>Possible tree from the first example. Dotted lines show edges you need to remove to get appropriate pairs.</p>
-<figure>
-<a href="http://codeforces.com/predownloaded/f1/81/f1814da1ac9aa4b5d09f17190f399b97a018ac08.png" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="http://codeforces.com/predownloaded/f1/81/f1814da1ac9aa4b5d09f17190f399b97a018ac08.png" alt></a><figcaption>Example</figcaption>
-</figure>
+    <h1 id="cf346b-lucky-common-subsequence">CF346B Lucky Common Subsequence<a class="post-anchor" href="#cf346b-lucky-common-subsequence"></a></h1>
 <blockquote>
 <p>题意：<br>
-是说，要构建一个树，使得它砍掉每一条边时，左右的最大权值是给定的值。 例如样例1，4-2-3-1，砍第一二条边左右最大都是4&amp;3，砍第三条是4&amp;1，符合题意，然后输出每一条边的左右节点。</p>
+  找出字符串 <span class="math inline">\(s_1,s_2\)</span> 的不以 <span class="math inline">\(s_3\)</span> 为子串的最长公共子序列。（长度 <span class="math inline">\(\leq100\)</span> ）</p>
 </blockquote>
 <blockquote>
 <p>思路：<br>
-最最最基本的，它的某一边最大一定是n，否则直接No。 如果n，x只出现了一次，那直接n，x相连即可。 如果出现了两次，那么要在n与x中间加一个比x小的数i。 如果三次。。。 那么就直接是贪心，从最小的x开始，i也从1开始递增，根据n，x出现的次数多少决定在n，x中间加多少个数（次数-1）。</p>
+  如果是裸的找最长公共子序列(LCS)那么是KMP（其实这么短二维DP也行），但是若要加子串的条件的话，就应当使用DP了。可以通过DP去维护 <span class="math inline">\(s_1,s_2\)</span> 的公共子序列有多少的长度被 <span class="math inline">\(s_3\)</span> 匹配了，然后用KMP来找要是当前串不匹配 <span class="math inline">\(s_3\)</span> 了的话上一个位置是在哪里。    <span class="math inline">\(dp[i][j][k]\)</span> 表示 <span class="math inline">\(s_1\)</span> 前 <span class="math inline">\(i\)</span> 位 <span class="math inline">\(s_2\)</span> 前 <span class="math inline">\(j\)</span> 位的合条件的最长公共子序列长度是多少，此时已经匹配了 <span class="math inline">\(s_3\)</span> 的前 <span class="math inline">\(k\)</span> 位。（如果 <span class="math inline">\(k=len3\)</span> 的，那该方案就要被舍弃掉啦）   关于KMP估计下周要找道裸题做做。感觉找不出好几个模板的差异，导致用起来出了差错。</p>
 </blockquote>
 <pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">105</span>;
+<span class="hljs-keyword">char</span> s1[maxn], s2[maxn], s3[maxn];
+<span class="hljs-keyword">int</span> len1, len2, len3;
+<span class="hljs-keyword">int</span> dp[maxn][maxn][maxn], nex[maxn];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>
+&#123;</span>
+    <span class="hljs-keyword">int</span> x, y, z;
+&#125;pre[maxn][maxn][maxn];
 
-<span class="hljs-keyword">int</span> n,a[<span class="hljs-number">1010</span>],b[<span class="hljs-number">1010</span>],c[<span class="hljs-number">1010</span>],now,add[<span class="hljs-number">1010</span>],nown=<span class="hljs-number">1</span>;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">path</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x1, <span class="hljs-keyword">int</span> x2, <span class="hljs-keyword">int</span> x3, <span class="hljs-keyword">int</span> x4, <span class="hljs-keyword">int</span> x5, <span class="hljs-keyword">int</span> x6)</span>
+</span>&#123;
+    pre[x1][x2][x3].x = x4;
+    pre[x1][x2][x3].y = x5;
+    pre[x1][x2][x3].z = x6;
+&#125;
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
-    <span class="hljs-built_in">cin</span>&gt;&gt;n;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)&#123;
-        <span class="hljs-keyword">int</span> x,y;
-        <span class="hljs-built_in">cin</span>&gt;&gt;x&gt;&gt;y;
-        <span class="hljs-keyword">if</span>(x==n) a[y]++;<span class="hljs-comment">//（x,n）中x的出现次数</span>
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(y==n) a[x]++; 
-        <span class="hljs-keyword">else</span>
-        &#123;
-            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">int</span> ch=<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">kmp</span><span class="hljs-params">()</span>
+</span>&#123;
+    nex[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= len3; ++i)
     &#123;
-        <span class="hljs-keyword">if</span>(a[i])<span class="hljs-comment">//没有就跳过</span>
-        &#123;
-            <span class="hljs-keyword">int</span> t=n;
-            <span class="hljs-keyword">while</span>(a[i]&gt;<span class="hljs-number">1</span>&amp;&amp;nown&lt;=i)<span class="hljs-comment">//是1，直接建边</span>
-            &#123;
-                <span class="hljs-keyword">if</span>(add[nown]==<span class="hljs-number">0</span>)&#123;
-                    b[++now]=t;
-                    c[now]=nown;
-                    add[nown]=<span class="hljs-number">1</span>;
-                    t=nown;
-                    a[i]--;
-                &#125;
-                nown++;
-            &#125;
-            <span class="hljs-keyword">if</span>(nown&gt;i)<span class="hljs-comment">//不是1，先往小的连，到1以后，再建边</span>
-            &#123;
-                ch=<span class="hljs-number">0</span>;
-                <span class="hljs-keyword">break</span>;
-            &#125;
-            b[++now]=t;
-            c[now]=i;
-            add[i]=<span class="hljs-number">1</span>;
-            a[i]--;
-        &#125;
+        <span class="hljs-keyword">while</span> (k &amp;&amp; s3[k + <span class="hljs-number">1</span>] != s3[i])
+            k = nex[k];
+        <span class="hljs-keyword">if</span> (s3[k + <span class="hljs-number">1</span>] == s3[i])
+            ++k;
+        nex[i] = k;
     &#125;
-    <span class="hljs-keyword">if</span>(ch==<span class="hljs-number">0</span>)<span class="hljs-comment">//（x,n）的次数少于剩余的小于x的数的总数了，No</span>
-    &#123;
-        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>;
-    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>;<span class="hljs-comment">//f;</span>
+    <span class="hljs-keyword">char</span> ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&lt;<span class="hljs-string">'0'</span>||ch&gt;<span class="hljs-string">'9'</span>) ch=getchar();
+    <span class="hljs-keyword">while</span>(ch&gt;=<span class="hljs-string">'0'</span>&amp;&amp;ch&lt;=<span class="hljs-string">'9'</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=getchar();&#125;
+    <span class="hljs-keyword">return</span> x;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z)</span>
+</span>&#123;
+    <span class="hljs-keyword">if</span> (x || y || z)
+        output(pre[x][y][z].x, pre[x][y][z].y, pre[x][y][z].z);
     <span class="hljs-keyword">else</span>
-    &#123;
-        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"YES"</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
-        &#123;
-            <span class="hljs-built_in">cout</span>&lt;&lt;b[i]&lt;&lt;<span class="hljs-string">' '</span>&lt;&lt;c[i]&lt;&lt;<span class="hljs-built_in">endl</span>;
-        &#125;
-    &#125;
+        <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (dp[x][y][z] != dp[pre[x][y][z].x][pre[x][y][z].y][pre[x][y][z].z])
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, s1[x]);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">-0x3f3f3f3f</span>, <span class="hljs-keyword">sizeof</span> dp);
+    dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, s1 + <span class="hljs-number">1</span>),<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, s2 + <span class="hljs-number">1</span>),<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, s3 + <span class="hljs-number">1</span>);
+    len1 = <span class="hljs-built_in">strlen</span>(s1 + <span class="hljs-number">1</span>),len2 = <span class="hljs-built_in">strlen</span>(s2 + <span class="hljs-number">1</span>),len3 = <span class="hljs-built_in">strlen</span>(s3 + <span class="hljs-number">1</span>);
+    kmp();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= len1; ++i)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= len2; ++j)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; len3; ++k)
+            &#123;
+                <span class="hljs-keyword">if</span> (i &lt; len1 &amp;&amp; dp[i][j][k] &gt; dp[i + <span class="hljs-number">1</span>][j][k])
+                    dp[i + <span class="hljs-number">1</span>][j][k] = dp[i][j][k], path(i + <span class="hljs-number">1</span>, j, k, i, j, k);
+                <span class="hljs-keyword">if</span> (j &lt; len2 &amp;&amp; dp[i][j][k] &gt; dp[i][j + <span class="hljs-number">1</span>][k])
+                    dp[i][j + <span class="hljs-number">1</span>][k] = dp[i][j][k], path(i, j + <span class="hljs-number">1</span>, k, i, j, k);
+                <span class="hljs-keyword">if</span> (i &lt; len1 &amp;&amp; j &lt; len2 &amp;&amp; s1[i + <span class="hljs-number">1</span>] == s2[j + <span class="hljs-number">1</span>])
+                &#123;
+                    <span class="hljs-keyword">int</span> newk = k;
+                    <span class="hljs-keyword">while</span> (newk &amp;&amp; s1[i + <span class="hljs-number">1</span>] != s3[newk + <span class="hljs-number">1</span>])
+                        newk = nex[newk];
+                    <span class="hljs-keyword">if</span> (s1[i + <span class="hljs-number">1</span>] == s3[newk + <span class="hljs-number">1</span>])
+                        ++newk;
+                    <span class="hljs-keyword">if</span> (dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>][newk] &lt; dp[i][j][k] + <span class="hljs-number">1</span>)
+                        dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>][newk] = dp[i][j][k] + <span class="hljs-number">1</span>, path(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>, newk, i, j, k);
+                &#125;
+            &#125;
+    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; len3; ++i)
+        <span class="hljs-keyword">if</span> (dp[len1][len2][i] &gt; dp[len1][len2][p])
+            p = i;
+    <span class="hljs-keyword">if</span> (dp[len1][len2][p])
+        output(len1, len2, p);
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"0\n"</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 
@@ -341,12 +328,12 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2019/11/15/PTA-L3-20/">PTA-L3-20</a>
+          <a href="/2020/02/02/CF167B/">CF167B</a>
         
     </div>
     <div class="item right">
         
-          <a href="/2019/11/13/PTA-L1-64/">PTA-L1-64</a>
+          <a href="/2020/01/27/%E7%94%9F%E6%97%A5%E5%B0%8F%E8%AE%B0-20/">生日小记-20</a>
         
     </div>
   </div>
@@ -358,7 +345,7 @@ Monocarp has drawn a tree (an undirected connected acyclic graph) and then has g
       本文作者：<a href="/">sher-wu</a>
     </div>
     <div class="link">
-      永久链接：<a href="/2019/11/14/CF1041E/">http://sher-wu.github.io/2019/11/14/CF1041E/</a>
+      永久链接：<a href="/2020/02/01/CF346B/">http://sher-wu.github.io/2020/02/01/CF346B/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/">sher-wu</a>的博客，转载请注明出处！
